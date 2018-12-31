@@ -1,4 +1,4 @@
-package br.coop.unimedriopardo.uniresultado.services;
+package br.coop.unimedriopardo.sgu.services;
 
 
 import java.util.List;
@@ -9,8 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.coop.unimedriopardo.uniresultado.models.Usuario;
-import br.coop.unimedriopardo.uniresultado.repositories.RepositorioUsuario;
+import br.coop.unimedriopardo.sgu.models.Usuario;
+import br.coop.unimedriopardo.sgu.repositories.RepositorioUsuario;
 
 @Service
 @Transactional

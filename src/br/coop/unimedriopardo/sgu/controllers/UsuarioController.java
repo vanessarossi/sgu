@@ -1,4 +1,4 @@
-package br.coop.unimedriopardo.uniresultado.controllers;
+package br.coop.unimedriopardo.sgu.controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.coop.unimedriopardo.uniresultado.models.Usuario;
-import br.coop.unimedriopardo.uniresultado.services.UsuarioService;
+import br.coop.unimedriopardo.sgu.models.Usuario;
+import br.coop.unimedriopardo.sgu.services.UsuarioService;
 
 @Controller
 @RequestMapping("/usuario")

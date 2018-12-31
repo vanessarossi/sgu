@@ -1,4 +1,4 @@
-package br.coop.unimedriopardo.uniresultado.models;
+package br.coop.unimedriopardo.sgu.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

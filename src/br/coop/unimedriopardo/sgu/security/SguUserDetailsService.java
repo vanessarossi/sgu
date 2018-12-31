@@ -1,4 +1,4 @@
-package br.coop.unimedriopardo.uniresultado.security;
+package br.coop.unimedriopardo.sgu.security;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import br.coop.unimedriopardo.uniresultado.models.Usuario;
-import br.coop.unimedriopardo.uniresultado.repositories.RepositorioUsuario;
+import br.coop.unimedriopardo.sgu.models.Usuario;
+import br.coop.unimedriopardo.sgu.repositories.RepositorioUsuario;
 
 public class SguUserDetailsService implements UserDetailsService{
 	

@@ -1,8 +1,8 @@
-package br.coop.unimedriopardo.uniresultado.services;
+package br.coop.unimedriopardo.sgu.services;
 
 import java.util.List;
 
-import br.coop.unimedriopardo.uniresultado.models.Usuario;
+import br.coop.unimedriopardo.sgu.models.Usuario;
 
 public interface UsuarioService {
 	

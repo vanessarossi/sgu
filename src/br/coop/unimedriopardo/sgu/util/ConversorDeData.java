@@ -1,4 +1,4 @@
-package br.coop.unimedriopardo.uniresultado.util;
+package br.coop.unimedriopardo.sgu.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

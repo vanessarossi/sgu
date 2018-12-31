@@ -22,8 +22,8 @@
 	<mvc:annotation-driven/>
 	<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**"/>
 	<context:annotation-config/>
-	<context:component-scan base-package="br.coop.unimedriopardo.uniresultado.controllers"/><!-- pacote onde estão os controller -->
-	<context:component-scan base-package="br.coop.unimedriopardo.uniresultado.services"/>	
+	<context:component-scan base-package="br.coop.unimedriopardo.sgu.controllers"/><!-- pacote onde estão os controller -->
+	<context:component-scan base-package="br.coop.unimedriopardo.sgu.services"/>	
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"></property> <!-- qual classe do spring vai processar a view -->
 		<!--  <property name="prefix" value="/WEB-INF/views/"></property>
@@ -49,7 +49,7 @@
 	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="persistenceUnitName" value="oracle"></property>
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="packagesToScan" value="br.coop.unimedriopardo.uniresultado.models"></property>
+		<property name="packagesToScan" value="br.coop.unimedriopardo.sgu.models"></property>
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
 		</property>
@@ -64,11 +64,11 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
 	</bean>
 
-	<jpa:repositories base-package="br.coop.unimedriopardo.uniresultado.repositories"></jpa:repositories>
+	<jpa:repositories base-package="br.coop.unimedriopardo.sgu.repositories"></jpa:repositories>
 	
 	<!-- Spring Security -->
 	<bean id="userDetailsService" 
-		class="br.coop.unimedriopardo.uniresultado.security.SguUserDetailsService"></bean>
+		class="br.coop.unimedriopardo.sgu.security.SguUserDetailsService"></bean>
 	<sec:http pattern="/resources/**" security="none"></sec:http>
 	<sec:http pattern="/identificacao" security="none"></sec:http>
 	<sec:http use-expressions="true" auto-config="true">

@@ -1,4 +1,4 @@
-package br.coop.unimedriopardo.uniresultado.controllers;
+package br.coop.unimedriopardo.sgu.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
