@@ -1,5 +1,5 @@
 <nav class="navbar navbar-dark bg-pantone2627c">
-	<a class="navbar-brand" href="home.html">SGU - Sistema de Gestão Unimed</a>
+	<a class="navbar-brand" href="/sgu/home">SGU - Sistema de Gestão Unimed</a>
 </nav>
 <section class="text-center" id="titulo">
 	<h1 class="h1">Despesas e Receitas</h1>

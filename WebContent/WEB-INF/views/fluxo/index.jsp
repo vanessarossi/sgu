@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-dark bg-pantone357c">
-	<a class="navbar-brand" href="/su">SGU - Sistema de Gestão Unimed</a>
+	<a class="navbar-brand" href="/sgu/home">SGU - Sistema de Gestão Unimed</a>
 </nav>
 <section class="text-center" id="titulo">
 	<h1 class="h1">Fluxo de Caixa</h1>

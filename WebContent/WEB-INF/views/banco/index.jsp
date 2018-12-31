@@ -1,6 +1,11 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="sec"%>
 <nav class="navbar navbar-dark bg-pantone">
-	<a class="navbar-brand" href="home.html">SGU - Sistema de Gestão Unimed</a>
+	<a class="navbar-brand" href="/sgu/home">SGU - Sistema de Gestão Unimed</a>
 </nav>
 <section class="text-center" id="titulo">
 	<h1 class="h1">Bancos</h1>
@@ -18,36 +23,13 @@
 		<div class="col-12 col-sm-12 col-md-12 col-lg6 col-xl-6" id="table">
 			<table class="table table-striped table-hover">
 				<tbody>
-					<tr>
-						<th>1</th>
-						<td>BANCO XX</td>
-						<td>R$ xxx.xxx,00</td>
-					</tr>
-					<tr>
-						<th>2</th>
-						<td>BANCO YY</td>
-						<td>R$ xxx.xxx,00</td>
-					</tr>
-					<tr>
-						<th>3</th>
-						<td>BANCO ZZ</td>
-						<td>R$ xxx.xxx,00</td>
-					</tr>
-					<tr>
-						<th>4</th>
-						<td>BANCO VV</td>
-						<td>R$ xxx.xxx,00</td>
-					</tr>
-					<tr>
-						<th>5</th>
-						<td>BANCO MM</td>
-						<td>R$ xxx.xxx,00</td>
-					</tr>
-					<tr>
-						<th>6</th>
-						<td>BANCO JJ</td>
-						<td>R$ xxx.xxx,00</td>
-					</tr>
+					<c:forEach items="${bancos}" var="banco" varStatus="i" >
+						<tr>
+							<td>${banco.codigoConta}</td>
+							<td>${banco.nomeConta}</td>
+							<td>${banco.contaAplicacao}</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
