@@ -1,18 +1,10 @@
 package br.coop.unimedriopardo.uniresultado.models;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
@@ -20,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "usuario")
+@Table(name = "sgu_usuario")
 public class Usuario {
 
 	@Id
@@ -51,13 +43,6 @@ public class Usuario {
 	@NotBlank
 	@Column(name = "perfil", length = 100, nullable = false)
 	private String perfil;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "prestador_id", foreignKey = @ForeignKey(name = "Fk_prestador_usuario"))
-	private Prestador prestador;
-
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-	private List<LogEnvio> logsEnvio;
 
 	public Integer getId() {
 		return id;
@@ -113,14 +98,6 @@ public class Usuario {
 
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
-	}
-
-	public Prestador getPrestador() {
-		return prestador;
-	}
-
-	public void setPrestador(Prestador prestador) {
-		this.prestador = prestador;
 	}
 
 }

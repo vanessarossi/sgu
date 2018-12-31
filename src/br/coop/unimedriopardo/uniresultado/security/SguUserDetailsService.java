@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import br.coop.unimedriopardo.uniresultado.models.Usuario;
 import br.coop.unimedriopardo.uniresultado.repositories.RepositorioUsuario;
 
-public class UniResultadoUserDetailsService implements UserDetailsService{
+public class SguUserDetailsService implements UserDetailsService{
 	
 
 	@Autowired
