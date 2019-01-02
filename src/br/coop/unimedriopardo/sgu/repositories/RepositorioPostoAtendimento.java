@@ -8,7 +8,10 @@ import br.coop.unimedriopardo.sgu.models.PostoAtendimento;
 
 public interface RepositorioPostoAtendimento extends JpaRepository<PostoAtendimento, String> {
 	
-	@Query(value = "fn_unrp_saldo_caixa(?1,?2)")
-	  public String calcularSaldoCaixa(String codigoPostoAtendimento, String data);
+	  @Query(nativeQuery = true, value = "SELECT fn_unrp_saldo_caixa(:codigoPosto, :data) FROM dual")
+	   String calcularSaldoCaixa(@Param("codigoPosto") String codigoPosto, @Param("data") String data);
+	  
+	  @Query(nativeQuery = true, value = "SELECT fn_unrp_saldo_total_caixa(:data) FROM dual")
+	   String calcularTotalSaldoCaixa(@Param("data") String data);
 	
 }

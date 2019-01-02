@@ -1,13 +1,14 @@
 package br.coop.unimedriopardo.sgu.services;
 
-import java.util.List;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.coop.unimedriopardo.sgu.models.Banco;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioBanco;
+import br.coop.unimedriopardo.sgu.util.Conversor;
 
 
 @Service
@@ -23,8 +24,18 @@ public class BancoServiceImpl implements BancoService {
 	}
 
 	@Override
-	public List<Banco> listarContasBancarias() {
-		return repositorioBanco.findAll();
+	public List<Banco> listarContasBancarias(String data) {
+		
+		List<Banco> contasBancarias = repositorioBanco.findAll();
+		for (Banco banco : contasBancarias) {
+			banco.setSaldo(new Conversor().formataReal(retornaSaldo(banco.getCodigoConta(), data)));
+		}
+		return contasBancarias;
+	}
+
+	@Override
+	public String retornaSaldo(String codigoConta, String data) {
+		return repositorioBanco.calcularSaldo(codigoConta, data);
 	}
 
 }

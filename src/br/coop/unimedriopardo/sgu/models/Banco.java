@@ -21,6 +21,9 @@ public class Banco {
 
 	@Column(name = "conta_aplicacao")
 	private String contaAplicacao;
+	
+	@Column(name = "saldo")
+	private String saldo;
 
 	public String getFilial() {
 		return filial;
@@ -53,7 +56,13 @@ public class Banco {
 	public void setContaAplicacao(String contaAplicacao) {
 		this.contaAplicacao = contaAplicacao;
 	}
-	
-	
-	
+
+	public String getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(String saldo) {
+		this.saldo = saldo;
+	}
+
 }

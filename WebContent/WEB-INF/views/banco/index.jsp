@@ -28,6 +28,7 @@
 							<td>${banco.codigoConta}</td>
 							<td>${banco.nomeConta}</td>
 							<td>${banco.contaAplicacao}</td>
+							<td>${banco.saldo}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
