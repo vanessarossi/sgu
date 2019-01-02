@@ -1,11 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<nav class="navbar navbar-dark bg-pantone192c">
+	<a class="navbar-brand" href="/sgu/home">SGU - Sistema de Gest√£o Unimed</a>
+</nav>
 <section class="text-center" id="titulo">
-	<h1 class="h1">Listagem de Usu·rio</h1>
+	<h1 class="h1">Listagem de Usu√°rio</h1>
 </section>
-<br>
 <section class="justify-content-center text-center">
 	<table class="table table-sm table-striped table-borderless table-hover">
 		<thead>
@@ -13,7 +15,7 @@
 				<th>Nome</th>
 				<th>Login</th>
 				<th>Perfil</th>
-				<th>Prestador</th>
+				<th>E-mail</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -24,13 +26,13 @@
 					<td>${usuario.nome}</td>
 					<td>${usuario.login}</td>
 					<td>${usuario.perfil}</td>
-					<td>${usuario.prestador.nome}</td>
-					<td><a href="/uniresultado/usuario/alterar/${usuario.id}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a></td>
-					<td><a href="/uniresultado/usuario/excluir/${usuario.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+					<td>${usuario.email}</td>
+					<td><a href="/sgu/usuario/alterar/${usuario.id}" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a></td>
+					<td><a href="/sgu/usuario/excluir/${usuario.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>
 	</table>
 </section>
-<a href="/uniresultado/usuario/formulario" class="btn btn-outline-primary"> Novo Usu·rio</a>
-<a href="/uniresultado/home" class="btn  btn-outline-secondary">P·gina Inicial</a>
+<a href="/sgu/usuario/formulario" class="btn btn-success"> Novo Usu√°rio</a>
+<a href="/sgu/home" class="btn  btn-danger">P√°gina Inicial</a>

@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<nav class="navbar navbar-dark bg-pantone192c">
+	<a class="navbar-brand" href="/sgu/home">SGU - Sistema de Gestão Unimed</a>
+</nav>
 <section class="text-center" id="titulo">
 	<h1 class="h1">Cadastro de Usuário</h1>
 </section>
-<form:form action="/uniresultado/usuario/salvar" method="post" modelAttribute="usuario">
+<form:form action="/sgu/usuario/salvar" method="post" modelAttribute="usuario">
 	<div class="form-row">
 		<div class="form-group col-md-2">
 			<label>Login</label>
@@ -31,31 +34,23 @@
 		</div>
 		<div class="form-group col-md-1">
 			<label>Ativo</label>
-			<form:checkbox cssClass="form-control form-control-sm" path="ativo"></form:checkbox>
+			<form:checkbox cssClass="form-control form-control-sm" path="ativo" value="1"></form:checkbox>
 			<form:errors path="ativo" />
 		</div>		
 	</div>
 	<div class="form-row">
 		<div class="form-group col-md-4">
-			<label>Prestador</label>
-			<form:select path="prestador.id" cssClass="form-control form-control-sm">
-				<form:option value="">SELECIONE</form:option>
-				<form:options items="${prestadores}" itemLabel="nome" itemValue="id"/>
-			</form:select>
-			<form:errors path="prestador.id" />
-		</div>
-		<div class="form-group col-md-4">
 			<label>Perfil</label>
 			<form:select path="perfil" cssClass="form-control form-control-sm">
 				<form:option value="">SELECIONE</form:option>
 				<form:option value="ROLE_ADMIN">ADMINISTRADOR</form:option>
-				<form:option value="ROLE_USER">PRESTADOR</form:option>
+				<form:option value="ROLE_USER">GESTOR</form:option>
 			</form:select>
 			<form:errors path="perfil" />
 		</div>
 	</div>
 	<form:hidden path="id" />
-	<button type="submit" class="btn  btn-outline-success">Salvar</button>
-	<a href="/uniresultado/home" class="btn  btn-outline-secondary">Página Inicial</a>
+	<button type="submit" class="btn  btn-success">Salvar</button>
+	<a href="/sgu/home" class="btn  btn-danger">Cancelar</a>
 	<br>
 </form:form>

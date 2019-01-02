@@ -23,7 +23,7 @@ public class SguUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		Usuario usuario = repositorioUsuario.findByLogin(login);
 		if (usuario == null) {
-			throw new UsernameNotFoundException("Usu�rio n�o encontrado");
+			throw new UsernameNotFoundException("Usuário não encontrado");
 		}
 		Set<GrantedAuthority> perfis = new HashSet<GrantedAuthority>();
 		perfis.add(new SimpleGrantedAuthority(usuario.getPerfil()));

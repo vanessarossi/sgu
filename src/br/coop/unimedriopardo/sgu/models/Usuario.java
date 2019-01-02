@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Email;
@@ -16,7 +17,8 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PK_SEQ_SGU_USUARIO")
+    @SequenceGenerator(sequenceName = "SEQ_SGU_USUARIO", allocationSize = 1, name = "PK_SEQ_SGU_USUARIO")
 	private Integer id;
 
 	@NotBlank
@@ -38,7 +40,7 @@ public class Usuario {
 
 	@NotNull
 	@Column(name = "ativo", nullable = false)
-	private Boolean ativo;
+	private String ativo;
 
 	@NotBlank
 	@Column(name = "perfil", length = 100, nullable = false)
@@ -84,11 +86,11 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public Boolean getAtivo() {
+	public String getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(Boolean ativo) {
+	public void setAtivo(String ativo) {
 		this.ativo = ativo;
 	}
 
@@ -100,4 +102,5 @@ public class Usuario {
 		this.perfil = perfil;
 	}
 
+	
 }

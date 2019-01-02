@@ -14,7 +14,7 @@
     	    <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
         	    <div class="form-wrap">
                 <h1>Identificação do Usuário</h1>
-                    <form role="form" action="/uniresultado/login" method="post" id="login-form" autocomplete="off">
+                    <form role="form" action="/sgu/login" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
                             <label for="usuario" class="sr-only">Login</label>
                            	<input type="text" id="usuario" name="login" class="form-control" />

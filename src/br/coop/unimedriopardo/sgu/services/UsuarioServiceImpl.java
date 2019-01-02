@@ -27,6 +27,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public Usuario salvar(Usuario usuario) {
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		if (usuario.getAtivo() == null ) {
+			usuario.setAtivo("0");
+		}
 		usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));	
 		return repositorioUsuario.save(usuario);
 	}
