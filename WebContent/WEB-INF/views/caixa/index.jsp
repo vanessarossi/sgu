@@ -10,6 +10,7 @@
 </nav>
 <section class="text-center" id="titulo">
 	<h1 class="h1">Saldo dos Caixas</h1>
+	<p class="h5">Data do saldo: ${dataEscolhida}</p>
 </section>
 <section id="conteudo justify-content-center text-center">
 	<form action="/sgu/caixa/consultar" method="post">

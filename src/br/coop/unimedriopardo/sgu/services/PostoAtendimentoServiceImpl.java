@@ -53,14 +53,14 @@ private final RepositorioPostoAtendimento repositorioPostoAtendimento;
 
 	@Override
 	public String retornaSaldoTotalCaixasPorDiaEscolhido(String data) {
-		String dataConvertida = new Conversor().formatarDataString(data);
+		String dataConvertida = new Conversor().formatarDataString(data, "YYYYMMdd");
 		return new Conversor().formataReal(repositorioPostoAtendimento.calcularTotalSaldoCaixa(dataConvertida));
 	}
 
 
 	@Override
 	public List<PostoAtendimento> listarPostosAtendimentoPorDiaEscolhido(String data) {
-		String dataConvertida = new Conversor().formatarDataString(data);
+		String dataConvertida = new Conversor().formatarDataString(data, "YYYYMMdd");
 		List<PostoAtendimento> postosAtendimento = repositorioPostoAtendimento.findAll();
 		for (PostoAtendimento postoAtendimento : postosAtendimento) {
 			postoAtendimento.setSaldo(new Conversor().formataReal(retornaSaldo(postoAtendimento.getCodigo(),dataConvertida)));

@@ -8,36 +8,60 @@
 	<a class="navbar-brand" href="/sgu/home">SGU - Sistema de Gestão Unimed</a>
 </nav>
 <section class="text-center" id="titulo">
-	<h1 class="h1">Bancos</h1>
+	<h1 class="h1">Saldo das contas Bancárias</h1>
+	<p class="h5">Data do saldo: ${dataEscolhida}</p>
 </section>
 <section id="conteudo justify-content-center text-center">
-	<div class="row">
-		<div class="form-group col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-			<label for="data">DATA</label> <input type="date" class="form-control" id="data">
+	<form action="/sgu/banco/consultar" method="post">
+		<div class="row">
+			<div class="form-group col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+				<div class="input-group">
+					<input type="date" class="form-control" id="data" name="data" required="required">
+					<div class="input-group-append">
+						<button type="submit" class="btn btn-info">
+							<i class="fas fa-search"> Consultar</i>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<a href="/sgu/home" class="btn btn-danger">Sair da consulta a conta bancaria</a>
+			</div>
 		</div>
-		<div class="form-group">
-			<br> <a href="/sgu/home" class="btn btn-danger">Sair da consulta ao banco</a>
-		</div>
-	</div>
+	</form>
 	<div class="row">
-		<div class="col-12 col-sm-12 col-md-12 col-lg6 col-xl-6" id="table">
+		<div class="col-12 col-sm-12 col-md-12 col-lg6 col-xl-6">
 			<table class="table table-striped table-hover">
 				<tbody>
-					<c:forEach items="${bancos}" var="banco" varStatus="i" >
+					<c:forEach items="${bancos}" var="banco" end="10" >
 						<tr>
 							<td>${banco.codigoConta}</td>
 							<td>${banco.nomeConta}</td>
-							<td>${banco.contaAplicacao}</td>
+							<td><c:if test="${banco.contaAplicacao eq 'S'}">APL</c:if></td>
 							<td>${banco.saldo}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6"
-			id="apresentacao">
-			<canvas id="chart"></canvas>
+		<div class="col-12 col-sm-12 col-md-12 col-lg6 col-xl-6">
+			<table class="table table-striped table-hover">
+				<tbody>
+					<c:forEach items="${bancos}" var="banco" begin="11" >
+						<tr>
+							<td>${banco.codigoConta}</td>
+							<td>${banco.nomeConta}</td>
+							<td><c:if test="${banco.contaAplicacao eq 'S'}">APL</c:if></td>
+							<td>${banco.saldo}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
+	</div>
+	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+		<div class="alert alert-info" role="alert">SALDO TOTAL
+			${saldoTotal}</div>
 	</div>
 </section>
 <br>

@@ -10,5 +10,8 @@ import br.coop.unimedriopardo.sgu.models.Banco;
 public interface RepositorioBanco extends JpaRepository<Banco, String> {
 
 	 @Query(nativeQuery = true, value = "SELECT fn_unrp_saldo_conta(:codigoConta, :data) FROM dual")
-	   String calcularSaldo(@Param("codigoConta") String codigoPosto, @Param("data") String data);
+	 String calcularSaldo(@Param("codigoConta") String codigoConta, @Param("data") String data);
+	 
+	 @Query(nativeQuery = true, value = "SELECT fn_unrp_saldo_total_conta(:data) FROM dual")
+	 String calcularTotalSaldo(@Param("data") String data);
 }

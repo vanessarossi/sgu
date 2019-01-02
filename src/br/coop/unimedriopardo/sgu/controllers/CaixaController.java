@@ -1,5 +1,7 @@
 package br.coop.unimedriopardo.sgu.controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import br.coop.unimedriopardo.sgu.services.PostoAtendimentoService;
+import br.coop.unimedriopardo.sgu.util.Conversor;
 
 @Controller
 @RequestMapping("/caixa")
@@ -23,6 +26,7 @@ public class CaixaController {
 	public String home(Model model) {
 		model.addAttribute("postosAtendimento", postoAtendimentoService.listarPostosAtendimento());
 		model.addAttribute("saldoTotal",postoAtendimentoService.retornaSaldoTotalCaixas());
+		model.addAttribute("dataEscolhida", new Conversor().formatarData(new Date(), "dd/MM/YYYY"));
 		return "caixa.index.tiles";
 	}
 	
@@ -30,6 +34,7 @@ public class CaixaController {
 	public String consultar(@ModelAttribute("data") String data, Model model) {
 		model.addAttribute("postosAtendimento", postoAtendimentoService.listarPostosAtendimentoPorDiaEscolhido(data));
 		model.addAttribute("saldoTotal",postoAtendimentoService.retornaSaldoTotalCaixasPorDiaEscolhido(data));
+		model.addAttribute("dataEscolhida", new Conversor().formatarData(new Date(), "dd/MM/YYYY"));
 		return "caixa.index.tiles";
 	}
 

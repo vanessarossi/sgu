@@ -2,6 +2,7 @@ package br.coop.unimedriopardo.sgu.util;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -13,10 +14,20 @@ public class Conversor {
 			return dataFormatada;
 		}
 		
-		public String formatarDataString(String data) {
-			String dataFormatada = data.replace("-", "");
+		public String formatarDataString(String data, String formatoNovo) {
+			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = null;
+			try {
+				date = formato.parse(data);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			formato.applyPattern(formatoNovo);
+			String dataFormatada = formato.format(date);
 			return dataFormatada;
 		}
+		
+	
 		
 		public String formataReal(String valorString) {
 			BigDecimal valor = new BigDecimal (valorString);  

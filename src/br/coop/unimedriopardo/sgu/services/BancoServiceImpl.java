@@ -1,6 +1,7 @@
 package br.coop.unimedriopardo.sgu.services;
 
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,6 @@ public class BancoServiceImpl implements BancoService {
 
 	@Override
 	public List<Banco> listarContasBancarias(String data) {
-		
 		List<Banco> contasBancarias = repositorioBanco.findAll();
 		for (Banco banco : contasBancarias) {
 			banco.setSaldo(new Conversor().formataReal(retornaSaldo(banco.getCodigoConta(), data)));
@@ -35,7 +35,32 @@ public class BancoServiceImpl implements BancoService {
 
 	@Override
 	public String retornaSaldo(String codigoConta, String data) {
-		return repositorioBanco.calcularSaldo(codigoConta, data);
+		String saldo = repositorioBanco.calcularSaldo(codigoConta, data);
+		if (saldo == null || saldo == "") {
+			saldo = "0";
+		}
+		return saldo;
+	}
+
+	@Override
+	public List<Banco> listarContasBancariasPorDiaEscolhido(String data) {
+		String dataConvertida = new Conversor().formatarDataString(data,"YYYYMMdd");
+		List<Banco> contasBancarias = repositorioBanco.findAll();
+		for (Banco banco : contasBancarias) {
+			banco.setSaldo(new Conversor().formataReal(retornaSaldo(banco.getCodigoConta(), dataConvertida)));
+		}
+		return contasBancarias;
+	}
+
+	@Override
+	public String retornaSaldoTotalContas() {
+		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldo(new Conversor().formatarData(new Date(), "YYYYMMdd")));
+	}
+
+	@Override
+	public String retornaSaldoTotalCaixasPorDiaEscolhido(String data) {
+		String dataConvertida = new Conversor().formatarDataString(data, "YYYYMMdd");
+		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldo(dataConvertida));
 	}
 
 }
