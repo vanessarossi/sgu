@@ -34,7 +34,7 @@ public class CaixaController {
 	public String consultar(@ModelAttribute("data") String data, Model model) {
 		model.addAttribute("postosAtendimento", postoAtendimentoService.listarPostosAtendimentoPorDiaEscolhido(data));
 		model.addAttribute("saldoTotal",postoAtendimentoService.retornaSaldoTotalCaixasPorDiaEscolhido(data));
-		model.addAttribute("dataEscolhida", new Conversor().formatarData(new Date(), "dd/MM/YYYY"));
+		model.addAttribute("dataEscolhida", new Conversor().formatarDataString(data, "dd/MM/YYYY"));
 		return "caixa.index.tiles";
 	}
 
