@@ -16,4 +16,9 @@ public class HomeController {
 	public String login() {
 		return "login.index.tiles";
 	}
+	
+	@RequestMapping("403")
+	public String accessDenied() {
+	    return "erro.403.tiles";
+	}
 }

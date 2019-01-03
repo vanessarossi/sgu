@@ -48,4 +48,9 @@
 		<put-attribute name="title" value="Fluxo de Caixa"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/fluxo/index.jsp"></put-attribute>
 	</definition>
+	<!-- ERRO 403 -->
+	<definition name="erro.403.tiles" extends="layout.tiles">
+		<put-attribute name="title" value="Erro 403"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/erro/403.jsp"></put-attribute>
+	</definition>
 </tiles-definitions>
