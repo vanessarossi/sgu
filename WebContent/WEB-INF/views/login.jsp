@@ -11,9 +11,10 @@
 <section id="login">
     <div class="container">
     	<div class="row">
-    	    <div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+    	    <div class="col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11">
         	    <div class="form-wrap">
-                <h1>Identificação do Usuário</h1>
+        	    <h1>SGU - Sistema de Gestão Unimed</h1>
+                <h2>Identificação do Usuário</h2>
                     <form role="form" action="/sgu/login" method="post" id="login-form" autocomplete="off">
                         <div class="form-group">
                             <label for="usuario" class="sr-only">Login</label>
@@ -26,7 +27,6 @@
                         <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Entrar">
                         <p class="text-center"><em>v1.0 - Unimed São José do Rio Pardo</em></p>
                     </form>
-                    <hr>
         	    </div>
     		</div> 
     	</div>

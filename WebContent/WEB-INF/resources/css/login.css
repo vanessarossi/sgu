@@ -1,0 +1,128 @@
+/*    --------------------------------------------------
+	:: Login Section
+	-------------------------------------------------- */
+body {
+	/*border-top-style: solid;
+	border-top-width: 50px;
+	border-top-color: #0A5F55;
+	background-color: rgba(0, 0, 0, 0.01);*/
+	background-color: #0A5F55;
+}
+
+#login {
+	padding-top: 50px
+}
+
+#login .form-wrap {
+	width: 40%;
+	margin: 0 auto;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #FFFFFF;
+	border-radius: 10px 20px;
+	box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
+}
+
+.form-wrap {
+	background-color: #FFFFFF;
+}
+
+#login h1 {
+	color: #0A5F55;
+	font-size: 30px;
+	text-align: center;
+	font-weight: bold;
+	padding: 20px;
+}
+
+#login h2 {
+	color: #0A5F55;
+	font-size: 25px;
+	text-align: center;
+	font-weight: bold;
+	padding: 20px;
+}
+
+#login #login-form {
+	padding: 20px;
+}
+
+#login .form-group {
+	margin-bottom: 25px;
+}
+
+#login .checkbox {
+	margin-bottom: 20px;
+	position: relative;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+#login .btn.btn-custom {
+	font-size: 14px;
+	margin-bottom: 20px;
+}
+
+#login .forget {
+	font-size: 13px;
+	text-align: center;
+	display: block;
+}
+
+/*    --------------------------------------------------
+	:: Inputs & Buttons
+	-------------------------------------------------- */
+.form-control {
+	color: #212121;
+}
+
+.btn-custom {
+	color: #FFFFFF;
+	background-color: #5B5C65;
+}
+
+.btn-custom:hover, .btn-custom:focus {
+	color: #212121;
+}
+
+/*    --------------------------------------------------
+    :: Footer
+	-------------------------------------------------- */
+#footer {
+	color: #FFFFFF;
+	font-size: 12px;
+	text-align: center;
+}
+
+#footer p {
+	margin-bottom: 0;
+}
+
+#footer a {
+	color: inherit;
+}
+
+@media ( max-width : 575.98px) {
+	#login .form-wrap {
+		width: 70%;
+		margin: 0 auto;
+	}
+}
+
+@media ( min-width : 576px) and (max-width: 767.98px) {
+	#login .form-wrap {
+		width: 60%;
+		margin: 0 auto;
+	}
+}
+
+@media ( min-width : 768px) and (max-width: 991.98px) {
+	#login .form-wrap {
+		width: 60%;
+		margin: 0 auto;
+	}
+}
+}
