@@ -10,11 +10,11 @@ body {
 }
 
 #login {
-	padding-top: 50px
+	padding-top: 80px
 }
 
 #login .form-wrap {
-	width: 40%;
+	width: 35%;
 	margin: 0 auto;
 	border-style: solid;
 	border-width: 1px;
@@ -51,25 +51,9 @@ body {
 	margin-bottom: 25px;
 }
 
-#login .checkbox {
-	margin-bottom: 20px;
-	position: relative;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	-o-user-select: none;
-	user-select: none;
-}
-
 #login .btn.btn-custom {
 	font-size: 14px;
 	margin-bottom: 20px;
-}
-
-#login .forget {
-	font-size: 13px;
-	text-align: center;
-	display: block;
 }
 
 /*    --------------------------------------------------
@@ -114,14 +98,14 @@ body {
 
 @media ( min-width : 576px) and (max-width: 767.98px) {
 	#login .form-wrap {
-		width: 60%;
+		width: 70%;
 		margin: 0 auto;
 	}
 }
 
 @media ( min-width : 768px) and (max-width: 991.98px) {
 	#login .form-wrap {
-		width: 60%;
+		width: 70%;
 		margin: 0 auto;
 	}
 }

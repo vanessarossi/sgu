@@ -32,7 +32,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<nav class="navbar navbar-dark bg-pantone192c"> <a
+		<nav class="navbar navbar-dark bg-dark"> <a
 			class="navbar-brand" href="/sgu/home">SGU - Sistema de Gestão
 			Unimed</a> </nav>
 		<section class="text-center" id="titulo">

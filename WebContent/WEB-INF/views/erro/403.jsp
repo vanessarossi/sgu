@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 <div class="container-fluid">
-	<nav class="navbar navbar-dark bg-pantone192c">
+	<nav class="navbar navbar-dark bg-dark">
 		<a class="navbar-brand" href="/sgu/home">SGU - Sistema de Gestão
 			Unimed</a>
 	</nav>
@@ -24,7 +24,7 @@
 	<section
 		class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
 		<p class="text-center lead">Ops! Você não tem as permissões
-			necessárias para executar a ação! !</p>
+			necessárias para executar a ação!</p>
 	</section>
 
 

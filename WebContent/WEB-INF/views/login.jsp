@@ -10,7 +10,7 @@
 
 <section id="login">
     <div class="container">
-    	<div class="row">
+    	<div class="row text-center">
     	    <div class="col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11">
         	    <div class="form-wrap">
         	    <h1>SGU - Sistema de Gestão Unimed</h1>

@@ -13,7 +13,7 @@ import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table(name = "sgu_usuario")
+@Table(name = "unrp_sgu_usuario")
 public class Usuario {
 
 	@Id
