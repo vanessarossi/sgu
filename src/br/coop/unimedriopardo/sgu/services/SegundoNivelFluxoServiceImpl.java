@@ -21,7 +21,7 @@ private final RepositorioSegundoNivelFluxo repositorioSegundoNivelFluxo;
 	}
 
 	@Override
-	public List<SegundoNivelFluxo> pesquisarSegundoNivelPorCodigoPrimeiroNivel(String codigoPrimeiroNivel) {
+	public List<SegundoNivelFluxo> pesquisarSegundoNivel(String codigoPrimeiroNivel) {
 		List<SegundoNivelFluxo> segundoNivelFluxo = repositorioSegundoNivelFluxo.findByCodigoPrimeiroNivel(codigoPrimeiroNivel);
 		return segundoNivelFluxo;
 	}

@@ -25,10 +25,10 @@ public class DespesaReceitaController {
 	
 	@RequestMapping("")
 	public String home(Model model) {
-		model.addAttribute("despesa", primeiroNivelFluxoService.pesquisarPrimeiroNivelPorCodigoNivel("2"));
-		model.addAttribute("segundoNivelDespesas", segundoNivelFluxoService.pesquisarSegundoNivelPorCodigoPrimeiroNivel("2"));
-		model.addAttribute("receita",primeiroNivelFluxoService.pesquisarPrimeiroNivelPorCodigoNivel("1"));
-		model.addAttribute("segundoNivelReceitas",segundoNivelFluxoService.pesquisarSegundoNivelPorCodigoPrimeiroNivel("1"));
+		model.addAttribute("despesa", primeiroNivelFluxoService.pesquisarPrimeiroNivel("2"));
+		model.addAttribute("segundoNivelDespesas", segundoNivelFluxoService.pesquisarSegundoNivel("2"));
+		model.addAttribute("receita",primeiroNivelFluxoService.pesquisarPrimeiroNivel("1"));
+		model.addAttribute("segundoNivelReceitas",segundoNivelFluxoService.pesquisarSegundoNivel("1"));
 		return "despesa.receita.index.tiles";
 	}
 	

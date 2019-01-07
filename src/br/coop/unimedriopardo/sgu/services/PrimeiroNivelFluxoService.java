@@ -4,6 +4,6 @@ import br.coop.unimedriopardo.sgu.models.PrimeiroNivelFluxo;
 
 public interface PrimeiroNivelFluxoService {
 	
-	public PrimeiroNivelFluxo pesquisarPrimeiroNivelPorCodigoNivel(String codigoNivel);
+	public PrimeiroNivelFluxo pesquisarPrimeiroNivel(String codigoNivel);
 
 }

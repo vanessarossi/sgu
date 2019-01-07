@@ -22,7 +22,7 @@ public class PrimeiroNivelFluxoServiceImpl implements PrimeiroNivelFluxoService{
 	
 	
 	@Override
-	public PrimeiroNivelFluxo pesquisarPrimeiroNivelPorCodigoNivel(String codigoNivel) {
+	public PrimeiroNivelFluxo pesquisarPrimeiroNivel(String codigoNivel) {
 		return repositorioPrimeiroNivelFluxo.findByCodigoNivel(codigoNivel);
 	}
 

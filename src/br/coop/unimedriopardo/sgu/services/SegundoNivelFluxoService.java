@@ -7,5 +7,5 @@ import br.coop.unimedriopardo.sgu.models.SegundoNivelFluxo;
 
 public interface SegundoNivelFluxoService {
 
-	public List<SegundoNivelFluxo> pesquisarSegundoNivelPorCodigoPrimeiroNivel(String codigoPrimeiroNivel);
+	public List<SegundoNivelFluxo> pesquisarSegundoNivel(String codigoPrimeiroNivel);
 }
