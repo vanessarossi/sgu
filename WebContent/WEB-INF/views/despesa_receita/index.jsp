@@ -44,7 +44,9 @@
 				        </tr>
 				        <tr>
 				            <td colspan="3">
-				                <div id="segundoNivelDespesa${segundoNivelDespesa.codigoAcesso}" class="collapse">Hidden by default</div>
+				                <div id="segundoNivelDespesa${segundoNivelDespesa.codigoAcesso}" class="collapse">
+				                	<a href="#" onclick="expandirTerceiroNivel('${segundoNivelDespesa.codigoPrimeiroNivel}','${segundoNivelDespesa.codigoNivel}')"> TESTE SEGUNDO NIVEL</a>
+				                </div>
 				            </td>
 				        </tr>
 				     </c:forEach>
@@ -68,7 +70,9 @@
 				        </tr>
 				        <tr>
 				            <td colspan="3">
-				                <div id="segundoNivelReceita${segundoNivelReceita.codigoAcesso}" class="collapse">Hidden by default</div>
+				                <div id="segundoNivelReceita${segundoNivelReceita.codigoAcesso}" class="collapse">
+				                	<a href="/sgu/despesareceita/pesquisaTerceiroNivel/${segundoNivelReceita.codigoPrimeiroNivel}/${segundoNivelReceita.codigoNivel}"> TESTE SEGUNDO NIVEL</a>
+				                </div>
 				            </td>
 				        </tr>
 				     </c:forEach>
@@ -78,3 +82,27 @@
 	</div>
 </section>
 <br>
+
+<script type="text/javascript">
+
+ 
+function expandirTerceiroNivel(codigoPrimeiroNivel,codigoSegundoNivel){
+	console.log("primeiro "+codigoPrimeiroNivel);
+	console.log("Segundo "+codigoSegundoNivel);
+
+	$.ajax({
+			 url : '/sgu/despesareceita/pesquisaTerceiroNivel/'+codigoPrimeiroNivel+'/'+codigoSegundoNivel,
+		     type : 'get',
+		beforeSend : function(){
+		     	
+		}
+		})
+		.done(function(msg){
+		         
+		 })
+		.fail(function(jqXHR, textStatus, msg){
+		          alert(msg);
+	}); 
+}
+ 
+</script>

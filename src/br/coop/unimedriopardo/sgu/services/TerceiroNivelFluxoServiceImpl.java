@@ -4,9 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import br.coop.unimedriopardo.sgu.models.SegundoNivelFluxo;
-import br.coop.unimedriopardo.sgu.repositories.RepositorioSegundoNivelFluxo;
+import br.coop.unimedriopardo.sgu.models.TerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioTerceiroNivelFluxo;
 
 @Service
@@ -22,9 +20,8 @@ private final RepositorioTerceiroNivelFluxo repositorioTerceiroNivelFluxo;
 	}
 
 	@Override
-	public List<SegundoNivelFluxo> pesquisarTerceiroNivel(String codigoPrimeiroNivel, String codigoSegundoNivel) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<TerceiroNivelFluxo> pesquisarTerceiroNivel(String codigoPrimeiroNivel, String codigoSegundoNivel) {
+		return repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel(codigoPrimeiroNivel, codigoSegundoNivel);
 	}
 
 	
