@@ -2,11 +2,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <nav class="nasvbar navbar-dark bg-pantone2627c">
 	<a class="navbar-brand" href="/sgu/home">SGU - Sistema de Gestão Unimed</a>
 </nav>
 <section class="text-center" id="titulo">
 	<h1 class="h1">Despesas e Receitas</h1>
+	<p class="h5">Data do saldo: ${dataEscolhida}</p>
 </section>
 <section id="conteudo justify-content-center text-center">
 	<form action="/sgu/despesareceita/consultar" method="post">
@@ -28,7 +30,7 @@
 	</form>
 	<div class="row" id="demonstrativo">
 		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="despesaNivelUm">
-			<p><strong>${despesa.codigo}</strong> - ${despesa.descricao} : </p>
+			<p><strong>${despesa.codigo}</strong> - ${despesa.descricao} : <strong>${saldoTotalDespesaNivel1}</strong></p>
 			<table class="table table-hover table-sm">
 			    <thead>
 			        <th>Código Fluxo</th>
@@ -40,12 +42,12 @@
 				        <tr data-toggle="collapse" data-target='#segundoNivelDespesa${segundoNivelDespesa.codigoAcesso}' class="clickable">
 				            <td>${segundoNivelDespesa.codigo}</td>
 				            <td>${segundoNivelDespesa.descricao}</td>
-				            <td>R$</td>
+				            <td>R$ ${segundoNivelDespesa.valorTotal}</td>
 				        </tr>
 				        <tr>
 				            <td colspan="3">
 				                <div id="segundoNivelDespesa${segundoNivelDespesa.codigoAcesso}" class="collapse">
-				                	<a href="#" onclick="expandirTerceiroNivel('${segundoNivelDespesa.codigoPrimeiroNivel}','${segundoNivelDespesa.codigoNivel}')"> TESTE SEGUNDO NIVEL</a>
+				                	<a href="#" onclick="expandirTerceiroNivel('${segundoNivelDespesa.codigoPrimeiroNivel}','${segundoNivelDespesa.codigoNivel}')"> TESTE TERCEIRO NIVEL</a>
 				                </div>
 				            </td>
 				        </tr>
@@ -54,7 +56,7 @@
 			</table>
 		</div>
 		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="receitaNivelUm">
-			<p><strong>${receita.codigo}</strong> - ${receita.descricao} : </p>
+			<p><strong>${receita.codigo}</strong> - ${receita.descricao} : <strong>${saldoTotalReceitaNivel1}</strong></p>
 			<table class="table table-hover table-sm">
 			    <thead>
 			        <th>Código Fluxo</th>
@@ -66,12 +68,12 @@
 				        <tr data-toggle="collapse" data-target='#segundoNivelReceita${segundoNivelReceita.codigoAcesso}' class="clickable">
 				            <td>${segundoNivelReceita.codigo}</td>
 				            <td>${segundoNivelReceita.descricao}</td>
-				            <td>R$</td>
+				            <td>R$ ${segundoNivelReceita.valorTotal}</td>
 				        </tr>
 				        <tr>
 				            <td colspan="3">
 				                <div id="segundoNivelReceita${segundoNivelReceita.codigoAcesso}" class="collapse">
-				                	<a href="/sgu/despesareceita/pesquisaTerceiroNivel/${segundoNivelReceita.codigoPrimeiroNivel}/${segundoNivelReceita.codigoNivel}"> TESTE SEGUNDO NIVEL</a>
+				                	<a href="#" onclick="expandirTerceiroNivel('${segundoNivelReceita.codigoPrimeiroNivel}','${segundoNivelReceita.codigoNivel}')"> TESTE SEGUNDO NIVEL</a>
 				                </div>
 				            </td>
 				        </tr>
@@ -82,27 +84,5 @@
 	</div>
 </section>
 <br>
-
-<script type="text/javascript">
-
- 
-function expandirTerceiroNivel(codigoPrimeiroNivel,codigoSegundoNivel){
-	console.log("primeiro "+codigoPrimeiroNivel);
-	console.log("Segundo "+codigoSegundoNivel);
-
-	$.ajax({
-			 url : '/sgu/despesareceita/pesquisaTerceiroNivel/'+codigoPrimeiroNivel+'/'+codigoSegundoNivel,
-		     type : 'get',
-		beforeSend : function(){
-		     	
-		}
-		})
-		.done(function(msg){
-		         
-		 })
-		.fail(function(jqXHR, textStatus, msg){
-		          alert(msg);
-	}); 
-}
- 
-</script>
+<spring:url value="/resources/js/despesaereceita.js" var="despesaereceitaJs"></spring:url>
+<script type="text/javascript" src="${despesaereceitaJs}"></script>

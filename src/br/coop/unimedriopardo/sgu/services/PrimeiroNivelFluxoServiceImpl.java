@@ -26,4 +26,16 @@ public class PrimeiroNivelFluxoServiceImpl implements PrimeiroNivelFluxoService{
 		return repositorioPrimeiroNivelFluxo.findByCodigoNivel(codigoNivel);
 	}
 
+
+	@Override
+	public String calcularSaldoReceita(String data) {
+		return repositorioPrimeiroNivelFluxo.calcularReceita(data);
+	}
+
+
+	@Override
+	public String calcularSaldoDespesa(String data) {
+		return repositorioPrimeiroNivelFluxo.calcularDespesa(data);
+	}
+
 }
