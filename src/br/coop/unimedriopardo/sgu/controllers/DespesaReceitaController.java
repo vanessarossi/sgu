@@ -2,7 +2,6 @@ package br.coop.unimedriopardo.sgu.controllers;
 
 import java.util.Date;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +10,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import br.coop.unimedriopardo.sgu.models.TerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.services.PrimeiroNivelFluxoService;
 import br.coop.unimedriopardo.sgu.services.SegundoNivelFluxoService;
 import br.coop.unimedriopardo.sgu.services.TerceiroNivelFluxoService;
 import br.coop.unimedriopardo.sgu.util.Conversor;
+import br.coop.unimedriopardo.sgu.util.TerceiroNivelView;
 
 @Controller
 @RequestMapping("/despesareceita")
@@ -66,9 +64,9 @@ public class DespesaReceitaController {
 	}
 	
 	
-	@RequestMapping(value="/pesquisaTerceiroNivel/{codigoPrimeiroNivel}/{codigoSegundoNivel}", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody List<TerceiroNivelFluxo> listarTerceiroNivel(@PathVariable("codigoPrimeiroNivel") String codigoPrimeiroNivel,@PathVariable("codigoSegundoNivel") String codigoSegundoNivel){
-		List<TerceiroNivelFluxo> listaTerceiroNivel = terceiroNivelFluxoService.pesquisarTerceiroNivel(codigoPrimeiroNivel,codigoSegundoNivel);
+	@RequestMapping(value="/pesquisaTerceiroNivel/{codigoPrimeiroNivel}/{codigoSegundoNivel}/{data}", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody List<TerceiroNivelView> listarTerceiroNivel(@PathVariable("codigoPrimeiroNivel") String codigoPrimeiroNivel,@PathVariable("codigoSegundoNivel") String codigoSegundoNivel, @PathVariable("data") String data){
+		List<TerceiroNivelView> listaTerceiroNivel = terceiroNivelFluxoService.pesquisarTerceiroNivel(codigoPrimeiroNivel,codigoSegundoNivel, data);
 		return listaTerceiroNivel;
 	}
 	

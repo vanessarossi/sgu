@@ -8,7 +8,7 @@
 </nav>
 <section class="text-center" id="titulo">
 	<h1 class="h1">Despesas e Receitas</h1>
-	<p class="h5">Data do saldo: ${dataEscolhida}</p>
+	<p class="h5">Data do saldo:</p><label class="h5" id="dataSaldo">${dataEscolhida}</label>
 </section>
 <section id="conteudo justify-content-center text-center">
 	<form action="/sgu/despesareceita/consultar" method="post">
@@ -32,55 +32,25 @@
 		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="despesaNivelUm">
 			<p><strong>${despesa.codigo}</strong> - ${despesa.descricao} : <strong>${saldoTotalDespesaNivel1}</strong></p>
 			<table class="table table-hover table-sm">
-			    <thead>
-			        <th>Código Fluxo</th>
-			        <th>Descrição</th>
-			        <th></th>
-			    </thead>
-			    <tbody>
-			    	<c:forEach items="${segundoNivelDespesas}" var="segundoNivelDespesa">
-				        <tr data-toggle="collapse" data-target='#segundoNivelDespesa${segundoNivelDespesa.codigoAcesso}' class="clickable">
-				            <td>${segundoNivelDespesa.codigo}</td>
-				            <td>${segundoNivelDespesa.descricao}</td>
-				            <td>R$ ${segundoNivelDespesa.valorTotal}</td>
-				        </tr>
-				        <tr>
-				            <td colspan="3">
-				                <div id="segundoNivelDespesa${segundoNivelDespesa.codigoAcesso}" class="collapse">
-				                	<a href="#" onclick="expandirTerceiroNivel('${segundoNivelDespesa.codigoPrimeiroNivel}','${segundoNivelDespesa.codigoNivel}')"> TESTE TERCEIRO NIVEL</a>
-				                </div>
-				            </td>
-				        </tr>
-				     </c:forEach>
-			    </tbody>
+				<thead>
+					<tr>
+						<th>Código</th>
+					   	<th>Descrição</th>
+					    <th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${segundoNivelDespesas}" var="segundoNivelDespesa">
+						<tr>
+					    	<td id="${segundoNivelDespesa.codigoNivel}"><button onclick="">EXPANDIR</button>${segundoNivelDespesa.codigo}</td>
+					        <td id="segundoNivelDespesa${segundoNivelDespesa.codigoNivel}">${segundoNivelDespesa.descricao}</td>
+					        <td>R$ ${segundoNivelDespesa.valorTotal}</td>
+					   </tr>
+					</c:forEach>
+				</tbody>
 			</table>
 		</div>
-		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="receitaNivelUm">
-			<p><strong>${receita.codigo}</strong> - ${receita.descricao} : <strong>${saldoTotalReceitaNivel1}</strong></p>
-			<table class="table table-hover table-sm">
-			    <thead>
-			        <th>Código Fluxo</th>
-			        <th>Descrição</th>
-			        <th></th>
-			    </thead>
-			    <tbody>
-			    	<c:forEach items="${segundoNivelReceitas}" var="segundoNivelReceita">
-				        <tr data-toggle="collapse" data-target='#segundoNivelReceita${segundoNivelReceita.codigoAcesso}' class="clickable">
-				            <td>${segundoNivelReceita.codigo}</td>
-				            <td>${segundoNivelReceita.descricao}</td>
-				            <td>R$ ${segundoNivelReceita.valorTotal}</td>
-				        </tr>
-				        <tr>
-				            <td colspan="3">
-				                <div id="segundoNivelReceita${segundoNivelReceita.codigoAcesso}" class="collapse">
-				                	<a href="#" onclick="expandirTerceiroNivel('${segundoNivelReceita.codigoPrimeiroNivel}','${segundoNivelReceita.codigoNivel}')"> TESTE SEGUNDO NIVEL</a>
-				                </div>
-				            </td>
-				        </tr>
-				     </c:forEach>
-			    </tbody>
-			</table>
-		</div>
+		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="receitaNivelUm"></div>
 	</div>
 </section>
 <br>
