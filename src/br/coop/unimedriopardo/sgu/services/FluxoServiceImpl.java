@@ -8,11 +8,16 @@ import org.springframework.transaction.annotation.Transactional;
 import br.coop.unimedriopardo.sgu.models.Banco;
 import br.coop.unimedriopardo.sgu.models.ContaFluxo;
 import br.coop.unimedriopardo.sgu.models.PostoAtendimento;
+import br.coop.unimedriopardo.sgu.models.SegundoNivelFluxo;
+import br.coop.unimedriopardo.sgu.models.TerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioBanco;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioContaFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioPostoAtendimento;
+import br.coop.unimedriopardo.sgu.repositories.RepositorioSegundoNivelFluxo;
+import br.coop.unimedriopardo.sgu.repositories.RepositorioTerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.util.ContaPrincipal;
 import br.coop.unimedriopardo.sgu.util.Conversor;
+import br.coop.unimedriopardo.sgu.util.DemonstrativoView;
 
 @Service
 @Transactional
@@ -20,16 +25,22 @@ public class FluxoServiceImpl implements FluxoService {
 	
 	private final RepositorioContaFluxo repositorioContaFluxo;
 	private final RepositorioBanco repositorioBanco;
-	private final RepositorioPostoAtendimento repositorioPostoAtendimento;
+	private final RepositorioPostoAtendimento repositorioPostoAtendimento;	
+	private final RepositorioSegundoNivelFluxo repositorioSegundoNivelFluxo;
+	private final RepositorioTerceiroNivelFluxo repositorioTerceiroNivelFluxo;
 	
 	@Autowired
-	public FluxoServiceImpl(RepositorioContaFluxo repositorioContaFluxo,RepositorioBanco repositorioBanco,RepositorioPostoAtendimento repositorioPostoAtendimento) {
+	public FluxoServiceImpl(RepositorioContaFluxo repositorioContaFluxo,RepositorioBanco repositorioBanco,RepositorioPostoAtendimento repositorioPostoAtendimento,
+			RepositorioSegundoNivelFluxo repositorioSegundoNivelFluxo, RepositorioTerceiroNivelFluxo repositorioTerceiroNivelFluxo) {
 		super();
 		this.repositorioContaFluxo = repositorioContaFluxo;
 		this.repositorioBanco = repositorioBanco;
 		this.repositorioPostoAtendimento = repositorioPostoAtendimento;
+		this.repositorioSegundoNivelFluxo = repositorioSegundoNivelFluxo;
+		this.repositorioTerceiroNivelFluxo = repositorioTerceiroNivelFluxo;
 	}
-
+	
+	
 	@Override
 	public List<ContaFluxo> listarContas() {
 		return repositorioContaFluxo.findAll();
@@ -146,6 +157,29 @@ public class FluxoServiceImpl implements FluxoService {
 		return principaisContas;
 	}
 	
-	
+	public List<DemonstrativoView> carregarDemonstrativos(){
+		
+		List<SegundoNivelFluxo> listaSegundoNivelFluxo = repositorioSegundoNivelFluxo.findByCodigoPrimeiroNivel("2");
+		List<DemonstrativoView> demonstrativoViews = new ArrayList<DemonstrativoView>();
+		for (SegundoNivelFluxo segundoNivelFluxo : listaSegundoNivelFluxo) {
+			DemonstrativoView demonstrativoView = new DemonstrativoView();
+			demonstrativoView.setSegundoNivelFluxo(segundoNivelFluxo);
+			
+			List<TerceiroNivelFluxo> receita = repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel("1", segundoNivelFluxo.getCodigoNivel());
+			List<TerceiroNivelFluxo> despesa = repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel("2", segundoNivelFluxo.getCodigoNivel());
+			
+			demonstrativoView.setReceitaTerceiroNivelFluxo(receita);
+			demonstrativoView.setDespesaTerceiroNivelFluxo(despesa);
+			
+			demonstrativoViews.add(demonstrativoView);
+		}
+		return demonstrativoViews;
+	}
 
+
+	@Override
+	public List<ContaFluxo> carregarContas() {
+		return repositorioContaFluxo.findAll();
+	}
+	
 }

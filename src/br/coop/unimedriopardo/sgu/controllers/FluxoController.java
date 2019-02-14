@@ -14,19 +14,19 @@ import br.coop.unimedriopardo.sgu.services.SegundoNivelFluxoService;
 @RequestMapping("/fluxo")
 public class FluxoController {
 	
-	private final SegundoNivelFluxoService segundoNivelFluxoService;
+	
 	private final FluxoService fluxoService;
 	
 	@Autowired
 	public FluxoController(SegundoNivelFluxoService segundoNivelFluxoService, FluxoService fluxoService) {
-		this.segundoNivelFluxoService = segundoNivelFluxoService;
 		this.fluxoService = fluxoService;
 	}
 
 	@RequestMapping("")
 	public String home(Model model) {
-		model.addAttribute("centrosCusto", segundoNivelFluxoService.pesquisarDescricoes("2"));
-		model.addAttribute("principaisContas", fluxoService.carregarContasValorizadas("2019-01-31"));
+		model.addAttribute("demonstrativos", fluxoService.carregarDemonstrativos());
+		model.addAttribute("contas",fluxoService.carregarContas());
+		model.addAttribute("contasFilha",fluxoService);
 		return "fluxo.index.tiles";
 	}
 

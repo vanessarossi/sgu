@@ -8,7 +8,7 @@
 </nav>
 
 <section class="text-center" id="titulo">
-	<h1 class="h1">Fluxo de Caixa</h1>
+	<h1 class="h1">Demonstrativo Financeiro</h1>
 </section>
 <section id="conteudo justify-content-center text-center">
 	<form>
@@ -30,69 +30,97 @@
 			</div>
 		 </div>
 	</form>
-	<div class="row">
-		<div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-102">
-			<c:forEach items="${centrosCusto}" var="centroCusto">
-				<p class="h5 bg-success text-white">${centroCusto.descricao}</p>
+	<div class="row justify-content-center text-center">
+		<div class="col-12 col-sm-12 col-md-11 col-lg-11 col-xl-11">
+			<c:forEach items="${demonstrativos}" var="demonstrativo">
+				<p class="h5 bg-success text-white">${demonstrativo.segundoNivelFluxo.descricao}</p>
 				<table class="table table-striped table-hover table-sm">
 				  <thead>
 				    <tr>
-				      <th>Competência</th>
-				      <th>Receita</th>
-				      <th>Despesa</th>
-				      <th>Líquido</th>
+				      <th> </th>
+				      <th>Saldo Anterior</th>
+				      <th>Saldo Atual</th>
+				      <th>Saldo Previsto</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
+				      <th>Receita</th>
+				      <th>R$ 00</th>
+				      <th>R$ 00</th>
+				      <th>R$ 00</th>
 				    </tr>
+				    <c:forEach items="${demonstrativo.receitaTerceiroNivelFluxo}" var="receita">
+				    	<tr>
+					      <td>${receita.descricao}</td>
+					      <td>R$ 00</td>
+					      <td>R$ 00</td>
+					      <td>R$ 00</td>
+					    </tr>
+				    </c:forEach>
 				    <tr>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				    </tr>
-				    <tr>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				    </tr>
+				      <th>Despesa</th>
+				      <th>R$ 00</th>
+				      <th>R$ 00</th>
+				      <th>R$ 00</th>
+				    </tr>				    
+				    <c:forEach items="${demonstrativo.despesaTerceiroNivelFluxo}" var="despesa">
+				    	<tr>
+					      <td>${despesa.descricao}</td>
+					      <td>R$ 00</td>
+					      <td>R$ 00</td>
+					      <td>R$ 00</td>
+					    </tr>
+				    </c:forEach>
 				  </tbody>
+				  <tfoot>
+				    <tr>
+				      <th>Líquido</th>
+				      <td>R$ 9999</td>
+				      <td>R$ 9999</td>
+				      <td>R$ 9999</td>
+				    </tr>
+				  </tfoot>
 				</table>
 			</c:forEach>
 		</div>
 	</div>
-	<div class="row">
-		<div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
-			<c:forEach items="${principaisContas}" var="contaPrincipal">
-				<p class="h5 bg-success text-white">${contaPrincipal.contaFluxo.descricao}</p>
+	<div class="row justify-content-center text-center">
+		<div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+			<div class="text-center" id="titulo">
+				<h3 class="h3">Movimentação</h3>
+			</div>
+			<c:forEach items="${contas}" var="conta">
+				<p class="h5 bg-danger text-white">${conta.descricao}</p>
 				<table class="table table-striped table-hover table-sm">
 				  <thead>
 				    <tr>
-				      <th>Competência</th>
-				      <th>Banco</th>
-				      <th>Caixa</th>
+				      <th>Saldo Líquido Anterior</th>
+				      <th>Receita</th>
+				      <th>Despesa</th>
+				      <th></th>
+				      <th>Saldo Banco</th>
+				      <th>Saldo Caixa</th>
 				      <th>Total</th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr>
-				      <td>${contaPrincipal.competencia}</td>
-				      <td>${contaPrincipal.valorBanco}</td>
-				      <td>${contaPrincipal.valorCaixa}</td>
-				      <td>${contaPrincipal.valorTotal}</td>
+				  	<tr>
+				      <td></td>
+				      <td></td>
+				      <td></td>
+				      <td></td>
+				      <td></td>
+				      <td></td>
+				      <td></td>
 				    </tr>
 				  </tbody>
 				  <tfoot>
 						<tr>
-							<td>Transferências Realizadas</td>
+							<td colspan="2">Transferências Realizadas</td>
 							<td></td>
-							<td>Transferências Recebidas</td>
+							<td></td>
+							<td colspan="2">Transferências Recebidas</td>
 							<td></td>
 						</tr>
 				  </tfoot>

@@ -9,6 +9,7 @@ public class ContaPrincipal {
 	private String valorBanco;
 	private String valorCaixa;
 	private String valorTotal;
+		
 	public ContaFluxo getContaFluxo() {
 		return contaFluxo;
 	}

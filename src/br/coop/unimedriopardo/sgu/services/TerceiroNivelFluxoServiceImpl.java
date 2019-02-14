@@ -55,5 +55,10 @@ private final RepositorioTerceiroNivelFluxo repositorioTerceiroNivelFluxo;
 		return repositorioTerceiroNivelFluxo.calcularDespesa(data, codigoSegundoNivel, codigoTerceiroNivel);
 	}
 
+	@Override
+	public List<TerceiroNivelFluxo> pesquisarTerceiroNivel() {
+		return repositorioTerceiroNivelFluxo.findAll();
+	}
+
 	
 }

@@ -63,9 +63,8 @@
 					<div class="card card-pantone357c text-center" id="fluxo">
 						<i class="fas fa-chart-pie fa-5x"></i>
 						<div class="card-body">
-							<h5 class="card-title">Fluxo Caixa</h5>
-							<p class="card-text">Tenha acesso ao resumo mensal do fluxo de
-								caixa.</p>
+							<h5 class="card-title">Demonstrativo Fianceiro</h5>
+							<p class="card-text">Tenha acesso ao demonstrativo financeiro.</p>
 						</div>
 					</div>
 				</a>
