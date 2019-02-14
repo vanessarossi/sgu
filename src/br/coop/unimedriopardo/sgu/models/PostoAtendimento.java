@@ -16,6 +16,9 @@ public class PostoAtendimento {
 	@Column(name = "nome")
 	private String nome;
 	
+	@Column(name = "filial")
+	private String filial;
+	
 	@Column(name = "saldo")
 	private String saldo;
 
@@ -35,6 +38,14 @@ public class PostoAtendimento {
 		this.nome = nome;
 	}
 
+	public String getFilial() {
+		return filial;
+	}
+
+	public void setFilial(String filial) {
+		this.filial = filial;
+	}
+
 	public String getSaldo() {
 		return saldo;
 	}
@@ -42,6 +53,4 @@ public class PostoAtendimento {
 	public void setSaldo(String saldo) {
 		this.saldo = saldo;
 	}
-	
-	
 }

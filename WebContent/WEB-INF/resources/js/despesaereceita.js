@@ -54,7 +54,7 @@ function monstarTabela(idTabela) {
 function montarLinhaTerceiroNivel(descricaoPrimeiroNivel,codigoSegundoNivel,codigoNivel,codigo, descricao, valorTotal) {
 	var linha =  "<tr>";
 		linha =+ "<td class='terceiroNivelDespesa'"+descricaoPrimeiroNivel+" id="+${codigoNivel}+">"+codigo+"</td>";
-		linha =+ "<td id='terceiroNivelDespesa'"+descricaoPrimeiroNivel+codigoNivel">"descricao"</td>";
+		linha =+ "<td id='terceiroNivelDespesa'"+descricaoPrimeiroNivel+codigoNivel+">"+descricao+"</td>";
 		linha =+ "<td>"+valorTotal+"</td>";
 		linha =+ "</tr>";
 }

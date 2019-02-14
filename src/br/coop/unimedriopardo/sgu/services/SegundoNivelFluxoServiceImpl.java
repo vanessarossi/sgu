@@ -56,4 +56,9 @@ private final RepositorioSegundoNivelFluxo repositorioSegundoNivelFluxo;
 	public String calcularSaldoDespesa(String data, String codigoSegundoNivel02) {
 		 return repositorioSegundoNivelFluxo.calcularDespesa(data, codigoSegundoNivel02);
 	}
+
+	@Override
+	public List<SegundoNivelFluxo> pesquisarDescricoes(String codigoPrimeiroNivel) {
+		return repositorioSegundoNivelFluxo.findByCodigoPrimeiroNivel(codigoPrimeiroNivel);
+	}
 }

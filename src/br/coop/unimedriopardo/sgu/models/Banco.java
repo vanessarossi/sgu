@@ -11,6 +11,9 @@ public class Banco {
 
 	@Column(name = "filial")
 	private String filial;
+	
+	@Column(name = "codigo_filial")
+	private String codigoFilial;
 
 	@Id
 	@Column(name = "codigo_conta")
@@ -31,6 +34,14 @@ public class Banco {
 
 	public void setFilial(String filial) {
 		this.filial = filial;
+	}
+
+	public String getCodigoFilial() {
+		return codigoFilial;
+	}
+
+	public void setCodigoFilial(String codigoFilial) {
+		this.codigoFilial = codigoFilial;
 	}
 
 	public String getCodigoConta() {
@@ -64,5 +75,4 @@ public class Banco {
 	public void setSaldo(String saldo) {
 		this.saldo = saldo;
 	}
-
 }
