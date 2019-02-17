@@ -17,6 +17,8 @@ import br.coop.unimedriopardo.sgu.repositories.RepositorioSegundoNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioTerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.util.ContaPrincipal;
 import br.coop.unimedriopardo.sgu.util.Conversor;
+import br.coop.unimedriopardo.sgu.util.Demonstrativo;
+import br.coop.unimedriopardo.sgu.util.DemonstrativoClassificacao;
 import br.coop.unimedriopardo.sgu.util.DemonstrativoView;
 
 @Service
@@ -46,7 +48,7 @@ public class FluxoServiceImpl implements FluxoService {
 		return repositorioContaFluxo.findAll();
 	}
 
-	@Override
+
 	public List<ContaPrincipal> carregarContasValorizadas(String data) {
 		
 		String dataGCS = new Conversor().formatarDataString(data, "YYYYMMdd");
@@ -123,8 +125,7 @@ public class FluxoServiceImpl implements FluxoService {
 		
 		for (ContaFluxo contaFluxo : contasFluxo) {
 			ContaPrincipal contaPrincipal = new ContaPrincipal();
-			contaPrincipal.setContaFluxo(contaFluxo);
-			contaPrincipal.setCompetencia(new Conversor().formatarDataString(data, "dd/MM/YYYY"));
+			contaPrincipal.setCodigoContaFluxo(contaFluxo.getCodigo());
 			
 			if (contaFluxo.getCodigo().equals("001")) {
 				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoSede.toString()));
@@ -180,6 +181,84 @@ public class FluxoServiceImpl implements FluxoService {
 	@Override
 	public List<ContaFluxo> carregarContas() {
 		return repositorioContaFluxo.findAll();
+	}
+
+
+	@Override
+	public List<Demonstrativo> valorizarDemonstrativo(String dataInicial, String dataFinal) {
+		
+		String dataInicialGCS = new Conversor().formatarDataString(dataInicial, "YYYYMMdd");
+		String dataFinalGCS = new Conversor().formatarDataString(dataFinal, "YYYYMMdd");
+		
+		List<Demonstrativo> demonstrativos = new ArrayList<Demonstrativo>();
+		List<SegundoNivelFluxo> listaSegundoNivelFluxo = repositorioSegundoNivelFluxo.findByCodigoPrimeiroNivel("2");
+		for (SegundoNivelFluxo segundoNivelFluxo : listaSegundoNivelFluxo) {
+			Demonstrativo demonstrativo = new Demonstrativo();
+			//id para colocar na tabela
+			demonstrativo.setCodigoId(segundoNivelFluxo.getCodigoNivel());
+			//pegar o valor da data atual
+			
+			String totalReceitaAnterior = repositorioContaFluxo.calcularTotalReceitaAnteriorSegundoNivel(dataInicialGCS, dataFinalGCS, segundoNivelFluxo.getCodigoNivel());
+			String totalReceita = repositorioContaFluxo.calcularTotalReceitaSegundoNivel(dataInicialGCS, dataFinalGCS, segundoNivelFluxo.getCodigoNivel());
+		    String totalReceitaPrevisto= "0";
+		    
+		    String totalDespesaAnterior = repositorioContaFluxo.calcularTotalDespesaAnteriorSegundoNivel(dataInicialGCS, dataFinalGCS, segundoNivelFluxo.getCodigoNivel());
+		    String totalDespesa = repositorioContaFluxo.calcularTotalDespesaSegundoNivel(dataInicialGCS, dataFinalGCS, segundoNivelFluxo.getCodigoNivel());
+		    String totalDespesaPrevisto = "0";
+		    
+		    String totalLiquidoAnterior = String.valueOf(Float.parseFloat(totalReceitaAnterior) - Float.parseFloat(totalDespesaAnterior));
+		    String totalLiquido = String.valueOf(Float.parseFloat(totalReceita) - Float.parseFloat(totalDespesa));
+		    String totalLiquidoPrevisto = "0";
+			
+			
+			demonstrativo.setTotalReceitaAnterior(new Conversor().formataReal(totalReceitaAnterior));
+			demonstrativo.setTotalReceita(new Conversor().formataReal(totalReceita));
+			demonstrativo.setTotalReceitaPrevisto("90");
+			
+			demonstrativo.setTotalDespesaAnterior(new Conversor().formataReal(totalDespesaAnterior));
+			demonstrativo.setTotalDespesa(new Conversor().formataReal(totalDespesa));
+			demonstrativo.setTotalDespesaPrevisto("100");
+			
+			demonstrativo.setTotalLiquidoAnterior(new Conversor().formataReal(totalLiquidoAnterior));
+			demonstrativo.setTotalLiquido(new Conversor().formataReal(totalLiquido));
+			demonstrativo.setTotalLiquidoPrevisto(new Conversor().formataReal(totalLiquidoPrevisto));
+			
+			List<TerceiroNivelFluxo> listaTerceiroNivelDespesa = repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel("2", segundoNivelFluxo.getCodigoNivel());
+			List<TerceiroNivelFluxo> listaTerceiroNivelReceita = repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel("1", segundoNivelFluxo.getCodigoNivel());
+			
+			List<DemonstrativoClassificacao> receitas = new ArrayList<DemonstrativoClassificacao>();
+			List<DemonstrativoClassificacao> despesas = new ArrayList<DemonstrativoClassificacao>();
+			/** calculo de segundo nivel **/
+			for (TerceiroNivelFluxo despesa : listaTerceiroNivelDespesa) {
+				DemonstrativoClassificacao classificacao = new DemonstrativoClassificacao();
+				classificacao.setCodigoId(despesa.getCodigoSegundoNivel().concat(despesa.getCodigoNivel()));
+				classificacao.setValorAnterior(new Conversor().formataReal(repositorioContaFluxo.calcularTotalDespesaAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, despesa.getCodigoSegundoNivel(), despesa.getCodigoNivel())));
+				classificacao.setValor(new Conversor().formataReal(repositorioContaFluxo.calcularTotalDespesaTerceiroNivel(dataInicialGCS, dataFinalGCS, despesa.getCodigoSegundoNivel(), despesa.getCodigoNivel())));
+				despesas.add(classificacao);
+			}
+			/** calculo de segundo nivel **/
+			for (TerceiroNivelFluxo receita : listaTerceiroNivelReceita) {
+				DemonstrativoClassificacao classificacao = new DemonstrativoClassificacao();
+				classificacao.setCodigoId(receita.getCodigoSegundoNivel().concat(receita.getCodigoNivel()));
+				classificacao.setValorAnterior(new Conversor().formataReal(repositorioContaFluxo.calcularTotalReceitaAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, receita.getCodigoSegundoNivel(), receita.getCodigoNivel())));
+				classificacao.setValor(new Conversor().formataReal(repositorioContaFluxo.calcularTotalReceitaTerceiroNivel(dataInicialGCS, dataFinalGCS, receita.getCodigoSegundoNivel(), receita.getCodigoNivel())));
+				receitas.add(classificacao);
+			}
+			
+			demonstrativo.setReceitas(receitas);
+			demonstrativo.setDespesas(despesas);			
+			demonstrativos.add(demonstrativo);
+			
+		}
+			
+		return demonstrativos;
+	}
+
+
+	@Override
+	public List<ContaPrincipal> valorizarConta(String dataFinal) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

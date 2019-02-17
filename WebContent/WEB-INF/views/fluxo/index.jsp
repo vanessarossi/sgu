@@ -11,22 +11,22 @@
 	<h1 class="h1">Demonstrativo Financeiro</h1>
 </section>
 <section id="conteudo justify-content-center text-center">
-	<form>
-		<div class="form-row">
+	<form action="#" method="post">
+		<div class="form-row justify-content-center text-center">
 		    <div class="form-group col-6 col-sm-6 col-md-2 col-lg-2 col-xl-2">
 		      <label for="dataInicial">Data inicial</label>
-		      <input type="date" class="form-control" id="dataInicial" requi>
+		      <input type="date" class="form-control" id="dataInicial" required="required">
 		    </div>
 		    <div class="form-group col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-		    		<label for="dataFinal">Data Final</label>
-					<div class="input-group">
-						<input type="date" class="form-control" id="dataFinal" name="dataFinal" required="required">
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-info">
-								<i class="fas fa-search"> Consultar</i>
-							</button>
-						</div>
+		    	<label for="dataFinal">Data Final</label>
+				<div class="input-group">
+					<input type="date" class="form-control" id="dataFinal" name="dataFinal" required="required">
+					<div class="input-group-append">
+						<a href="#" class="btn btn-info" onclick="enviarConsulta()">
+							<i class="fas fa-search"> Consultar</i>
+						</a>
 					</div>
+				</div>
 			</div>
 		 </div>
 	</form>
@@ -46,39 +46,39 @@
 				  <tbody>
 				    <tr>
 				      <th>Receita</th>
-				      <th>R$ 00</th>
-				      <th>R$ 00</th>
-				      <th>R$ 00</th>
+				      <th id="totalReceitaAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 00</th>
+				      <th id="totalReceita${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 00</th>
+				      <th id="totalReceitaPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 00</th>
 				    </tr>
 				    <c:forEach items="${demonstrativo.receitaTerceiroNivelFluxo}" var="receita">
 				    	<tr>
 					      <td>${receita.descricao}</td>
-					      <td>R$ 00</td>
-					      <td>R$ 00</td>
-					      <td>R$ 00</td>
+					      <td id="receitaAnterior${receita.codigoSegundoNivel}${receita.codigoNivel}">R$ 00</td>
+					      <td id="receita${receita.codigoSegundoNivel}${receita.codigoNivel}">R$ 00</td>
+					      <td id="receitaPrevisto${receita.codigoSegundoNivel}${receita.codigoNivel}">R$ 00</td>
 					    </tr>
 				    </c:forEach>
 				    <tr>
 				      <th>Despesa</th>
-				      <th>R$ 00</th>
-				      <th>R$ 00</th>
-				      <th>R$ 00</th>
+				      <th id="totalDespesaAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa">R$ 00</th>
+				      <th id="totalDespesa${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa">R$ 00</th>
+				      <th id="totalDespesaPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa">R$ 00</th>
 				    </tr>				    
 				    <c:forEach items="${demonstrativo.despesaTerceiroNivelFluxo}" var="despesa">
 				    	<tr>
 					      <td>${despesa.descricao}</td>
-					      <td>R$ 00</td>
-					      <td>R$ 00</td>
-					      <td>R$ 00</td>
+					      <td id="despesaAnterior${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa">R$ 00</td>
+					      <td id="despesa${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa">R$ 00</td>
+					      <td id="despesaPrevisto${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa">R$ 00</td>
 					    </tr>
 				    </c:forEach>
 				  </tbody>
 				  <tfoot>
 				    <tr>
 				      <th>Líquido</th>
-				      <td>R$ 9999</td>
-				      <td>R$ 9999</td>
-				      <td>R$ 9999</td>
+				      <td id="totalLiquidoAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 9999</td>
+				      <td id="totalLiquido${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 9999</td>
+				      <td id="totalLiquidoPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 9999</td>
 				    </tr>
 				  </tfoot>
 				</table>
@@ -106,21 +106,21 @@
 				  </thead>
 				  <tbody>
 				  	<tr>
+				      <td id="saldoLiquidoAnterior${conta.codigo}"></td>
+				      <td id="receita{conta.codigo}"></td>
+				      <td id="despesa${conta.codigo}"></td>
 				      <td></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
-				      <td></td>
+				      <td id="saldoBanco"></td>
+				      <td id="saldoCaixa${conta.codigo}"></td>
+				      <td id="saldoTotal${conta.codigo}"></td>
 				    </tr>
 				  </tbody>
 				  <tfoot>
 						<tr>
-							<td colspan="2">Transferências Realizadas</td>
+							<td colspan="2" id="transRealizada${conta.codigo}">Transferências Realizadas</td>
 							<td></td>
 							<td></td>
-							<td colspan="2">Transferências Recebidas</td>
+							<td colspan="2" id="transRecebida${conta.codigo}">Transferências Recebidas</td>
 							<td></td>
 						</tr>
 				  </tfoot>
@@ -129,3 +129,17 @@
 		</div>
 	</div>
 </section>
+<div class="modal fade bs-example-modal-sm" id="spinner" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="false">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-body justify-content-center text-center">
+                <p class="lead text-center"> Por favor, aguarde o processamento dos dados! </p>
+                <div class="fa-5x">
+					<i class="fas fa-spinner fa-spin"></i>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+<spring:url value="/resources/js/demonstrativofinanceiro.js" var="demonstrativoJs"></spring:url>
+<script type="text/javascript" src="${demonstrativoJs}"></script>

@@ -40,7 +40,7 @@
 		</section>
 		<br><br>
 		<section class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-			<a href="${pageContext.request.contextPath}/home" class="rounded "><img src="${pageContext.request.contextPath}/resources/img/compass.png" alt="compass"/></a>		
+			<a href="${pageContext.request.contextPath}/home" class="rounded "><img src="${pageContext.request.contextPath}/resources/img/rocket.png" alt="rocket"/></a>		
 		</section>
 		<br><br>
 		<section class="form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">

@@ -1,26 +1,38 @@
 package br.coop.unimedriopardo.sgu.util;
 
-import br.coop.unimedriopardo.sgu.models.ContaFluxo;
 
 public class ContaPrincipal {
 	
-	private ContaFluxo contaFluxo;
-	private String competencia;
+	private String codigoContaFluxo;
+	private String valorLiquidoAnterior;
+	private String valorReceita;
+	private String valorDespesa;
 	private String valorBanco;
 	private String valorCaixa;
 	private String valorTotal;
-		
-	public ContaFluxo getContaFluxo() {
-		return contaFluxo;
+	public String getCodigoContaFluxo() {
+		return codigoContaFluxo;
 	}
-	public void setContaFluxo(ContaFluxo contaFluxo) {
-		this.contaFluxo = contaFluxo;
+	public void setCodigoContaFluxo(String codigoContaFluxo) {
+		this.codigoContaFluxo = codigoContaFluxo;
 	}
-	public String getCompetencia() {
-		return competencia;
+	public String getValorLiquidoAnterior() {
+		return valorLiquidoAnterior;
 	}
-	public void setCompetencia(String competencia) {
-		this.competencia = competencia;
+	public void setValorLiquidoAnterior(String valorLiquidoAnterior) {
+		this.valorLiquidoAnterior = valorLiquidoAnterior;
+	}
+	public String getValorReceita() {
+		return valorReceita;
+	}
+	public void setValorReceita(String valorReceita) {
+		this.valorReceita = valorReceita;
+	}
+	public String getValorDespesa() {
+		return valorDespesa;
+	}
+	public void setValorDespesa(String valorDespesa) {
+		this.valorDespesa = valorDespesa;
 	}
 	public String getValorBanco() {
 		return valorBanco;

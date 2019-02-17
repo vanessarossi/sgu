@@ -33,3 +33,7 @@
 
 .card-pantone192c{border-color: #ED1651 !important; color: #ED1651 !important;}
 .card-pantone192c:hover{}
+
+.despesa{
+	color: #FF0000 !important;
+}
