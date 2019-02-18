@@ -11,7 +11,7 @@ public interface FluxoService {
 	
 	public List<DemonstrativoView> carregarDemonstrativos();
 	public List<ContaFluxo> listarContas();
-	public List<ContaPrincipal> valorizarConta(String dataFinal);
+	public List<ContaPrincipal> valorizarConta(String dataInicial, String dataFinal);
 	public List<ContaFluxo> carregarContas();
 	public List<Demonstrativo> valorizarDemonstrativo(String dataInicial, String dataFinal);
 

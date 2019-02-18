@@ -11,9 +11,10 @@
 <spring:url value="/resources/js/jquery.min.js" var="jqueryJS"></spring:url>
 <spring:url value="/resources/js/bootstrap.bundle.min.js" var="bootstrapJS"></spring:url>
 
+<spring:url value="resources/img/logo_unimed.png" var="logoUnimedImg"></spring:url>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="shortcut icon" href="/resources/img/logo_unimed.png" type="image/x-icon"/>
+<link rel="shortcut icon" href="logoUnimedImg" type="image/x-icon"/>
 <title>SGU - <tiles:insertAttribute name="title" ignore="true"></tiles:insertAttribute> </title>
 
 <script type="text/javascript" src="${jqueryJS}"></script>

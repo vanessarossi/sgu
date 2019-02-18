@@ -14,4 +14,7 @@ public interface RepositorioBanco extends JpaRepository<Banco, String> {
 	 
 	 @Query(nativeQuery = true, value = "SELECT fn_unrp_saldo_total_conta(:data) FROM dual")
 	 String calcularTotalSaldo(@Param("data") String data);
+	 
+	 @Query(nativeQuery = true, value = "SELECT fn_unrp_saldo_anterior_conta(:codigoConta, :dataInicial) FROM dual")
+	 String calcularSaldoDiaAnterior(@Param("codigoConta") String codigoConta, @Param("dataInicial") String dataInicial);
 }

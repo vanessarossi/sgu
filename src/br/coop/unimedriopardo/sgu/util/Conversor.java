@@ -27,11 +27,16 @@ public class Conversor {
 			return dataFormatada;
 		}
 		
-	
-		
 		public String formataReal(String valorString) {
 			BigDecimal valor = new BigDecimal (valorString);  
 			NumberFormat nf = NumberFormat.getCurrencyInstance();  
+			String formatado = nf.format (valor);
+			return formatado;
+		}
+		
+		public String formataRealSemCifrao(String valorString) {
+			BigDecimal valor = new BigDecimal (valorString);  
+			NumberFormat nf = NumberFormat.getInstance();  
 			String formatado = nf.format (valor);
 			return formatado;
 		}

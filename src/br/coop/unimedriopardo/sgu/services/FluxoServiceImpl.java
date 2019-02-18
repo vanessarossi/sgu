@@ -47,116 +47,6 @@ public class FluxoServiceImpl implements FluxoService {
 	public List<ContaFluxo> listarContas() {
 		return repositorioContaFluxo.findAll();
 	}
-
-
-	public List<ContaPrincipal> carregarContasValorizadas(String data) {
-		
-		String dataGCS = new Conversor().formatarDataString(data, "YYYYMMdd");
-		
-		/** saldos bancos **/
-		
-		Float saldoBancoSede = 0f;
-		Float saldoBancoFamacia = 0f;
-		Float saldoBancoOptica = 0f;
-		Float saldoBancoConstrucao = 0f;
-		
-		
-		List<Banco> bancos = repositorioBanco.findAll();
-		for (Banco banco : bancos) {
-			String saldo = repositorioBanco.calcularSaldo(banco.getCodigoConta(), dataGCS);
-			if (saldo == null || saldo == "") {
-				saldo = "0";
-			}
-			
-			if (banco.getCodigoFilial().equals("002")) {
-				
-				saldoBancoFamacia = saldoBancoFamacia + Float.parseFloat(saldo);
-				
-			}if (banco.getCodigoFilial().equals("003")) {
-				
-				saldoBancoOptica = saldoBancoOptica + Float.parseFloat(saldo);
-				
-			}if (banco.getCodigoFilial().equals("070")) {
-				
-				saldoBancoConstrucao = saldoBancoConstrucao + Float.parseFloat(saldo);
-				
-			}if (! banco.getCodigoFilial().equals("002") && ! banco.getCodigoFilial().equals("002") && ! banco.getCodigoFilial().equals("002")) {
-				
-				saldoBancoSede = saldoBancoSede + Float.parseFloat(saldo);
-			}
-		}
-		
-		/** saldos caixas **/
-		Float saldoCaixaSede = 0f ;
-		Float saldoCaixaFamacia = 0f;
-		Float saldoCaixaOptica = 0f ;
-		Float saldoCaixaConstrucao = 0f;
-		
-		List<PostoAtendimento> postosAtendimento = repositorioPostoAtendimento.findAll();
-		
-		for (PostoAtendimento postoAtendimento : postosAtendimento) {
-			String saldo = repositorioPostoAtendimento.calcularSaldoCaixa(postoAtendimento.getCodigo(), dataGCS);
-			if (saldo == null || saldo == "") {
-				saldo = "0";
-			}
-			
-			if (postoAtendimento.getFilial().equals("002")) {
-				
-				saldoCaixaFamacia = saldoCaixaFamacia + Float.parseFloat(saldo);
-				
-			}if (postoAtendimento.getFilial().equals("003")) {
-				
-				saldoCaixaOptica = saldoCaixaOptica + Float.parseFloat(saldo);
-				
-			}if (postoAtendimento.getFilial().equals("070")) {
-				
-				saldoCaixaConstrucao = saldoCaixaConstrucao + Float.parseFloat(saldo);
-				
-			}if ( ! postoAtendimento.getFilial().equals("002") && ! postoAtendimento.getFilial().equals("003") && ! postoAtendimento.getFilial().equals("070")) {
-				
-				saldoCaixaSede = saldoCaixaSede + Float.parseFloat(saldo);
-			}
-		}
-		
-		List<ContaFluxo> contasFluxo = repositorioContaFluxo.findAll();
-		
-		/** Inicio da montagem da Conta Principal **/
-		List<ContaPrincipal> principaisContas = new ArrayList<ContaPrincipal>();
-		
-		for (ContaFluxo contaFluxo : contasFluxo) {
-			ContaPrincipal contaPrincipal = new ContaPrincipal();
-			contaPrincipal.setCodigoContaFluxo(contaFluxo.getCodigo());
-			
-			if (contaFluxo.getCodigo().equals("001")) {
-				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoSede.toString()));
-				contaPrincipal.setValorCaixa(new Conversor().formataReal(saldoCaixaSede.toString()));
-				Float saldoTotal = saldoCaixaSede + saldoBancoSede;
-				contaPrincipal.setValorTotal(new Conversor().formataReal(saldoTotal.toString()));
-			}
-			if (contaFluxo.getCodigo().equals("002")) {
-				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoFamacia.toString()));
-				contaPrincipal.setValorCaixa(new Conversor().formataReal(saldoCaixaFamacia.toString()));
-				Float saldoTotal = saldoCaixaFamacia + saldoBancoFamacia;
-				contaPrincipal.setValorTotal(new Conversor().formataReal(saldoTotal.toString()));
-			}
-			if (contaFluxo.getCodigo().equals("003")) {
-				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoOptica.toString()));
-				contaPrincipal.setValorCaixa(new Conversor().formataReal(saldoCaixaOptica.toString()));
-				Float saldoTotal = saldoCaixaOptica + saldoBancoOptica;
-				contaPrincipal.setValorTotal(new Conversor().formataReal(saldoTotal.toString()));
-			}
-			if (contaFluxo.getCodigo().equals("070")) {
-				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoConstrucao.toString()));
-				contaPrincipal.setValorCaixa(new Conversor().formataReal(saldoCaixaConstrucao.toString()));
-				Float saldoTotal = saldoCaixaConstrucao + saldoBancoConstrucao;
-				contaPrincipal.setValorTotal(new Conversor().formataReal(saldoTotal.toString()));
-			}
-			
-			principaisContas.add(contaPrincipal);
-		}
-		
-		return principaisContas;
-	}
 	
 	public List<DemonstrativoView> carregarDemonstrativos(){
 		
@@ -211,17 +101,17 @@ public class FluxoServiceImpl implements FluxoService {
 		    String totalLiquidoPrevisto = "0";
 			
 			
-			demonstrativo.setTotalReceitaAnterior(new Conversor().formataReal(totalReceitaAnterior));
-			demonstrativo.setTotalReceita(new Conversor().formataReal(totalReceita));
+			demonstrativo.setTotalReceitaAnterior(new Conversor().formataRealSemCifrao(totalReceitaAnterior));
+			demonstrativo.setTotalReceita(new Conversor().formataRealSemCifrao(totalReceita));
 			demonstrativo.setTotalReceitaPrevisto("90");
 			
-			demonstrativo.setTotalDespesaAnterior(new Conversor().formataReal(totalDespesaAnterior));
-			demonstrativo.setTotalDespesa(new Conversor().formataReal(totalDespesa));
+			demonstrativo.setTotalDespesaAnterior(new Conversor().formataRealSemCifrao(totalDespesaAnterior));
+			demonstrativo.setTotalDespesa(new Conversor().formataRealSemCifrao(totalDespesa));
 			demonstrativo.setTotalDespesaPrevisto("100");
 			
-			demonstrativo.setTotalLiquidoAnterior(new Conversor().formataReal(totalLiquidoAnterior));
-			demonstrativo.setTotalLiquido(new Conversor().formataReal(totalLiquido));
-			demonstrativo.setTotalLiquidoPrevisto(new Conversor().formataReal(totalLiquidoPrevisto));
+			demonstrativo.setTotalLiquidoAnterior(new Conversor().formataRealSemCifrao(totalLiquidoAnterior));
+			demonstrativo.setTotalLiquido(new Conversor().formataRealSemCifrao(totalLiquido));
+			demonstrativo.setTotalLiquidoPrevisto(new Conversor().formataRealSemCifrao(totalLiquidoPrevisto));
 			
 			List<TerceiroNivelFluxo> listaTerceiroNivelDespesa = repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel("2", segundoNivelFluxo.getCodigoNivel());
 			List<TerceiroNivelFluxo> listaTerceiroNivelReceita = repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel("1", segundoNivelFluxo.getCodigoNivel());
@@ -232,16 +122,16 @@ public class FluxoServiceImpl implements FluxoService {
 			for (TerceiroNivelFluxo despesa : listaTerceiroNivelDespesa) {
 				DemonstrativoClassificacao classificacao = new DemonstrativoClassificacao();
 				classificacao.setCodigoId(despesa.getCodigoSegundoNivel().concat(despesa.getCodigoNivel()));
-				classificacao.setValorAnterior(new Conversor().formataReal(repositorioContaFluxo.calcularTotalDespesaAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, despesa.getCodigoSegundoNivel(), despesa.getCodigoNivel())));
-				classificacao.setValor(new Conversor().formataReal(repositorioContaFluxo.calcularTotalDespesaTerceiroNivel(dataInicialGCS, dataFinalGCS, despesa.getCodigoSegundoNivel(), despesa.getCodigoNivel())));
+				classificacao.setValorAnterior(new Conversor().formataRealSemCifrao(repositorioContaFluxo.calcularTotalDespesaAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, despesa.getCodigoSegundoNivel(), despesa.getCodigoNivel())));
+				classificacao.setValor(new Conversor().formataRealSemCifrao(repositorioContaFluxo.calcularTotalDespesaTerceiroNivel(dataInicialGCS, dataFinalGCS, despesa.getCodigoSegundoNivel(), despesa.getCodigoNivel())));
 				despesas.add(classificacao);
 			}
 			/** calculo de segundo nivel **/
 			for (TerceiroNivelFluxo receita : listaTerceiroNivelReceita) {
 				DemonstrativoClassificacao classificacao = new DemonstrativoClassificacao();
 				classificacao.setCodigoId(receita.getCodigoSegundoNivel().concat(receita.getCodigoNivel()));
-				classificacao.setValorAnterior(new Conversor().formataReal(repositorioContaFluxo.calcularTotalReceitaAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, receita.getCodigoSegundoNivel(), receita.getCodigoNivel())));
-				classificacao.setValor(new Conversor().formataReal(repositorioContaFluxo.calcularTotalReceitaTerceiroNivel(dataInicialGCS, dataFinalGCS, receita.getCodigoSegundoNivel(), receita.getCodigoNivel())));
+				classificacao.setValorAnterior(new Conversor().formataRealSemCifrao(repositorioContaFluxo.calcularTotalReceitaAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, receita.getCodigoSegundoNivel(), receita.getCodigoNivel())));
+				classificacao.setValor(new Conversor().formataRealSemCifrao(repositorioContaFluxo.calcularTotalReceitaTerceiroNivel(dataInicialGCS, dataFinalGCS, receita.getCodigoSegundoNivel(), receita.getCodigoNivel())));
 				receitas.add(classificacao);
 			}
 			
@@ -256,9 +146,146 @@ public class FluxoServiceImpl implements FluxoService {
 
 
 	@Override
-	public List<ContaPrincipal> valorizarConta(String dataFinal) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ContaPrincipal> valorizarConta(String dataInicial,String dataFinal) {
+		String dataFinalGCS = new Conversor().formatarDataString(dataFinal, "YYYYMMdd");
+		String dataInicialGCS = new Conversor().formatarDataString(dataInicial, "YYYYMMdd");
+		List<ContaPrincipal> principaisContas = new ArrayList<ContaPrincipal>();
+		
+		/** saldos bancos **/
+		Float saldoBancoSede = 0f;
+		Float saldoBancoFamacia = 0f;
+		Float saldoBancoOptica = 0f;
+		Float saldoBancoConstrucao = 0f;
+		
+		Float saldoBancoSedeDiaAnterior = 0f;
+		Float saldoBancoFarmaciaDiaAnterior = 0f;
+		Float saldoBancoOpticaDiaAnterior = 0f;
+		Float saldoBancoConstrucaoDiaAnterior = 0f;
+		
+		List<Banco> bancos = repositorioBanco.findAll();
+		for (Banco banco : bancos) {
+			String saldo = repositorioBanco.calcularSaldo(banco.getCodigoConta(), dataFinalGCS);
+			String saldoDiaAnterior = repositorioBanco.calcularSaldoDiaAnterior(banco.getCodigoConta(), dataFinalGCS);
+			if (saldo == null || saldo == "") {
+				saldo = "0";
+			}
+			if (saldoDiaAnterior == null || saldoDiaAnterior == "") {
+				saldo = "0";
+			}
+			
+			if (banco.getCodigoFilial().equals("002")) {
+				
+				saldoBancoFamacia = saldoBancoFamacia + Float.parseFloat(saldo);
+				saldoBancoFarmaciaDiaAnterior = saldoBancoFarmaciaDiaAnterior + Float.parseFloat(saldoDiaAnterior);
+				
+			}if (banco.getCodigoFilial().equals("003")) {
+				
+				saldoBancoOptica = saldoBancoOptica + Float.parseFloat(saldo);
+				saldoBancoOpticaDiaAnterior = saldoBancoOpticaDiaAnterior + Float.parseFloat(saldoDiaAnterior);
+				
+			}if (banco.getCodigoFilial().equals("070")) {
+				
+				saldoBancoConstrucao = saldoBancoConstrucao + Float.parseFloat(saldo);
+				saldoBancoConstrucaoDiaAnterior = saldoBancoConstrucaoDiaAnterior + Float.parseFloat(saldoDiaAnterior);
+				
+			}if (! banco.getCodigoFilial().equals("002") && ! banco.getCodigoFilial().equals("002") && ! banco.getCodigoFilial().equals("002")) {
+				
+				saldoBancoSede = saldoBancoSede + Float.parseFloat(saldo);
+				saldoBancoSedeDiaAnterior = saldoBancoSedeDiaAnterior + Float.parseFloat(saldoDiaAnterior);
+			}
+		}
+		
+		/** saldos caixas **/
+		Float saldoCaixaSede = 0f ;
+		Float saldoCaixaFamacia = 0f;
+		Float saldoCaixaOptica = 0f ;
+		Float saldoCaixaConstrucao = 0f;
+		
+		Float saldoCaixaAnteriorSede = 0f ;
+		Float saldoCaixaAnteriorFamacia = 0f;
+		Float saldoCaixaAnteriorOptica = 0f ;
+		Float saldoCaixaAnteriorConstrucao = 0f;
+		
+		List<PostoAtendimento> postosAtendimento = repositorioPostoAtendimento.findAll();
+		
+		for (PostoAtendimento postoAtendimento : postosAtendimento) {
+			String saldo = repositorioPostoAtendimento.calcularSaldoCaixa(postoAtendimento.getCodigo(), dataFinalGCS);
+			// continuar aqui 
+			String saldoDiaAnterior = repositorioPostoAtendimento.calcularSaldoAnteriorCaixa(postoAtendimento.getCodigo(), dataInicialGCS);
+			if (saldo == null || saldo == "") {
+				saldo = "0";
+			}
+			if (saldoDiaAnterior == null || saldoDiaAnterior == "") {
+				saldoDiaAnterior = "0";
+			}
+			
+			if (postoAtendimento.getFilial().equals("002")) {
+				
+				saldoCaixaFamacia = saldoCaixaFamacia + Float.parseFloat(saldo);
+				saldoCaixaAnteriorFamacia = saldoCaixaAnteriorFamacia + Float.parseFloat(saldoDiaAnterior);
+				
+			}if (postoAtendimento.getFilial().equals("003")) {
+				
+				saldoCaixaOptica = saldoCaixaOptica + Float.parseFloat(saldo);
+				saldoCaixaAnteriorOptica = saldoCaixaAnteriorOptica + Float.parseFloat(saldoDiaAnterior);
+				
+			}if (postoAtendimento.getFilial().equals("070")) {
+				
+				saldoCaixaConstrucao = saldoCaixaConstrucao + Float.parseFloat(saldo);
+				saldoCaixaAnteriorConstrucao = saldoCaixaAnteriorConstrucao + Float.parseFloat(saldoDiaAnterior);
+				
+			}if ( ! postoAtendimento.getFilial().equals("002") && ! postoAtendimento.getFilial().equals("003") && ! postoAtendimento.getFilial().equals("070")) {
+				
+				saldoCaixaSede = saldoCaixaSede + Float.parseFloat(saldo);
+				saldoCaixaAnteriorSede = saldoCaixaAnteriorSede + Float.parseFloat(saldoDiaAnterior);
+			}
+		}
+		
+		List<ContaFluxo> contasFluxo = repositorioContaFluxo.findAll();
+
+		/** Inicio da montagem da Conta Principal **/
+		
+		for (ContaFluxo contaFluxo : contasFluxo) {
+			ContaPrincipal contaPrincipal = new ContaPrincipal();
+			contaPrincipal.setCodigoContaFluxo(contaFluxo.getCodigo());
+			
+			if (contaFluxo.getCodigo().equals("001")) {
+				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoSede.toString()));
+				contaPrincipal.setValorCaixa(new Conversor().formataReal(saldoCaixaSede.toString()));
+				Float saldoTotal = saldoCaixaSede + saldoBancoSede;
+				contaPrincipal.setValorTotal(new Conversor().formataReal(saldoTotal.toString()));
+				Float saldoLiquidoAnterior = saldoCaixaAnteriorSede + saldoBancoSedeDiaAnterior;
+				contaPrincipal.setValorLiquidoAnterior(new Conversor().formataReal(saldoLiquidoAnterior.toString()));
+			}
+			if (contaFluxo.getCodigo().equals("002")) {
+				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoFamacia.toString()));
+				contaPrincipal.setValorCaixa(new Conversor().formataReal(saldoCaixaFamacia.toString()));
+				Float saldoTotal = saldoCaixaFamacia + saldoBancoFamacia;
+				contaPrincipal.setValorTotal(new Conversor().formataReal(saldoTotal.toString()));
+				Float saldoLiquidoAnterior = saldoCaixaAnteriorOptica + saldoBancoFarmaciaDiaAnterior;
+				contaPrincipal.setValorLiquidoAnterior(new Conversor().formataReal(saldoLiquidoAnterior.toString()));
+			}
+			if (contaFluxo.getCodigo().equals("003")) {
+				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoOptica.toString()));
+				contaPrincipal.setValorCaixa(new Conversor().formataReal(saldoCaixaOptica.toString()));
+				Float saldoTotal = saldoCaixaOptica + saldoBancoOptica;
+				contaPrincipal.setValorTotal(new Conversor().formataReal(saldoTotal.toString()));
+				Float saldoLiquidoAnterior = saldoCaixaAnteriorOptica + saldoBancoOpticaDiaAnterior;
+				contaPrincipal.setValorLiquidoAnterior(new Conversor().formataReal(saldoLiquidoAnterior.toString()));
+			}
+			if (contaFluxo.getCodigo().equals("070")) {
+				contaPrincipal.setValorBanco(new Conversor().formataReal(saldoBancoConstrucao.toString()));
+				contaPrincipal.setValorCaixa(new Conversor().formataReal(saldoCaixaConstrucao.toString()));
+				Float saldoTotal = saldoCaixaConstrucao + saldoBancoConstrucao;
+				contaPrincipal.setValorTotal(new Conversor().formataReal(saldoTotal.toString()));
+				Float saldoLiquidoAnterior = saldoCaixaAnteriorConstrucao + saldoBancoConstrucaoDiaAnterior;
+				contaPrincipal.setValorLiquidoAnterior(new Conversor().formataReal(saldoLiquidoAnterior.toString()));
+			}
+			
+			principaisContas.add(contaPrincipal);
+		
+		}
+		return principaisContas;
 	}
 	
 }

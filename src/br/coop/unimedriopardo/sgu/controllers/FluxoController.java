@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.coop.unimedriopardo.sgu.services.FluxoService;
 import br.coop.unimedriopardo.sgu.services.SegundoNivelFluxoService;
+import br.coop.unimedriopardo.sgu.util.ContaPrincipal;
 import br.coop.unimedriopardo.sgu.util.Demonstrativo;
 
 
@@ -39,6 +40,12 @@ public class FluxoController {
 	public @ResponseBody List<Demonstrativo> carregarDemonstrativo(@PathVariable("dataInicial") String dataInicial, @PathVariable("dataFinal") String dataFinal){
 		List<Demonstrativo> demonstrativos = fluxoService.valorizarDemonstrativo(dataInicial,dataFinal);
 		return demonstrativos ;
+	}
+	
+	@RequestMapping(value="/carregar/movimentacao/{dataInicial}/{dataFinal}", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody List<ContaPrincipal> carregarMovimentacao(@PathVariable("dataInicial") String dataInicial, @PathVariable("dataFinal") String dataFinal){
+		List<ContaPrincipal> movimentacao = fluxoService.valorizarConta(dataInicial, dataFinal);
+		return movimentacao ;
 	}
 
 }

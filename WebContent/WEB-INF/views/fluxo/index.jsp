@@ -46,39 +46,39 @@
 				  <tbody>
 				    <tr>
 				      <th>Receita</th>
-				      <th id="totalReceitaAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 00</th>
-				      <th id="totalReceita${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 00</th>
-				      <th id="totalReceitaPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 00</th>
+				      <th id="totalReceitaAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}"></th>
+				      <th id="totalReceita${demonstrativo.segundoNivelFluxo.codigoNivel}"></th>
+				      <th id="totalReceitaPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}"></th>
 				    </tr>
 				    <c:forEach items="${demonstrativo.receitaTerceiroNivelFluxo}" var="receita">
 				    	<tr>
 					      <td>${receita.descricao}</td>
-					      <td id="receitaAnterior${receita.codigoSegundoNivel}${receita.codigoNivel}">R$ 00</td>
-					      <td id="receita${receita.codigoSegundoNivel}${receita.codigoNivel}">R$ 00</td>
-					      <td id="receitaPrevisto${receita.codigoSegundoNivel}${receita.codigoNivel}">R$ 00</td>
+					      <td id="receitaAnterior${receita.codigoSegundoNivel}${receita.codigoNivel}"></td>
+					      <td id="receita${receita.codigoSegundoNivel}${receita.codigoNivel}"></td>
+					      <td id="receitaPrevisto${receita.codigoSegundoNivel}${receita.codigoNivel}"></td>
 					    </tr>
 				    </c:forEach>
 				    <tr>
 				      <th>Despesa</th>
-				      <th id="totalDespesaAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa">R$ 00</th>
-				      <th id="totalDespesa${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa">R$ 00</th>
-				      <th id="totalDespesaPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa">R$ 00</th>
+				      <th id="totalDespesaAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa"></th>
+				      <th id="totalDespesa${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa"></th>
+				      <th id="totalDespesaPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa"></th>
 				    </tr>				    
 				    <c:forEach items="${demonstrativo.despesaTerceiroNivelFluxo}" var="despesa">
 				    	<tr>
 					      <td>${despesa.descricao}</td>
-					      <td id="despesaAnterior${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa">R$ 00</td>
-					      <td id="despesa${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa">R$ 00</td>
-					      <td id="despesaPrevisto${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa">R$ 00</td>
+					      <td id="despesaAnterior${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa"></td>
+					      <td id="despesa${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa"></td>
+					      <td id="despesaPrevisto${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa"></td>
 					    </tr>
 				    </c:forEach>
 				  </tbody>
 				  <tfoot>
 				    <tr>
 				      <th>Líquido</th>
-				      <td id="totalLiquidoAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 9999</td>
-				      <td id="totalLiquido${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 9999</td>
-				      <td id="totalLiquidoPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}">R$ 9999</td>
+				      <td id="totalLiquidoAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}"></td>
+				      <td id="totalLiquido${demonstrativo.segundoNivelFluxo.codigoNivel}"></td>
+				      <td id="totalLiquidoPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}"></td>
 				    </tr>
 				  </tfoot>
 				</table>
@@ -106,22 +106,22 @@
 				  </thead>
 				  <tbody>
 				  	<tr>
-				      <td id="saldoLiquidoAnterior${conta.codigo}"></td>
-				      <td id="receita{conta.codigo}"></td>
-				      <td id="despesa${conta.codigo}"></td>
+				      <td id="movSaldoLiquidoAnterior${conta.codigo}"></td>
+				      <td id="movReceita${conta.codigo}"></td>
+				      <td id="movDespesa${conta.codigo}"></td>
 				      <td></td>
-				      <td id="saldoBanco"></td>
-				      <td id="saldoCaixa${conta.codigo}"></td>
-				      <td id="saldoTotal${conta.codigo}"></td>
+				      <td id="movSaldoBanco${conta.codigo}"></td>
+				      <td id="movSaldoCaixa${conta.codigo}"></td>
+				      <td id="movSaldoTotal${conta.codigo}"></td>
 				    </tr>
 				  </tbody>
 				  <tfoot>
 						<tr>
-							<td colspan="2" id="transRealizada${conta.codigo}">Transferências Realizadas</td>
+							<td colspan="2">Transferências Realizadas</td>
+							<td id="movTransRealizada${conta.codigo}"></td>
 							<td></td>
-							<td></td>
-							<td colspan="2" id="transRecebida${conta.codigo}">Transferências Recebidas</td>
-							<td></td>
+							<td colspan="2">Transferências Recebidas</td>
+							<td id="movTransRecebida${conta.codigo}"></td>
 						</tr>
 				  </tfoot>
 				</table>
