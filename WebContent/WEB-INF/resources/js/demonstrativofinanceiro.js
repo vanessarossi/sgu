@@ -103,10 +103,10 @@ function calcularReceitaMovimentacao() {
 	var receitaHospital = removerFormatacaoReal($("#totalReceita70").text());
 	var totalReceitaContaHospital = receitaHospital;
 
-	$('#movReceita001').text(totalReceitaContaSede);
-	$('#movReceita002').text(totalReceitaContaFarmacia);
-	$('#movReceita003').text(totalReceitaContaOptica);
-	$('#movReceita070').text(totalReceitaContaHospital);
+	$('#movReceita001').text(totalReceitaContaSede.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movReceita002').text(totalReceitaContaFarmacia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movReceita003').text(totalReceitaContaOptica.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movReceita070').text(totalReceitaContaHospital.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
 }
 
 function calcularDespesaMovimentacao() {
@@ -138,10 +138,10 @@ function calcularDespesaMovimentacao() {
 	var despesaHospital = removerFormatacaoReal($("#totalDespesa70").text());
 	var totalDespesaContaHospital = despesaHospital;
 
-	$('#movDespesa001').text(totalDespesaContaSede);
-	$('#movDespesa002').text(totalDespesaContaFarmacia);
-	$('#movDespesa003').text(totalDespesaContaOptica);
-	$('#movDespesa070').text(totalDespesaContaHospital);
+	$('#movDespesa001').text(totalDespesaContaSede.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movDespesa002').text(totalDespesaContaFarmacia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movDespesa003').text(totalDespesaContaOptica.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movDespesa070').text(totalDespesaContaHospital.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
 }
 
 function removerFormatacaoReal(valor) {
