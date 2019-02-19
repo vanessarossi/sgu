@@ -59,13 +59,11 @@ function carregarMovimentacao(dataInicial, dataFinal) {
 		.done(function(response){
 			for (var i = 0; i < response.length; i++) {
 				$("#movSaldoLiquidoAnterior"+response[i]["codigoContaFluxo"]).text(response[i]["valorLiquidoAnterior"]);
-				$("#movReceita"+response[i]["codigoContaFluxo"]).text("0");
-				$("#movRespesa"+response[i]["codigoContaFluxo"]).text("0");
 				$("#movSaldoBanco"+response[i]["codigoContaFluxo"]).text(response[i]["valorBanco"]);
 				$("#movSaldoCaixa"+response[i]["codigoContaFluxo"]).text(response[i]["valorCaixa"]);
 				$("#movSaldoTotal"+response[i]["codigoContaFluxo"]).text(response[i]["valorTotal"]);
-				$("#movTransRealizada"+response[i]["codigoContaFluxo"]).text("0");
-				$("#movTransRecebida"+response[i]["codigoContaFluxo"]).text("0");
+				$("#movTransRealizada"+response[i]["codigoContaFluxo"]).text(response[i]["valorTransferenciaSaiu"]);
+				$("#movTransRecebida"+response[i]["codigoContaFluxo"]).text(response[i]["valorTransferenciaEntrou"]);
 			}
 			calcularReceitaMovimentacao();
 			calcularDespesaMovimentacao();

@@ -10,6 +10,8 @@ public class ContaPrincipal {
 	private String valorBanco;
 	private String valorCaixa;
 	private String valorTotal;
+	private String valorTransferenciaEntrou;
+	private String valorTransferenciaSaiu;
 	public String getCodigoContaFluxo() {
 		return codigoContaFluxo;
 	}
@@ -51,5 +53,17 @@ public class ContaPrincipal {
 	}
 	public void setValorTotal(String valorTotal) {
 		this.valorTotal = valorTotal;
+	}
+	public String getValorTransferenciaEntrou() {
+		return valorTransferenciaEntrou;
+	}
+	public void setValorTransferenciaEntrou(String valorTransferenciaEntrou) {
+		this.valorTransferenciaEntrou = valorTransferenciaEntrou;
+	}
+	public String getValorTransferenciaSaiu() {
+		return valorTransferenciaSaiu;
+	}
+	public void setValorTransferenciaSaiu(String valorTransferenciaSaiu) {
+		this.valorTransferenciaSaiu = valorTransferenciaSaiu;
 	}
 }
