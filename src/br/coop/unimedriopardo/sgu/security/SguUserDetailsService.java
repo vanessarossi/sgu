@@ -22,7 +22,7 @@ public class SguUserDetailsService implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
 		Usuario usuario = repositorioUsuario.findByLogin(login);
-		if (usuario == null) {
+		if (usuario == null || usuario.getAtivo().equals("0")) {
 			throw new UsernameNotFoundException("Usuário não encontrado");
 		}
 		Set<GrantedAuthority> perfis = new HashSet<GrantedAuthority>();

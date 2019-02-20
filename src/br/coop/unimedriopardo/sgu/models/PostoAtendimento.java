@@ -10,47 +10,48 @@ import javax.persistence.Table;
 public class PostoAtendimento {
 	
 	@Id
-	@Column(name = "codigo")
-	private String codigo;
+	@Column(name = "codigo_posto")
+	private String codigoPosto;
 	
-	@Column(name = "nome")
-	private String nome;
+	@Column(name = "descricao")
+	private String descricao;
 	
-	@Column(name = "filial")
-	private String filial;
+	@Column(name = "codigo_filial")
+	private String codigoFilial;
 	
-	@Column(name = "saldo")
-	private String saldo;
+	@Column(name = "razao_filial")
+	private String razaoFilial;
 
-	public String getCodigo() {
-		return codigo;
+	public String getCodigoPosto() {
+		return codigoPosto;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setCodigoPosto(String codigoPosto) {
+		this.codigoPosto = codigoPosto;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public String getFilial() {
-		return filial;
+	public String getCodigoFilial() {
+		return codigoFilial;
 	}
 
-	public void setFilial(String filial) {
-		this.filial = filial;
+	public void setCodigoFilial(String codigoFilial) {
+		this.codigoFilial = codigoFilial;
 	}
 
-	public String getSaldo() {
-		return saldo;
+	public String getRazaoFilial() {
+		return razaoFilial;
 	}
 
-	public void setSaldo(String saldo) {
-		this.saldo = saldo;
+	public void setRazaoFilial(String razaoFilial) {
+		this.razaoFilial = razaoFilial;
 	}
+		
 }

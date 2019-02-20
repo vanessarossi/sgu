@@ -9,40 +9,21 @@ import javax.persistence.Table;
 @Table(name = "VW_UNRP_CONTA_BANCARIA")
 public class Banco {
 
-	@Column(name = "filial")
-	private String filial;
-	
-	@Column(name = "codigo_filial")
-	private String codigoFilial;
-
 	@Id
 	@Column(name = "codigo_conta")
 	private String codigoConta;
 	
 	@Column(name = "nome_conta")
 	private String nomeConta;
-
+	
+	@Column(name = "codigo_filial")
+	private String codigoFilial;
+	
+	@Column(name = "razao_filial")
+	private String razaoFilial;
+	
 	@Column(name = "conta_aplicacao")
 	private String contaAplicacao;
-	
-	@Column(name = "saldo")
-	private String saldo;
-
-	public String getFilial() {
-		return filial;
-	}
-
-	public void setFilial(String filial) {
-		this.filial = filial;
-	}
-
-	public String getCodigoFilial() {
-		return codigoFilial;
-	}
-
-	public void setCodigoFilial(String codigoFilial) {
-		this.codigoFilial = codigoFilial;
-	}
 
 	public String getCodigoConta() {
 		return codigoConta;
@@ -60,6 +41,22 @@ public class Banco {
 		this.nomeConta = nomeConta;
 	}
 
+	public String getCodigoFilial() {
+		return codigoFilial;
+	}
+
+	public void setCodigoFilial(String codigoFilial) {
+		this.codigoFilial = codigoFilial;
+	}
+
+	public String getRazaoFilial() {
+		return razaoFilial;
+	}
+
+	public void setRazaoFilial(String razaoFilial) {
+		this.razaoFilial = razaoFilial;
+	}
+
 	public String getContaAplicacao() {
 		return contaAplicacao;
 	}
@@ -67,12 +64,5 @@ public class Banco {
 	public void setContaAplicacao(String contaAplicacao) {
 		this.contaAplicacao = contaAplicacao;
 	}
-
-	public String getSaldo() {
-		return saldo;
-	}
-
-	public void setSaldo(String saldo) {
-		this.saldo = saldo;
-	}
+		
 }
