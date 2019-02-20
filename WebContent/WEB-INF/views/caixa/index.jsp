@@ -37,9 +37,9 @@
 					<c:forEach items="${postosAtendimento}" var="postoAtendimento"
 						end="8">
 						<tr>
-							<td>${postoAtendimento.codigo}</td>
-							<td>${postoAtendimento.nome}</td>
-							<td>${postoAtendimento.saldo}</td>
+							<td>${postoAtendimento.codigoPosto}</td>
+							<td>${postoAtendimento.descricao}</td>
+							<td>${postoAtendimento.valor}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -51,9 +51,9 @@
 					<c:forEach items="${postosAtendimento}" var="postoAtendimento"
 						begin="9">
 						<tr>
-							<td>${postoAtendimento.codigo}</td>
-							<td>${postoAtendimento.nome}</td>
-							<td>${postoAtendimento.saldo}</td>
+							<td>${postoAtendimento.codigoPosto}</td>
+							<td>${postoAtendimento.descricao}</td>
+							<td>${postoAtendimento.valor}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

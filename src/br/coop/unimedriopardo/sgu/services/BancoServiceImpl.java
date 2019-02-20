@@ -1,15 +1,15 @@
 package br.coop.unimedriopardo.sgu.services;
 
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.coop.unimedriopardo.sgu.models.Banco;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioBanco;
 import br.coop.unimedriopardo.sgu.util.Conversor;
+import br.coop.unimedriopardo.sgu.util.view.BancoView;
 
 
 @Service
@@ -25,12 +25,20 @@ public class BancoServiceImpl implements BancoService {
 	}
 
 	@Override
-	public List<Banco> listarContasBancarias(String data) {
+	public List<BancoView> listarContasBancariaValorizada(String data) {
 		List<Banco> contasBancarias = repositorioBanco.findAll();
+		List<BancoView> contasBancoView = new ArrayList<BancoView>();
 		for (Banco banco : contasBancarias) {
-			banco.setSaldo(new Conversor().formataReal(retornaSaldo(banco.getCodigoConta(), data)));
+			BancoView bancoView = new BancoView();
+			bancoView.setCodigoConta(banco.getCodigoConta());
+			bancoView.setNomeConta(banco.getNomeConta());
+			bancoView.setCodigoFilial(banco.getCodigoFilial());
+			bancoView.setRazaoFilial(banco.getRazaoFilial());
+			bancoView.setAplicacao(banco.getAplicacao());
+			bancoView.setValor(new Conversor().formataReal(retornaSaldo(banco.getCodigoConta(), data)));
+			contasBancoView.add(bancoView);
 		}
-		return contasBancarias;
+		return contasBancoView;
 	}
 
 	@Override
@@ -42,25 +50,10 @@ public class BancoServiceImpl implements BancoService {
 		return saldo;
 	}
 
-	@Override
-	public List<Banco> listarContasBancariasPorDiaEscolhido(String data) {
-		String dataConvertida = new Conversor().formatarDataString(data,"YYYYMMdd");
-		List<Banco> contasBancarias = repositorioBanco.findAll();
-		for (Banco banco : contasBancarias) {
-			banco.setSaldo(new Conversor().formataReal(retornaSaldo(banco.getCodigoConta(), dataConvertida)));
-		}
-		return contasBancarias;
-	}
 
 	@Override
-	public String retornaSaldoTotalContas() {
-		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldo(new Conversor().formatarData(new Date(), "YYYYMMdd")));
-	}
-
-	@Override
-	public String retornaSaldoTotalCaixasPorDiaEscolhido(String data) {
-		String dataConvertida = new Conversor().formatarDataString(data, "YYYYMMdd");
-		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldo(dataConvertida));
+	public String retornaSaldoTotalContas(String data) {
+		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldo(data));
 	}
 
 }

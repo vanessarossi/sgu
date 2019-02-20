@@ -24,16 +24,16 @@ public class CaixaController {
 
 	@RequestMapping("")
 	public String home(Model model) {
-		model.addAttribute("postosAtendimento", postoAtendimentoService.listarPostosAtendimento());
-		model.addAttribute("saldoTotal",postoAtendimentoService.retornaSaldoTotalCaixas());
+		model.addAttribute("postosAtendimento", postoAtendimentoService.listarPostosAtendimentoValorizado(new Conversor().formatarData(new Date(),"YYYYMMdd")));
+		model.addAttribute("saldoTotal",postoAtendimentoService.retornaSaldoTotalCaixas(new Conversor().formatarData(new Date(),"YYYYMMdd")));
 		model.addAttribute("dataEscolhida", new Conversor().formatarData(new Date(), "dd/MM/YYYY"));
 		return "caixa.index.tiles";
 	}
 	
 	@RequestMapping(value = "/consultar", method = RequestMethod.POST)
 	public String consultar(@ModelAttribute("data") String data, Model model) {
-		model.addAttribute("postosAtendimento", postoAtendimentoService.listarPostosAtendimentoPorDiaEscolhido(data));
-		model.addAttribute("saldoTotal",postoAtendimentoService.retornaSaldoTotalCaixasPorDiaEscolhido(data));
+		model.addAttribute("postosAtendimento", postoAtendimentoService.listarPostosAtendimentoValorizado(new Conversor().formatarDataString(data,"YYYYMMdd")));
+		model.addAttribute("saldoTotal",postoAtendimentoService.retornaSaldoTotalCaixas(new Conversor().formatarDataString(data,"YYYYMMdd")));
 		model.addAttribute("dataEscolhida", new Conversor().formatarDataString(data, "dd/MM/YYYY"));
 		return "caixa.index.tiles";
 	}

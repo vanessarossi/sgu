@@ -25,17 +25,17 @@ public class BancoController {
 
 	@RequestMapping("")
 	public String home(Model model) {
-		model.addAttribute("bancos", bancoService.listarContasBancarias(new Conversor().formatarData(new Date(), "YYYYMMdd")));
-		model.addAttribute("saldoTotal",bancoService.retornaSaldoTotalContas());
-		model.addAttribute("dataEscolhida", new Conversor().formatarData(new Date(), "dd/MM/YYYY"));
+		model.addAttribute("bancos", bancoService.listarContasBancariaValorizada(new Conversor().formatarData(new Date(),"YYYYMMdd")));
+		model.addAttribute("saldoTotal",bancoService.retornaSaldoTotalContas(new Conversor().formatarData(new Date(),"YYYYMMdd")));
+		model.addAttribute("dataEscolhida", new Conversor().formatarData(new Date(),"dd/MM/YYYY"));
 		return "banco.index.tiles";
 	}
 	
 	@RequestMapping(value = "/consultar", method = RequestMethod.POST)
-	public String consultar(@ModelAttribute("data") String data, Model model) {
-		model.addAttribute("bancos", bancoService.listarContasBancariasPorDiaEscolhido(data));
-		model.addAttribute("saldoTotal",bancoService.retornaSaldoTotalCaixasPorDiaEscolhido(data));
-		model.addAttribute("dataEscolhida", new Conversor().formatarDataString(data, "dd/MM/YYYY"));
+	public String consultar(@ModelAttribute("data") String data, Model model) {	
+		model.addAttribute("bancos", bancoService.listarContasBancariaValorizada(new Conversor().formatarDataString(data,"YYYYMMdd")));
+		model.addAttribute("saldoTotal",bancoService.retornaSaldoTotalContas(new Conversor().formatarDataString(data,"YYYYMMdd")));
+		model.addAttribute("dataEscolhida", new Conversor().formatarData(new Date(),"dd/MM/YYYY"));
 		return "banco.index.tiles";
 	}
 }

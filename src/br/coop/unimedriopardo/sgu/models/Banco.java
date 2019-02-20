@@ -22,8 +22,8 @@ public class Banco {
 	@Column(name = "razao_filial")
 	private String razaoFilial;
 	
-	@Column(name = "conta_aplicacao")
-	private String contaAplicacao;
+	@Column(name = "aplicacao")
+	private String aplicacao;
 
 	public String getCodigoConta() {
 		return codigoConta;
@@ -57,12 +57,11 @@ public class Banco {
 		this.razaoFilial = razaoFilial;
 	}
 
-	public String getContaAplicacao() {
-		return contaAplicacao;
+	public String getAplicacao() {
+		return aplicacao;
 	}
 
-	public void setContaAplicacao(String contaAplicacao) {
-		this.contaAplicacao = contaAplicacao;
-	}
-		
+	public void setAplicacao(String aplicacao) {
+		this.aplicacao = aplicacao;
+	}	
 }

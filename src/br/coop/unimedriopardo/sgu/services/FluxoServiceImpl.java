@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import br.coop.unimedriopardo.sgu.models.Banco;
 import br.coop.unimedriopardo.sgu.models.ContaFluxo;
-import br.coop.unimedriopardo.sgu.models.PostoAtendimento;
 import br.coop.unimedriopardo.sgu.models.SegundoNivelFluxo;
 import br.coop.unimedriopardo.sgu.models.TerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioBanco;
@@ -183,7 +182,7 @@ public class FluxoServiceImpl implements FluxoService {
 		Float saldoCaixaAnteriorFamacia = 0f;
 		Float saldoCaixaAnteriorOptica = 0f ;
 		Float saldoCaixaAnteriorConstrucao = 0f;
-		
+		/**
 		List<Banco> bancos = repositorioBanco.findAll();
 		for (Banco banco : bancos) {
 			if(banco.getContaAplicacao().contains("N")) {
@@ -228,9 +227,9 @@ public class FluxoServiceImpl implements FluxoService {
 					saldoTransferenciaSaiuSede = saldoTransferenciaSaiuSede + Float.parseFloat(saldoTransSaiu);
 				}
 			}
-		}
+		}**/
 			
-			
+		/**	
 		List<PostoAtendimento> postosAtendimento = repositorioPostoAtendimento.findAll();
 			
 			for (PostoAtendimento postoAtendimento : postosAtendimento) {
@@ -265,10 +264,10 @@ public class FluxoServiceImpl implements FluxoService {
 					saldoCaixaAnteriorSede = saldoCaixaAnteriorSede + Float.parseFloat(saldoDiaAnterior);
 				}
 			}
-			
+			**/
 			List<ContaFluxo> contasFluxo = repositorioContaFluxo.findAll();
 			/** Inicio da montagem da Conta Principal **/
-			
+			/**
 			for (ContaFluxo contaFluxo : contasFluxo) {
 				ContaPrincipal contaPrincipal = new ContaPrincipal();
 				contaPrincipal.setCodigoContaFluxo(contaFluxo.getCodigo());
@@ -317,7 +316,7 @@ public class FluxoServiceImpl implements FluxoService {
 				principaisContas.add(contaPrincipal);
 			
 			}
-
+			**/
 		return principaisContas;
 	}
 	

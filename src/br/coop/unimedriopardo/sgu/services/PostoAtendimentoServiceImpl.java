@@ -1,15 +1,14 @@
 package br.coop.unimedriopardo.sgu.services;
 
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.coop.unimedriopardo.sgu.models.PostoAtendimento;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioPostoAtendimento;
 import br.coop.unimedriopardo.sgu.util.Conversor;
+import br.coop.unimedriopardo.sgu.util.view.PostoAtendimentoView;
 
 @Service
 @Transactional
@@ -26,12 +25,19 @@ private final RepositorioPostoAtendimento repositorioPostoAtendimento;
 	
 	
 	@Override
-	public List<PostoAtendimento> listarPostosAtendimento() {
+	public List<PostoAtendimentoView> listarPostosAtendimentoValorizado(String data) {
 		List<PostoAtendimento> postosAtendimento = repositorioPostoAtendimento.findAll();
+		List<PostoAtendimentoView> postosAtendimentoView = new ArrayList<PostoAtendimentoView>();
 		for (PostoAtendimento postoAtendimento : postosAtendimento) {
-			postoAtendimento.setSaldo(new Conversor().formataReal(retornaSaldo(postoAtendimento.getCodigo(), new Conversor().formatarData(new Date(), "YYYYMMdd"))));
+			PostoAtendimentoView postoAtendimentoView = new PostoAtendimentoView();
+			postoAtendimentoView.setCodigoPosto(postoAtendimento.getCodigoPosto());
+			postoAtendimentoView.setDescricao(postoAtendimento.getDescricao());
+			postoAtendimentoView.setCodigoFilial(postoAtendimento.getCodigoFilial());
+			postoAtendimentoView.setRazaoFilial(postoAtendimento.getRazaoFilial());
+			postoAtendimentoView.setValor(new Conversor().formataReal(retornaSaldo(postoAtendimento.getCodigoPosto(),data)));
+			postosAtendimentoView.add(postoAtendimentoView);
 		}
-		return postosAtendimento;
+		return postosAtendimentoView;
 	}
 
 
@@ -46,26 +52,8 @@ private final RepositorioPostoAtendimento repositorioPostoAtendimento;
 
 
 	@Override
-	public String retornaSaldoTotalCaixas() {
-		return new Conversor().formataReal(repositorioPostoAtendimento.calcularTotalSaldoCaixa(new Conversor().formatarData(new Date(), "YYYYMMdd")));
-	}
-
-
-	@Override
-	public String retornaSaldoTotalCaixasPorDiaEscolhido(String data) {
-		String dataConvertida = new Conversor().formatarDataString(data, "YYYYMMdd");
-		return new Conversor().formataReal(repositorioPostoAtendimento.calcularTotalSaldoCaixa(dataConvertida));
-	}
-
-
-	@Override
-	public List<PostoAtendimento> listarPostosAtendimentoPorDiaEscolhido(String data) {
-		String dataConvertida = new Conversor().formatarDataString(data, "YYYYMMdd");
-		List<PostoAtendimento> postosAtendimento = repositorioPostoAtendimento.findAll();
-		for (PostoAtendimento postoAtendimento : postosAtendimento) {
-			postoAtendimento.setSaldo(new Conversor().formataReal(retornaSaldo(postoAtendimento.getCodigo(),dataConvertida)));
-		}
-		return postosAtendimento;
+	public String retornaSaldoTotalCaixas(String data) {
+		return new Conversor().formataReal(repositorioPostoAtendimento.calcularTotalSaldoCaixa(data));
 	}
 
 }

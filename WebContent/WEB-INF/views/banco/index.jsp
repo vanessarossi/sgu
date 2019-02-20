@@ -37,8 +37,8 @@
 						<tr>
 							<td>${banco.codigoConta}</td>
 							<td>${banco.nomeConta}</td>
-							<td><c:if test="${banco.contaAplicacao eq 'S'}">APL</c:if></td>
-							<td>${banco.saldo}</td>
+							<td><c:if test="${banco.aplicacao eq 'S'}">APL</c:if></td>
+							<td>${banco.valor}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -51,8 +51,8 @@
 						<tr>
 							<td>${banco.codigoConta}</td>
 							<td>${banco.nomeConta}</td>
-							<td><c:if test="${banco.contaAplicacao eq 'S'}">APL</c:if></td>
-							<td>${banco.saldo}</td>
+							<td><c:if test="${banco.aplicacao eq 'S'}">APL</c:if></td>
+							<td>${banco.valor}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
