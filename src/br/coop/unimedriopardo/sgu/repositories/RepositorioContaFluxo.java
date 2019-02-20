@@ -38,5 +38,21 @@ public interface RepositorioContaFluxo extends JpaRepository<ContaFluxo, String>
 	@Query(nativeQuery = true, value = "SELECT fn_unrp_desp_ant_cla_03_fluxo(:dataInicial, :dataFinal, :codigoSegundoNivel, :codigoNivel) FROM dual")
 	 String calcularTotalDespesaAnteriorTerceiroNivel(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, @Param("codigoSegundoNivel") String codigoSegundoNivel, @Param("codigoNivel") String codigoNivel );
 
+	/** PREVISTO **/
+	
+	@Query(nativeQuery = true, value = "SELECT fn_unrp_rec_prev_cla_02_fluxo(:dataInicial, :dataFinal, :codigoSegundoNivel) FROM dual")
+	 String calcularTotalReceitaPrevistaSegundoNivel(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, @Param("codigoSegundoNivel") String codigoSegundoNivel );
+	
+	@Query(nativeQuery = true, value = "SELECT fn_unrp_desp_prev_cla_02_fluxo(:dataInicial, :dataFinal, :codigoSegundoNivel) FROM dual")
+	 String calcularTotalDespesaPrevistaSegundoNivel(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, @Param("codigoSegundoNivel") String codigoSegundoNivel );
+	
+
+	@Query(nativeQuery = true, value = "SELECT fn_unrp_rec_prev_cla_03_fluxo(:dataInicial, :dataFinal, :codigoSegundoNivel, :codigoNivel) FROM dual")
+	 String calcularTotalReceitaPrevistoTerceiroNivel(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, @Param("codigoSegundoNivel") String codigoSegundoNivel, @Param("codigoNivel") String codigoNivel );
+	
+	
+	@Query(nativeQuery = true, value = "SELECT fn_unrp_desp_prev_cla_03_fluxo(:dataInicial, :dataFinal, :codigoSegundoNivel, :codigoNivel) FROM dual")
+	 String calcularTotalDespesaPrevistoTerceiroNivel(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, @Param("codigoSegundoNivel") String codigoSegundoNivel, @Param("codigoNivel") String codigoNivel );
+
 	
 }

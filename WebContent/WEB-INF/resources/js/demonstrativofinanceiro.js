@@ -31,11 +31,13 @@ function enviarConsulta() {
 				for (var j = response[i]["receitas"].length - 1; j >= 0; j--) {
 					$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorAnterior"]);
 					$("#receita"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valor"]);
+					$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorPrevisto"]);
 				}
 
 				for (var k = response[i]["despesas"].length - 1; k >= 0; k--) {
 					$("#despesaAnterior"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorAnterior"]);
 					$("#despesa"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valor"]);
+					$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisto"]);
 				}
 			}
 
@@ -103,10 +105,10 @@ function calcularReceitaMovimentacao() {
 	var receitaHospital = removerFormatacaoReal($("#totalReceita70").text());
 	var totalReceitaContaHospital = receitaHospital;
 
-	$('#movReceita001').text(totalReceitaContaSede.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movReceita002').text(totalReceitaContaFarmacia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movReceita003').text(totalReceitaContaOptica.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movReceita070').text(totalReceitaContaHospital.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movReceita001').text(parseFloat(totalReceitaContaSede).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movReceita002').text(parseFloat(totalReceitaContaFarmacia).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movReceita003').text(parseFloat(totalReceitaContaOptica).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movReceita070').text(parseFloat(totalReceitaContaHospital).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
 }
 
 function calcularDespesaMovimentacao() {
@@ -138,10 +140,10 @@ function calcularDespesaMovimentacao() {
 	var despesaHospital = removerFormatacaoReal($("#totalDespesa70").text());
 	var totalDespesaContaHospital = despesaHospital;
 
-	$('#movDespesa001').text(totalDespesaContaSede.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movDespesa002').text(totalDespesaContaFarmacia.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movDespesa003').text(totalDespesaContaOptica.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movDespesa070').text(totalDespesaContaHospital.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movDespesa001').text(parseFloat(totalDespesaContaSede).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movDespesa002').text(parseFloat(totalDespesaContaFarmacia).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movDespesa003').text(parseFloat(totalDespesaContaOptica).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+	$('#movDespesa070').text(parseFloat(totalDespesaContaHospital).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
 }
 
 function removerFormatacaoReal(valor) {
