@@ -22,7 +22,7 @@ public class QuartoNivelFluxoServiceImpl implements QuartoNivelFluxoService{
 	@Override
 	public List<QuartoNivelFluxo> pesquisarQuartoNivel(String codigoPrimeiroNivel, String codigoSegundoNivel,
 			String codigoTerceiroNivel) {
-		return null;
+		return repositorioQuartoNivelFluxo.findAll();
 	}
 
 	

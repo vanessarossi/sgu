@@ -37,8 +37,8 @@
 				<table class="table table-striped table-hover table-sm">
 				  <thead>
 				    <tr>
-				      <th> </th>
-				      <th>Saldo Anterior</th>
+				      <th></th>
+				      <th>Saldo Mês Anterior</th>
 				      <th>Saldo Atual</th>
 				      <th>Saldo Previsto</th>
 				    </tr>
@@ -50,12 +50,12 @@
 				      <th id="totalReceita${demonstrativo.segundoNivelFluxo.codigoNivel}"></th>
 				      <th id="totalReceitaPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}"></th>
 				    </tr>
-				    <c:forEach items="${demonstrativo.receitaTerceiroNivelFluxo}" var="receita">
+				    <c:forEach items="${demonstrativo.receitas}" var="receita">
 				    	<tr>
-					      <td>${receita.descricao}</td>
-					      <td id="receitaAnterior${receita.codigoSegundoNivel}${receita.codigoNivel}"></td>
-					      <td id="receita${receita.codigoSegundoNivel}${receita.codigoNivel}"></td>
-					      <td id="receitaPrevisto${receita.codigoSegundoNivel}${receita.codigoNivel}"></td>
+					      <td>${receita.terceiroNivelFluxo.descricao}</td>
+					      <td id="receitaAnterior${receita.terceiroNivelFluxo.codigoSegundoNivel}${receita.terceiroNivelFluxo.codigoNivel}"></td>
+					      <td id="receita${receita.terceiroNivelFluxo.codigoSegundoNivel}${receita.terceiroNivelFluxo.codigoNivel}"></td>
+					      <td id="receitaPrevisto${receita.terceiroNivelFluxo.codigoSegundoNivel}${receita.terceiroNivelFluxo.codigoNivel}"></td>
 					    </tr>
 				    </c:forEach>
 				    <tr>
@@ -64,12 +64,12 @@
 				      <th id="totalDespesa${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa"></th>
 				      <th id="totalDespesaPrevisto${demonstrativo.segundoNivelFluxo.codigoNivel}" class="despesa"></th>
 				    </tr>				    
-				    <c:forEach items="${demonstrativo.despesaTerceiroNivelFluxo}" var="despesa">
+				    <c:forEach items="${demonstrativo.despesas}" var="despesa">
 				    	<tr>
-					      <td>${despesa.descricao}</td>
-					      <td id="despesaAnterior${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa"></td>
-					      <td id="despesa${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa"></td>
-					      <td id="despesaPrevisto${despesa.codigoSegundoNivel}${despesa.codigoNivel}" class="despesa"></td>
+					      <td>${despesa.terceiroNivelFluxo.descricao}</td>
+					      <td id="despesaAnterior${despesa.terceiroNivelFluxo.codigoSegundoNivel}${despesa.terceiroNivelFluxo.codigoNivel}" class="despesa"></td>
+					      <td id="despesa${despesa.terceiroNivelFluxo.codigoSegundoNivel}${despesa.terceiroNivelFluxo.codigoNivel}" class="despesa"></td>
+					      <td id="despesaPrevisto${despesa.terceiroNivelFluxo.codigoSegundoNivel}${despesa.terceiroNivelFluxo.codigoNivel}" class="despesa"></td>
 					    </tr>
 				    </c:forEach>
 				  </tbody>

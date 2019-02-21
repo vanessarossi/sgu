@@ -8,13 +8,14 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+
 @Entity
-@Table(name = "unrp_sgu_receita")
-public class Receita {
-	
+@Table(name = "unrp_sgu_previsao_despesa")
+public class PrevisaoDespesa {
+		
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PK_SEQ_SGU_RECEITA")
-    @SequenceGenerator(sequenceName = "SEQ_SGU_RECEITA", allocationSize = 1, name = "PK_SEQ_SGU_RECEITA")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PK_SEQ_SGU_PREVISAO_DESPESA")
+    @SequenceGenerator(sequenceName = "SEQ_SGU_PREVISAO_DESPESA", allocationSize = 1, name = "PK_SEQ_SGU_PREVISAO_DESPESA")
 	private Integer id;
 
 	@Column(name="data_lanc")
@@ -79,4 +80,6 @@ public class Receita {
 	public void setValor(Float valor) {
 		this.valor = valor;
 	}
+
+	
 }

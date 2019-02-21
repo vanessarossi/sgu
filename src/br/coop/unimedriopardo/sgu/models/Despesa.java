@@ -31,7 +31,7 @@ public class Despesa {
 	private String classificacao;
 	
 	@Column(name="valor")
-	private String valor;
+	private Float valor;
 
 	public Integer getId() {
 		return id;
@@ -73,12 +73,11 @@ public class Despesa {
 		this.classificacao = classificacao;
 	}
 
-	public String getValor() {
+	public Float getValor() {
 		return valor;
 	}
 
-	public void setValor(String valor) {
+	public void setValor(Float valor) {
 		this.valor = valor;
 	}
-
 }
