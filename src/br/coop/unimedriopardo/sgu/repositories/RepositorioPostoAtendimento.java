@@ -13,5 +13,8 @@ public interface RepositorioPostoAtendimento extends JpaRepository<PostoAtendime
 	  
 	  @Query(nativeQuery = true, value = "SELECT fn_unrp_saldo_total_caixa(:data) FROM dual")
 	   String calcularTotalSaldoCaixa(@Param("data") String data);
+	  
+	  @Query(nativeQuery = true, value = "SELECT fn_unrp_saldo_ant_caixa(:codigoPosto, :data) FROM dual")
+	   String calcularTotalSaldoAnteriorCaixa(@Param("codigoPosto") String codigoPosto, @Param("data") String data);
 
 }

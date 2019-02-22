@@ -28,6 +28,7 @@ public class Conversor {
 		}
 		
 		public String formataReal(String valorString) {
+			valorString = valorString.replace(",", ".");
 			BigDecimal valor = new BigDecimal (valorString);  
 			NumberFormat nf = NumberFormat.getCurrencyInstance();  
 			String formatado = nf.format (valor);
@@ -35,6 +36,7 @@ public class Conversor {
 		}
 		
 		public String formataRealSemCifrao(String valorString) {
+			valorString = valorString.replace(",", ".");
 			BigDecimal valor = new BigDecimal (valorString);  
 			NumberFormat nf = NumberFormat.getInstance();  
 			String formatado = nf.format (valor);

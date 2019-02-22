@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.coop.unimedriopardo.sgu.services.FluxoService;
 import br.coop.unimedriopardo.sgu.services.SegundoNivelFluxoService;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.DemonstrativoValorizadoView;
+import br.coop.unimedriopardo.sgu.util.view.fluxo.MovimentoValorizadoView;
 
 
 @Controller
@@ -30,6 +31,7 @@ public class FluxoController {
 	@RequestMapping("")
 	public String home(Model model) {
 		model.addAttribute("demonstrativos", fluxoService.montarDemonstrativo());
+		model.addAttribute("filiais",fluxoService.montarFilial());
 		return "fluxo.index.tiles";
 	}
 	
@@ -39,13 +41,12 @@ public class FluxoController {
 		return demonstrativos ;
 	}
 	
-	/**
-	@RequestMapping(value="/carregar/movimentacao/{dataInicial}/{dataFinal}", method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody List<ContaPrincipal> carregarMovimentacao(@PathVariable("dataInicial") String dataInicial, @PathVariable("dataFinal") String dataFinal){
-		
-		return null ;
-	}
 	
-	**/
+	@RequestMapping(value="/carregar/movimento/{dataInicial}/{dataFinal}", method = RequestMethod.GET, produces = "application/json")
+	public @ResponseBody List<MovimentoValorizadoView> carregarMovimentacao(@PathVariable("dataInicial") String dataInicial, @PathVariable("dataFinal") String dataFinal){
+		List<MovimentoValorizadoView> movimento = fluxoService.valorizarMovimento(dataInicial, dataFinal);
+		return movimento ;
+	}
+
 
 }

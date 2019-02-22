@@ -40,9 +40,9 @@ function enviarConsulta() {
 					$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisao"]);
 				}
 			}
-			/**
+			
 			carregarMovimentacao(dataInicial,dataFinal);
-			**/
+			
 			$('#spinner').modal('hide');
 		 })
 		.fail(function(jqXHR, textStatus, msg){
@@ -54,18 +54,18 @@ function enviarConsulta() {
 function carregarMovimentacao(dataInicial, dataFinal) {
 	/** carregar info**/
 	$.ajax({
-			 url : '/sgu/fluxo/carregar/movimentacao/'+dataInicial+'/'+dataFinal,
+			 url : '/sgu/fluxo/carregar/movimento/'+dataInicial+'/'+dataFinal,
 		     type : 'get',
 		beforeSend : function(){}
 		})
 		.done(function(response){
 			for (var i = 0; i < response.length; i++) {
-				$("#movSaldoLiquidoAnterior"+response[i]["codigoContaFluxo"]).text(response[i]["valorLiquidoAnterior"]);
-				$("#movSaldoBanco"+response[i]["codigoContaFluxo"]).text(response[i]["valorBanco"]);
-				$("#movSaldoCaixa"+response[i]["codigoContaFluxo"]).text(response[i]["valorCaixa"]);
-				$("#movSaldoTotal"+response[i]["codigoContaFluxo"]).text(response[i]["valorTotal"]);
-				$("#movTransRealizada"+response[i]["codigoContaFluxo"]).text(response[i]["valorTransferenciaSaiu"]);
-				$("#movTransRecebida"+response[i]["codigoContaFluxo"]).text(response[i]["valorTransferenciaEntrou"]);
+				$("#movSaldoLiquidoAnterior"+response[i]["codigoId"]).text(response[i]["saldoLiquidoAnterior"]);
+				$("#movSaldoBanco"+response[i]["codigoId"]).text(response[i]["saldoBanco"]);
+				$("#movSaldoCaixa"+response[i]["codigoId"]).text(response[i]["saldoCaixa"]);
+				$("#movSaldoTotal"+response[i]["codigoId"]).text(response[i]["saldoLiquido"]);
+				$("#movTransRealizada"+response[i]["codigoId"]).text(response[i]["valorTransferenciaSaiu"]);
+				$("#movTransRecebida"+response[i]["codigoId"]).text(response[i]["valorTransferenciaEntrou"]);
 			}
 			calcularReceitaMovimentacao();
 			calcularDespesaMovimentacao();

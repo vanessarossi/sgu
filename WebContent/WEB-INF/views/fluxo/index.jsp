@@ -74,7 +74,7 @@
 				    </c:forEach>
 				  </tbody>
 				  <tfoot>
-				    <tr>
+				    <tr class="table-success">
 				      <th>Líquido</th>
 				      <td id="totalLiquidoAnterior${demonstrativo.segundoNivelFluxo.codigoNivel}"></td>
 				      <td id="totalLiquido${demonstrativo.segundoNivelFluxo.codigoNivel}"></td>
@@ -90,8 +90,8 @@
 			<div class="text-center" id="titulo">
 				<h3 class="h3">Movimentação</h3>
 			</div>
-			<c:forEach items="${contas}" var="conta">
-				<p class="h5 bg-danger text-white">${conta.descricao}</p>
+			<c:forEach items="${filiais}" var="filial">
+				<p class="h5 bg-danger text-white">${filial.razaoSocial}</p>
 				<table class="table table-striped table-hover table-sm">
 				  <thead>
 				    <tr>
@@ -106,22 +106,22 @@
 				  </thead>
 				  <tbody>
 				  	<tr>
-				      <td id="movSaldoLiquidoAnterior${conta.codigo}"></td>
-				      <td id="movReceita${conta.codigo}"></td>
-				      <td id="movDespesa${conta.codigo}"></td>
+				      <td id="movSaldoLiquidoAnterior${filial.codigoFilial}"></td>
+				      <td id="movReceita${filial.codigoFilial}"></td>
+				      <td id="movDespesa${filial.codigoFilial}"></td>
 				      <td></td>
-				      <td id="movSaldoBanco${conta.codigo}"></td>
-				      <td id="movSaldoCaixa${conta.codigo}"></td>
-				      <td id="movSaldoTotal${conta.codigo}"></td>
+				      <td id="movSaldoBanco${filial.codigoFilial}"></td>
+				      <td id="movSaldoCaixa${filial.codigoFilial}"></td>
+				      <td id="movSaldoTotal${filial.codigoFilial}"></td>
 				    </tr>
 				  </tbody>
 				  <tfoot>
 						<tr>
 							<td colspan="2">Transferências Realizadas</td>
-							<td id="movTransRealizada${conta.codigo}"></td>
+							<td id="movTransRealizada${filial.codigoFilial}"></td>
 							<td></td>
 							<td colspan="2">Transferências Recebidas</td>
-							<td id="movTransRecebida${conta.codigo}"></td>
+							<td id="movTransRecebida${filial.codigoFilial}"></td>
 						</tr>
 				  </tfoot>
 				</table>
