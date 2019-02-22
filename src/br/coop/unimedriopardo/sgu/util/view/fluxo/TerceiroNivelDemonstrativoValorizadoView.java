@@ -6,6 +6,8 @@ public class TerceiroNivelDemonstrativoValorizadoView {
 	private String valorAnterior;
 	private String valor;
 	private String valorPrevisao;
+	
+	
 	public String getCodigoId() {
 		return codigoId;
 	}
@@ -30,4 +32,7 @@ public class TerceiroNivelDemonstrativoValorizadoView {
 	public void setValorPrevisao(String valorPrevisao) {
 		this.valorPrevisao = valorPrevisao;
 	}
+	
+	
+	
 }

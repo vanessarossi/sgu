@@ -16,33 +16,33 @@ function enviarConsulta() {
 		})
 		.done(function(response){
 			for (var i = response.length - 1; i >= 0; i--) {
-				$("#totalReceitaAnterior"+response[i]["codigoId"]).text(response[i]["totalReceitaAnterior"]);
-				$("#totalReceita"+response[i]["codigoId"]).text(response[i]["totalReceita"]);
-				$("#totalReceitaPrevisto"+response[i]["codigoId"]).text(response[i]["totalReceitaPrevisto"]);
-				$("#totalDespesaAnterior"+response[i]["codigoId"]).text(response[i]["totalDespesaAnterior"]);
-				$("#totalDespesa"+response[i]["codigoId"]).text(response[i]["totalDespesa"]);
-				$("#totalDespesaPrevisto"+response[i]["codigoId"]).text(response[i]["totalDespesaPrevisto"]);
+				$("#totalReceitaAnterior"+response[i]["codigoId"]).text(response[i]["valorReceitaAnterior"]);
+				$("#totalReceita"+response[i]["codigoId"]).text(response[i]["valorReceita"]);
+				$("#totalReceitaPrevisto"+response[i]["codigoId"]).text(response[i]["valorReceitaPrevisao"]);
+				$("#totalDespesaAnterior"+response[i]["codigoId"]).text(response[i]["valorDespesaAnterior"]);
+				$("#totalDespesa"+response[i]["codigoId"]).text(response[i]["valorDespesa"]);
+				$("#totalDespesaPrevisto"+response[i]["codigoId"]).text(response[i]["valorDespesaPrevisao"]);
 
 				/** Valor Líquido**/
-				$("#totalLiquidoAnterior"+response[i]["codigoId"]).text(response[i]["totalLiquidoAnterior"]);
-				$("#totalLiquido"+response[i]["codigoId"]).text(response[i]["totalLiquido"]);
-				$("#totalLiquidoPrevisto"+response[i]["codigoId"]).text(response[i]["totalLiquidoPrevisto"]);
+				$("#totalLiquidoAnterior"+response[i]["codigoId"]).text(response[i]["valorLiquidoAnterior"]);
+				$("#totalLiquido"+response[i]["codigoId"]).text(response[i]["valorLiquido"]);
+				$("#totalLiquidoPrevisto"+response[i]["codigoId"]).text(response[i]["valorLiquidoPrevisao"]);
 
 				for (var j = response[i]["receitas"].length - 1; j >= 0; j--) {
 					$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorAnterior"]);
 					$("#receita"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valor"]);
-					$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorPrevisto"]);
+					$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorPrevisao"]);
 				}
 
 				for (var k = response[i]["despesas"].length - 1; k >= 0; k--) {
 					$("#despesaAnterior"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorAnterior"]);
 					$("#despesa"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valor"]);
-					$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisto"]);
+					$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisao"]);
 				}
 			}
-
+			/**
 			carregarMovimentacao(dataInicial,dataFinal);
-			
+			**/
 			$('#spinner').modal('hide');
 		 })
 		.fail(function(jqXHR, textStatus, msg){

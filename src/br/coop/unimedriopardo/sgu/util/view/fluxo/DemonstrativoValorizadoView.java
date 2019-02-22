@@ -12,6 +12,10 @@ public class DemonstrativoValorizadoView {
 	private String valorDespesa;
 	private String valorDespesaPrevisao;
 	
+	private String valorLiquidoAnterior;
+	private String valorLiquido;
+	private String valorLiquidoPrevisao;
+	
 	List<TerceiroNivelDemonstrativoValorizadoView> receitas;
 	List<TerceiroNivelDemonstrativoValorizadoView> despesas;
 	public String getCodigoId() {
@@ -56,6 +60,24 @@ public class DemonstrativoValorizadoView {
 	public void setValorDespesaPrevisao(String valorDespesaPrevisao) {
 		this.valorDespesaPrevisao = valorDespesaPrevisao;
 	}
+	public String getValorLiquidoAnterior() {
+		return valorLiquidoAnterior;
+	}
+	public void setValorLiquidoAnterior(String valorLiquidoAnterior) {
+		this.valorLiquidoAnterior = valorLiquidoAnterior;
+	}
+	public String getValorLiquido() {
+		return valorLiquido;
+	}
+	public void setValorLiquido(String valorLiquido) {
+		this.valorLiquido = valorLiquido;
+	}
+	public String getValorLiquidoPrevisao() {
+		return valorLiquidoPrevisao;
+	}
+	public void setValorLiquidoPrevisao(String valorLiquidoPrevisao) {
+		this.valorLiquidoPrevisao = valorLiquidoPrevisao;
+	}
 	public List<TerceiroNivelDemonstrativoValorizadoView> getReceitas() {
 		return receitas;
 	}
@@ -68,6 +90,8 @@ public class DemonstrativoValorizadoView {
 	public void setDespesas(List<TerceiroNivelDemonstrativoValorizadoView> despesas) {
 		this.despesas = despesas;
 	}
+	
+	
 	
 	
 }

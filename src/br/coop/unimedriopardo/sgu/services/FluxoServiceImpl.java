@@ -82,15 +82,58 @@ public class FluxoServiceImpl implements FluxoService {
 		for (SegundoNivelFluxo segundoNivelFluxo : listaSegundoNivel) {
 			DemonstrativoValorizadoView demonstrativoValorizado = new DemonstrativoValorizadoView();
 			demonstrativoValorizado.setCodigoId(segundoNivelFluxo.getCodigoNivel());
-			demonstrativoValorizado.setValorDespesa(repositorioDespesa.calcularSaldoSegundoNivel(dataInicialGCS, dataFinalGCS, "2", segundoNivelFluxo.getCodigoNivel()));
-			demonstrativoValorizado.setValorReceita(repositorioRececita.calcularSaldoSegundoNivel(dataInicialGCS, dataFinalGCS, "1", segundoNivelFluxo.getCodigoNivel()));
+			String valorReceitaAnterior = repositorioRececita.calcularSaldoAnteriorSegundoNivel(dataInicialGCS, dataFinalGCS, "1", segundoNivelFluxo.getCodigoNivel());
+			String valorDespesaAnterior = repositorioDespesa.calcularSaldoAnteriorSegundoNivel(dataInicialGCS, dataFinalGCS, "2", segundoNivelFluxo.getCodigoNivel());
+			String valorDespesa = repositorioDespesa.calcularSaldoSegundoNivel(dataInicialGCS, dataFinalGCS, "2", segundoNivelFluxo.getCodigoNivel());
+			String valorReceita = repositorioRececita.calcularSaldoSegundoNivel(dataInicialGCS, dataFinalGCS, "1", segundoNivelFluxo.getCodigoNivel());
+			String valorReceitaPrevisao = repositorioRececita.calcularSaldoPrevisaoSegundoNivel(dataInicialGCS, dataFinalGCS, "1", segundoNivelFluxo.getCodigoNivel());
+			String valorDespesaPrevisao = repositorioDespesa.calcularSaldoPrevisaoSegundoNivel(dataInicialGCS, dataFinalGCS, "2", segundoNivelFluxo.getCodigoNivel());
+			
+			String valorLiquidoAnterior =  String.valueOf((Float.parseFloat(valorReceitaAnterior.replace(",", ".")) - Float.parseFloat(valorDespesaAnterior.replace(",", ".")))) ;
+			String valorLiquido = String.valueOf((Float.parseFloat(valorReceita.replace(",", ".")) - Float.parseFloat(valorDespesa.replace(",", "."))));
+			String valorLiquidoPrevisao = String.valueOf((Float.parseFloat(valorReceitaPrevisao.replace(",", ".")) - Float.parseFloat(valorDespesaPrevisao.replace(",", "."))));
+			
+			
+			demonstrativoValorizado.setValorReceitaAnterior(valorReceitaAnterior);
+			demonstrativoValorizado.setValorDespesaAnterior(valorDespesaAnterior);
+			demonstrativoValorizado.setValorLiquidoAnterior(valorLiquidoAnterior);
+			
+			demonstrativoValorizado.setValorReceita(valorReceita);
+			demonstrativoValorizado.setValorDespesa(valorDespesa);
+			demonstrativoValorizado.setValorLiquido(valorLiquido);
+			
+			demonstrativoValorizado.setValorReceitaPrevisao(valorReceitaPrevisao);
+			demonstrativoValorizado.setValorDespesaPrevisao(valorDespesaPrevisao);
+			demonstrativoValorizado.setValorLiquidoPrevisao(valorLiquidoPrevisao);
+			
 			
 			List<TerceiroNivelDemonstrativoValorizadoView> receitas = new ArrayList<>();
 			List<TerceiroNivelDemonstrativoValorizadoView> despesas = new ArrayList<>();
+						
+		
+			List<TerceiroNivelFluxo> receitasTerceiroNivelFluxo = repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel("1", segundoNivelFluxo.getCodigoNivel());
+			List<TerceiroNivelFluxo> despesasTerceiroNivelFluxo = repositorioTerceiroNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivel("2", segundoNivelFluxo.getCodigoNivel());
+			//receitas
+			for (TerceiroNivelFluxo terceiroNivelFluxo : receitasTerceiroNivelFluxo) {
+					TerceiroNivelDemonstrativoValorizadoView receita = new TerceiroNivelDemonstrativoValorizadoView();
+					receita.setCodigoId(terceiroNivelFluxo.getCodigoSegundoNivel().concat(terceiroNivelFluxo.getCodigoNivel()));
+					receita.setValorAnterior((repositorioRececita.calcularSaldoAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel())));
+					receita.setValor(repositorioRececita.calcularSaldoTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
+					receita.setValorPrevisao(repositorioRececita.calcularSaldoPrevisaoTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
+					receitas.add(receita);
+			}	
+			//despesas
+			for(TerceiroNivelFluxo terceiroNivelFluxo : despesasTerceiroNivelFluxo) {		
+				TerceiroNivelDemonstrativoValorizadoView despesa = new TerceiroNivelDemonstrativoValorizadoView();
+				despesa.setCodigoId(terceiroNivelFluxo.getCodigoSegundoNivel().concat(terceiroNivelFluxo.getCodigoNivel()));
+				despesa.setValorAnterior(repositorioDespesa.calcularSaldoAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
+				despesa.setValor(repositorioDespesa.calcularSaldoTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
+				despesa.setValorPrevisao(repositorioDespesa.calcularSaldoPrevisaoTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
+				despesas.add(despesa);
+			}
 			
-			
-			demonstrativoValorizado.setDespesas(despesas);
 			demonstrativoValorizado.setReceitas(receitas);
+			demonstrativoValorizado.setDespesas(despesas);
 			
 			listaDemonstrativoValorizada.add(demonstrativoValorizado);
 		}
