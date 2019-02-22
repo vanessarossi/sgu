@@ -132,18 +132,18 @@ public class FluxoServiceImpl implements FluxoService {
 			for (TerceiroNivelFluxo terceiroNivelFluxo : receitasTerceiroNivelFluxo) {
 					TerceiroNivelDemonstrativoValorizadoView receita = new TerceiroNivelDemonstrativoValorizadoView();
 					receita.setCodigoId(terceiroNivelFluxo.getCodigoSegundoNivel().concat(terceiroNivelFluxo.getCodigoNivel()));
-					receita.setValorAnterior((repositorioRececita.calcularSaldoAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel())));
-					receita.setValor(repositorioRececita.calcularSaldoTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
-					receita.setValorPrevisao(repositorioRececita.calcularSaldoPrevisaoTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
+					receita.setValorAnterior(conversor.formataRealSemCifrao(repositorioRececita.calcularSaldoAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel())));
+					receita.setValor(conversor.formataRealSemCifrao(repositorioRececita.calcularSaldoTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel())));
+					receita.setValorPrevisao(conversor.formataRealSemCifrao(repositorioRececita.calcularSaldoPrevisaoTerceiroNivel(dataInicialGCS, dataFinalGCS, "1", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel())));
 					receitas.add(receita);
 			}	
 			//despesas
 			for(TerceiroNivelFluxo terceiroNivelFluxo : despesasTerceiroNivelFluxo) {		
 				TerceiroNivelDemonstrativoValorizadoView despesa = new TerceiroNivelDemonstrativoValorizadoView();
 				despesa.setCodigoId(terceiroNivelFluxo.getCodigoSegundoNivel().concat(terceiroNivelFluxo.getCodigoNivel()));
-				despesa.setValorAnterior(repositorioDespesa.calcularSaldoAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
-				despesa.setValor(repositorioDespesa.calcularSaldoTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
-				despesa.setValorPrevisao(repositorioDespesa.calcularSaldoPrevisaoTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel()));
+				despesa.setValorAnterior(conversor.formataRealSemCifrao(repositorioDespesa.calcularSaldoAnteriorTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel())));
+				despesa.setValor(conversor.formataRealSemCifrao(repositorioDespesa.calcularSaldoTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel())));
+				despesa.setValorPrevisao(conversor.formataRealSemCifrao(repositorioDespesa.calcularSaldoPrevisaoTerceiroNivel(dataInicialGCS, dataFinalGCS, "2", terceiroNivelFluxo.getCodigoSegundoNivel(), terceiroNivelFluxo.getCodigoNivel())));
 				despesas.add(despesa);
 			}
 			
