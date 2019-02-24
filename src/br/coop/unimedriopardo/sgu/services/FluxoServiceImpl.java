@@ -9,12 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import br.coop.unimedriopardo.sgu.models.Banco;
 import br.coop.unimedriopardo.sgu.models.Filial;
 import br.coop.unimedriopardo.sgu.models.PostoAtendimento;
+import br.coop.unimedriopardo.sgu.models.QuartoNivelFluxo;
+import br.coop.unimedriopardo.sgu.models.QuintoNivelFluxo;
 import br.coop.unimedriopardo.sgu.models.SegundoNivelFluxo;
 import br.coop.unimedriopardo.sgu.models.TerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioBanco;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioDespesa;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioFilial;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioPostoAtendimento;
+import br.coop.unimedriopardo.sgu.repositories.RepositorioQuartoNivelFluxo;
+import br.coop.unimedriopardo.sgu.repositories.RepositorioQuintoNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioReceita;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioSegundoNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioTerceiroNivelFluxo;
@@ -22,6 +26,7 @@ import br.coop.unimedriopardo.sgu.util.Conversor;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.DemonstrativoValorizadoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.DemonstrativoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.MovimentoValorizadoView;
+import br.coop.unimedriopardo.sgu.util.view.fluxo.QuartoNivelDemonstrativoValorizado;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.TerceiroNivelDemonstrativoValorizadoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.TerceiroNivelDemonstrativoView;
 
@@ -37,13 +42,15 @@ public class FluxoServiceImpl implements FluxoService {
 	private final RepositorioReceita repositorioRececita;
 	private final RepositorioFilial repositorioFilial;
 	private final RepositorioPostoAtendimento repositorioPostoAtendimento;
+	private final RepositorioQuartoNivelFluxo repositorioQuartoNivelFluxo;
 
 	@Autowired
 	public FluxoServiceImpl(RepositorioSegundoNivelFluxo repositorioSegundoNivelFluxo,
 			RepositorioTerceiroNivelFluxo repositorioTerceiroNivelFluxo, 
 			RepositorioDespesa repositorioDespesa, RepositorioReceita repositorioReceita, 
 			RepositorioFilial repositorioFilial, RepositorioBanco repositorioBanco,
-			RepositorioPostoAtendimento repositorioPostoAtendimento) {
+			RepositorioPostoAtendimento repositorioPostoAtendimento,
+			RepositorioQuartoNivelFluxo repositorioQuartoNivelFluxo) {
 		super();
 		this.repositorioSegundoNivelFluxo = repositorioSegundoNivelFluxo;
 		this.repositorioTerceiroNivelFluxo = repositorioTerceiroNivelFluxo;
@@ -52,6 +59,7 @@ public class FluxoServiceImpl implements FluxoService {
 		this.repositorioFilial = repositorioFilial;
 		this.repositorioBanco = repositorioBanco;
 		this.repositorioPostoAtendimento = repositorioPostoAtendimento;
+		this.repositorioQuartoNivelFluxo = repositorioQuartoNivelFluxo;
 	}
 
 	@Override
@@ -282,4 +290,58 @@ public class FluxoServiceImpl implements FluxoService {
 		}
 		return movimentosValorizado;
 	}
+
+	@Override
+	public List<QuartoNivelDemonstrativoValorizado> valorizarQuintoNivel(String codigoPrimeiroNivel, String codigoSegundoNivel, String codigoTerceiroNivel, String dataInicial,
+			String dataFinal) {
+		List<QuartoNivelFluxo> listaQuartoNivel = repositorioQuartoNivelFluxo.findByCodigoPrimeiroNivelAndCodigoSegundoNivelAndCodigoTerceiroNivel(codigoPrimeiroNivel, codigoSegundoNivel, codigoTerceiroNivel);
+	List<QuartoNivelDemonstrativoValorizado> listaQuartoNivelValorizado = new ArrayList<QuartoNivelDemonstrativoValorizado>();
+		Conversor conversor = new Conversor();
+		String dataInicialGCS = conversor.formatarDataString(dataInicial, "YYYYMMdd");
+		String dataFinalGCS = conversor.formatarDataString(dataFinal, "YYYYMMdd");
+		
+		if (codigoPrimeiroNivel.equals("1")) {
+			
+			for (QuartoNivelFluxo quartoNivelFluxo : listaQuartoNivel) {
+				QuartoNivelDemonstrativoValorizado quartoNivel = new QuartoNivelDemonstrativoValorizado();
+				quartoNivel.setDescricao(quartoNivelFluxo.getDescricao());
+				quartoNivel.setValorAnterior(conversor.formataRealSemCifrao(repositorioRececita.calcularSaldoAnteriorQuartoNivel(dataInicialGCS, dataFinalGCS, 
+						quartoNivelFluxo.getCodigoPrimeiroNivel(), quartoNivelFluxo.getCodigoSegundoNivel(), 
+						quartoNivelFluxo.getCodigoTerceiroNivel(),quartoNivelFluxo.getCodigoNivel())));
+				
+				quartoNivel.setValor(conversor.formataRealSemCifrao(repositorioRececita.calcularSaldoQuartoNivel(dataInicialGCS, dataFinalGCS, 
+						quartoNivelFluxo.getCodigoPrimeiroNivel(), quartoNivelFluxo.getCodigoSegundoNivel(), 
+						quartoNivelFluxo.getCodigoTerceiroNivel(), quartoNivelFluxo.getCodigoNivel())));
+				
+				quartoNivel.setValorPrevisto(conversor.formataRealSemCifrao(repositorioRececita.calcularSaldoPrevisaoQuartoNivel(dataInicialGCS, dataFinalGCS, 
+						quartoNivelFluxo.getCodigoPrimeiroNivel(), quartoNivelFluxo.getCodigoSegundoNivel(), 
+						quartoNivelFluxo.getCodigoTerceiroNivel(), quartoNivelFluxo.getCodigoNivel())));
+			
+				listaQuartoNivelValorizado.add(quartoNivel);
+			}
+			
+		}
+		if(codigoPrimeiroNivel.equals("2")) {
+			for (QuartoNivelFluxo quartoNivelFluxo : listaQuartoNivel) {
+				QuartoNivelDemonstrativoValorizado quartoNivel = new QuartoNivelDemonstrativoValorizado();
+				quartoNivel.setDescricao(quartoNivelFluxo.getDescricao());
+				quartoNivel.setValorAnterior(conversor.formataRealSemCifrao((repositorioDespesa.calcularSaldoAnteriorQuartoNivel(dataInicialGCS, dataFinalGCS, 
+						quartoNivelFluxo.getCodigoPrimeiroNivel(), quartoNivelFluxo.getCodigoSegundoNivel(), 
+						quartoNivelFluxo.getCodigoTerceiroNivel(), quartoNivelFluxo.getCodigoNivel()))));
+				
+				quartoNivel.setValor(conversor.formataRealSemCifrao(repositorioDespesa.calcularSaldoQuartoNivel(dataInicialGCS, dataFinalGCS, 
+						quartoNivelFluxo.getCodigoPrimeiroNivel(), quartoNivelFluxo.getCodigoSegundoNivel(), 
+						quartoNivelFluxo.getCodigoTerceiroNivel(), quartoNivelFluxo.getCodigoNivel())));
+				
+				quartoNivel.setValorPrevisto(conversor.formataRealSemCifrao(repositorioDespesa.calcularSaldoPrevisaoQuartoNivel(dataInicialGCS, dataFinalGCS, 
+						quartoNivelFluxo.getCodigoPrimeiroNivel(), quartoNivelFluxo.getCodigoSegundoNivel(), 
+						quartoNivelFluxo.getCodigoTerceiroNivel(), quartoNivelFluxo.getCodigoNivel())));
+			
+				listaQuartoNivelValorizado.add(quartoNivel);
+			}
+		}
+		return listaQuartoNivelValorizado;
+	}
+
+	
 }

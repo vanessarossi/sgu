@@ -21,13 +21,22 @@ public interface RepositorioReceita extends JpaRepository<Receita, String> {
 									  @Param("codigoSegundoNivel") String codigoSegundoNivel,
 									  @Param("codigoTerceiroNivel") String codigoTerceiroNivel);
 	
-	@Query(nativeQuery = true, value = "SELECT  FN_UNRP_SALDO_FLUXO_NIVEL_03(:dataInicial, :dataFinal, :codigoPrimeiroNivel , :codigoSegundoNivel, :codigoTerceiroNivel, :codigoQuartoNivel ) from dual")
+	@Query(nativeQuery = true, value = "SELECT  FN_UNRP_SALDO_FLUXO_NIVEL_04(:dataInicial, :dataFinal, :codigoPrimeiroNivel , :codigoSegundoNivel, :codigoTerceiroNivel, :codigoQuartoNivel ) from dual")
 	 String calcularSaldoQuartoNivel(@Param("dataInicial") String dataInicial, 
 									  @Param("dataFinal") String dataFinal, 
 									  @Param("codigoPrimeiroNivel") String codigoPrimeiroNivel,
 									  @Param("codigoSegundoNivel") String codigoSegundoNivel,
 									  @Param("codigoTerceiroNivel") String codigoTerceiroNivel,
 									  @Param("codigoQuartoNivel") String codigoQuartoNivel);
+	
+	@Query(nativeQuery = true, value = "SELECT  FN_UNRP_SALDO_FLUXO_NIVEL_05(:dataInicial, :dataFinal, :codigoPrimeiroNivel , :codigoSegundoNivel, :codigoTerceiroNivel, :codigoQuartoNivel , :codigoNivel ) from dual")
+	 String calcularSaldoQuintoNivel(@Param("dataInicial") String dataInicial, 
+									  @Param("dataFinal") String dataFinal, 
+									  @Param("codigoPrimeiroNivel") String codigoPrimeiroNivel,
+									  @Param("codigoSegundoNivel") String codigoSegundoNivel,
+									  @Param("codigoTerceiroNivel") String codigoTerceiroNivel,
+									  @Param("codigoQuartoNivel") String codigoQuartoNivel,
+									  @Param("codigoNivel") String codigoNivel);
 	
 	/** VALOR ANTERIOR **/
 	@Query(nativeQuery = true, value = "SELECT  FN_UNRP_SALDO_ANT_FLUXO_NVL_02(:dataInicial, :dataFinal, :codigoPrimeiroNivel , :codigoSegundoNivel ) from dual")
@@ -50,6 +59,15 @@ public interface RepositorioReceita extends JpaRepository<Receita, String> {
 									  @Param("codigoSegundoNivel") String codigoSegundoNivel,
 									  @Param("codigoTerceiroNivel") String codigoTerceiroNivel,
 									  @Param("codigoQuartoNivel") String codigoQuartoNivel);
+	
+	@Query(nativeQuery = true, value = "SELECT  FN_UNRP_SALDO_ANT_FLUXO_NVL_05(:dataInicial, :dataFinal, :codigoPrimeiroNivel , :codigoSegundoNivel, :codigoTerceiroNivel, :codigoQuartoNivel, :codigoNivel ) from dual")
+	 String calcularSaldoAnteriorQuintoNivel(@Param("dataInicial") String dataInicial, 
+									  @Param("dataFinal") String dataFinal, 
+									  @Param("codigoPrimeiroNivel") String codigoPrimeiroNivel,
+									  @Param("codigoSegundoNivel") String codigoSegundoNivel,
+									  @Param("codigoTerceiroNivel") String codigoTerceiroNivel,
+									  @Param("codigoQuartoNivel") String codigoQuartoNivel,
+									  @Param("codigoNivel") String codigoNivel);
 	
 
 	/** VALOR PREVISAO **/
@@ -74,4 +92,12 @@ public interface RepositorioReceita extends JpaRepository<Receita, String> {
 									  @Param("codigoTerceiroNivel") String codigoTerceiroNivel,
 									  @Param("codigoQuartoNivel") String codigoQuartoNivel);
 
+	@Query(nativeQuery = true, value = "SELECT  FN_UNRP_SALDO_PRV_FLUXO_NVL_05(:dataInicial, :dataFinal, :codigoPrimeiroNivel , :codigoSegundoNivel, :codigoTerceiroNivel, :codigoQuartoNivel, :codigoNivel ) from dual")
+	 String calcularSaldoPrevisaoQuintoNivel(@Param("dataInicial") String dataInicial, 
+									  @Param("dataFinal") String dataFinal, 
+									  @Param("codigoPrimeiroNivel") String codigoPrimeiroNivel,
+									  @Param("codigoSegundoNivel") String codigoSegundoNivel,
+									  @Param("codigoTerceiroNivel") String codigoTerceiroNivel,
+									  @Param("codigoQuartoNivel") String codigoQuartoNivel,
+									  @Param("codigoNivel") String codigoNivel);
 }

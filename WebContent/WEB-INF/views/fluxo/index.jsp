@@ -52,7 +52,7 @@
 				    </tr>
 				    <c:forEach items="${demonstrativo.receitas}" var="receita">
 				    	<tr>
-					      <td>${receita.terceiroNivelFluxo.descricao}</td>
+					      <td>${receita.terceiroNivelFluxo.descricao} <a href="#"  onclick="pesquisarReceita('1${receita.terceiroNivelFluxo.codigoSegundoNivel}${receita.terceiroNivelFluxo.codigoNivel}')"><i class="fas fa-bars"></i></a></td>
 					      <td id="receitaAnterior${receita.terceiroNivelFluxo.codigoSegundoNivel}${receita.terceiroNivelFluxo.codigoNivel}"></td>
 					      <td id="receita${receita.terceiroNivelFluxo.codigoSegundoNivel}${receita.terceiroNivelFluxo.codigoNivel}"></td>
 					      <td id="receitaPrevisto${receita.terceiroNivelFluxo.codigoSegundoNivel}${receita.terceiroNivelFluxo.codigoNivel}"></td>
@@ -66,7 +66,7 @@
 				    </tr>				    
 				    <c:forEach items="${demonstrativo.despesas}" var="despesa">
 				    	<tr>
-					      <td>${despesa.terceiroNivelFluxo.descricao}</td>
+					      <td>${despesa.terceiroNivelFluxo.descricao} <a href="#"  onclick="pesquisarDespesa('2${despesa.terceiroNivelFluxo.codigoSegundoNivel}${despesa.terceiroNivelFluxo.codigoNivel}')"><i class="fas fa-bars"></i></a></td>
 					      <td id="despesaAnterior${despesa.terceiroNivelFluxo.codigoSegundoNivel}${despesa.terceiroNivelFluxo.codigoNivel}" class="despesa"></td>
 					      <td id="despesa${despesa.terceiroNivelFluxo.codigoSegundoNivel}${despesa.terceiroNivelFluxo.codigoNivel}" class="despesa"></td>
 					      <td id="despesaPrevisto${despesa.terceiroNivelFluxo.codigoSegundoNivel}${despesa.terceiroNivelFluxo.codigoNivel}" class="despesa"></td>
@@ -141,5 +141,26 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade bd-example-modal-lg" id="quintoNivel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <table class="table" id="tabelaQuintoNivel">
+			<thead>
+				<tr>
+					<th>Descrição</th>
+				    <th>Valor Mês Anterior</th>
+				    <th>Valor</th>
+				    <th>Valor Previsto</th>
+				</tr>
+			</thead>
+			<tbody>  
+			</tbody>
+		</table>
+    </div>
+  </div>
+</div>
+
 <spring:url value="/resources/js/demonstrativofinanceiro.js" var="demonstrativoJs"></spring:url>
 <script type="text/javascript" src="${demonstrativoJs}"></script>

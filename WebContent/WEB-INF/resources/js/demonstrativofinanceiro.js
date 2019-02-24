@@ -155,3 +155,66 @@ function removerFormatacaoReal(valor) {
 
 	return valor;
 }
+
+function pesquisarReceita(codigoNivel) {
+	var dataInicial = $('#dataInicial').val();
+	var dataFinal = $('#dataFinal').val();
+	$.ajax({
+			url : '/sgu/fluxo/carregar/receita/'+codigoNivel+'/'+dataInicial+'/'+dataFinal,
+		    type : 'get',
+		beforeSend : function(){
+				$('#tabelaQuintoNivel > tbody >tr').remove();
+				$('#spinner').modal('show');
+			}
+		})
+		.done(function(response){
+			for (var i = 0; i < response.length; i++) {
+				var row = '<tr>';
+		                row += "<td>"+response[i]["descricao"]+"</td>";
+		                row += "<td>"+response[i]["valorAnterior"]+"</td>";
+		                row += "<td>"+response[i]["valor"]+"</td>";
+		                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
+						row += "</tr>";
+
+				$('#tabelaQuintoNivel > tbody').append(row);
+
+			}
+			$('#spinner').modal('hide');
+			$('#quintoNivel').modal('show');
+		})
+		.fail(function(jqXHR, textStatus, msg){
+			$('#spinner').modal('hide');
+		    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
+	});
+}
+
+function pesquisarDespesa(codigoNivel) {
+	var dataInicial = $('#dataInicial').val();
+	var dataFinal = $('#dataFinal').val();
+	$.ajax({
+			 url : '/sgu/fluxo/carregar/despesa/'+codigoNivel+'/'+dataInicial+'/'+dataFinal,
+		     type : 'get',
+		beforeSend : function(){
+				$('#tabelaQuintoNivel > tbody >tr').remove();
+				$('#spinner').modal('show');
+			}
+		})
+		.done(function(response){
+			for (var i = 0; i < response.length; i++) {
+				var row = '<tr>';
+		                row += "<td>"+response[i]["descricao"]+"</td>";
+		                row += "<td>"+response[i]["valorAnterior"]+"</td>";
+		                row += "<td>"+response[i]["valor"]+"</td>";
+		                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
+						row += "</tr>";
+
+				$('#tabelaQuintoNivel > tbody').append(row);
+			}
+			$('#spinner').modal('hide');
+			$('#quintoNivel').modal('show');
+		})
+		.fail(function(jqXHR, textStatus, msg){
+			$('#spinner').modal('hide');
+		    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
+	});
+}
