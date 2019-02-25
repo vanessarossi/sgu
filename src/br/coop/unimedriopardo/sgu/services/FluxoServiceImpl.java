@@ -5,12 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import br.coop.unimedriopardo.sgu.models.Banco;
 import br.coop.unimedriopardo.sgu.models.Filial;
 import br.coop.unimedriopardo.sgu.models.PostoAtendimento;
 import br.coop.unimedriopardo.sgu.models.QuartoNivelFluxo;
-import br.coop.unimedriopardo.sgu.models.QuintoNivelFluxo;
 import br.coop.unimedriopardo.sgu.models.SegundoNivelFluxo;
 import br.coop.unimedriopardo.sgu.models.TerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioBanco;
@@ -18,7 +16,6 @@ import br.coop.unimedriopardo.sgu.repositories.RepositorioDespesa;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioFilial;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioPostoAtendimento;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioQuartoNivelFluxo;
-import br.coop.unimedriopardo.sgu.repositories.RepositorioQuintoNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioReceita;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioSegundoNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioTerceiroNivelFluxo;
@@ -263,24 +260,32 @@ public class FluxoServiceImpl implements FluxoService {
 				movimento.setSaldoBanco(conversor.formataReal(saldoBancoSede.toString()));
 				movimento.setSaldoCaixa(conversor.formataReal(saldoCaixaSede.toString()));
 				movimento.setSaldoLiquido(conversor.formataReal(String.valueOf(saldoBancoSede + saldoCaixaSede)));
+				movimento.setSaldoTranferenciaRealizada(conversor.formataReal(repositorioBanco.calcularTotalTranferenciaRealizada(dataInicialGCS, dataFinalGCS, filial.getCodigoFilial())));
+				movimento.setSaldoTranferenciaRecebida(conversor.formataReal(repositorioBanco.calcularTotalTranferenciaRecebida(dataInicialGCS, dataFinalGCS, filial.getCodigoFilial())));
 				break;
 			case "002":
 				movimento.setSaldoLiquidoAnterior(conversor.formataReal(String.valueOf(saldoAnteriorBancoFarmacia + saldoAnteriorCaixaFarmacia)));
 				movimento.setSaldoBanco(conversor.formataReal(saldoBancoFarmacia.toString()));
 				movimento.setSaldoCaixa(conversor.formataReal(saldoCaixaFarmacia.toString()));
 				movimento.setSaldoLiquido(conversor.formataReal(String.valueOf(saldoBancoFarmacia + saldoCaixaFarmacia)));
+				movimento.setSaldoTranferenciaRealizada(conversor.formataReal(repositorioBanco.calcularTotalTranferenciaRealizada(dataInicialGCS, dataFinalGCS, filial.getCodigoFilial())));
+				movimento.setSaldoTranferenciaRecebida(conversor.formataReal(repositorioBanco.calcularTotalTranferenciaRecebida(dataInicialGCS, dataFinalGCS, filial.getCodigoFilial())));
 				break;
 			case "003":
 				movimento.setSaldoLiquidoAnterior(conversor.formataReal(String.valueOf(saldoAnteriorBancoOptica + saldoAnteriorCaixaOptica)));
 				movimento.setSaldoBanco(conversor.formataReal(saldoBancoOptica.toString()));
 				movimento.setSaldoCaixa(conversor.formataReal(saldoCaixaOptica.toString()));
 				movimento.setSaldoLiquido(conversor.formataReal(String.valueOf(saldoBancoOptica + saldoCaixaOptica)));
+				movimento.setSaldoTranferenciaRealizada(conversor.formataReal(repositorioBanco.calcularTotalTranferenciaRealizada(dataInicialGCS, dataFinalGCS, filial.getCodigoFilial())));
+				movimento.setSaldoTranferenciaRecebida(conversor.formataReal(repositorioBanco.calcularTotalTranferenciaRecebida(dataInicialGCS, dataFinalGCS, filial.getCodigoFilial())));
 				break;
 			case "070":
 				movimento.setSaldoLiquidoAnterior(conversor.formataReal(String.valueOf(saldoAnteriorBancoConstrucao + saldoAnteriorCaixaConstrucao)));
 				movimento.setSaldoBanco(conversor.formataReal(saldoBancoConstrucao.toString()));
 				movimento.setSaldoCaixa(conversor.formataReal(saldoCaixaConstrucao.toString()));
 				movimento.setSaldoLiquido(conversor.formataReal(String.valueOf(saldoBancoConstrucao + saldoCaixaConstrucao)));
+				movimento.setSaldoTranferenciaRealizada(conversor.formataReal(repositorioBanco.calcularTotalTranferenciaRealizada(dataInicialGCS, dataFinalGCS, filial.getCodigoFilial())));
+				movimento.setSaldoTranferenciaRecebida(conversor.formataReal(repositorioBanco.calcularTotalTranferenciaRecebida(dataInicialGCS, dataFinalGCS, filial.getCodigoFilial())));
 				break;
 			default:
 				break;

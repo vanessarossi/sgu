@@ -21,5 +21,11 @@ public interface RepositorioBanco extends JpaRepository<Banco, String> {
 	 String calcularTotalSaldo(@Param("data") String data);
 	 
 	 public List<Banco> findByAplicacao(String aplicacao);
+	 
+	 @Query(nativeQuery = true, value = "SELECT FN_UNRP_TRANFERENCIA_RECEBIDA(:dataInicial, :dataFinal, :codigoFilial) FROM dual")
+	 String calcularTotalTranferenciaRecebida(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, @Param("codigoFilial") String codigoFilial);
+	 
+	 @Query(nativeQuery = true, value = "SELECT FN_UNRP_TRANFERENCIA_REALIZADA(:dataInicial, :dataFinal, :codigoFilial) FROM dual")
+	 String calcularTotalTranferenciaRealizada(@Param("dataInicial") String dataInicial, @Param("dataFinal") String dataFinal, @Param("codigoFilial") String codigoFilial);
 	
 }

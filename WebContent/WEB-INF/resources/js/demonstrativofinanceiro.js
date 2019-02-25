@@ -64,8 +64,8 @@ function carregarMovimentacao(dataInicial, dataFinal) {
 				$("#movSaldoBanco"+response[i]["codigoId"]).text(response[i]["saldoBanco"]);
 				$("#movSaldoCaixa"+response[i]["codigoId"]).text(response[i]["saldoCaixa"]);
 				$("#movSaldoTotal"+response[i]["codigoId"]).text(response[i]["saldoLiquido"]);
-				$("#movTransRealizada"+response[i]["codigoId"]).text(response[i]["valorTransferenciaSaiu"]);
-				$("#movTransRecebida"+response[i]["codigoId"]).text(response[i]["valorTransferenciaEntrou"]);
+				$("#movTransRealizada"+response[i]["codigoId"]).text(response[i]["saldoTranferenciaRealizada"]);
+				$("#movTransRecebida"+response[i]["codigoId"]).text(response[i]["saldoTranferenciaRecebida"]);
 			}
 			calcularReceitaMovimentacao();
 			calcularDespesaMovimentacao();
@@ -164,7 +164,6 @@ function pesquisarReceita(codigoNivel) {
 		    type : 'get',
 		beforeSend : function(){
 				$('#tabelaQuintoNivel > tbody >tr').remove();
-				$('#spinner').modal('show');
 			}
 		})
 		.done(function(response){
@@ -179,7 +178,6 @@ function pesquisarReceita(codigoNivel) {
 				$('#tabelaQuintoNivel > tbody').append(row);
 
 			}
-			$('#spinner').modal('hide');
 			$('#quintoNivel').modal('show');
 		})
 		.fail(function(jqXHR, textStatus, msg){
@@ -196,7 +194,6 @@ function pesquisarDespesa(codigoNivel) {
 		     type : 'get',
 		beforeSend : function(){
 				$('#tabelaQuintoNivel > tbody >tr').remove();
-				$('#spinner').modal('show');
 			}
 		})
 		.done(function(response){
@@ -210,7 +207,6 @@ function pesquisarDespesa(codigoNivel) {
 
 				$('#tabelaQuintoNivel > tbody').append(row);
 			}
-			$('#spinner').modal('hide');
 			$('#quintoNivel').modal('show');
 		})
 		.fail(function(jqXHR, textStatus, msg){
