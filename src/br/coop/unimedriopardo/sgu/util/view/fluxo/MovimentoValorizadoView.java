@@ -9,6 +9,7 @@ public class MovimentoValorizadoView {
 	private String saldoLiquido;
 	private String saldoTranferenciaRealizada;
 	private String saldoTranferenciaRecebida;
+	
 	public String getCodigoId() {
 		return codigoId;
 	}

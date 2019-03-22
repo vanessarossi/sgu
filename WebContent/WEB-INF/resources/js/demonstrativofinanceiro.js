@@ -1,6 +1,15 @@
 $(document).ready(function(){
-
+	    $('[data-toggle="popover"]').popover();   
 });
+
+function montarInfo(comentario) {
+	if (comentario != "" && comentario != " ") {
+		return "<a class='badge badge-info' onclick=abrirComentario("+comentario+")><i class='fas fa-info'></i></a>";
+	}else{
+		return '';
+	}
+
+}
 
 function enviarConsulta() {
 	var dataInicial = $('#dataInicial').val();
@@ -29,14 +38,23 @@ function enviarConsulta() {
 				$("#totalLiquidoPrevisto"+response[i]["codigoId"]).text(response[i]["valorLiquidoPrevisao"]);
 
 				for (var j = response[i]["receitas"].length - 1; j >= 0; j--) {
+
 					$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorAnterior"]);
+					$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentarioAnterior"]));
+
 					$("#receita"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valor"]);
+					$("#receita"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentario"]));
+
 					$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorPrevisao"]);
 				}
 
 				for (var k = response[i]["despesas"].length - 1; k >= 0; k--) {
 					$("#despesaAnterior"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorAnterior"]);
+					$("#despesaAnterior"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentarioAnterior"]));
+
 					$("#despesa"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valor"]);
+					$("#despesa"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentario"]));
+
 					$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisao"]);
 				}
 			}
@@ -156,6 +174,16 @@ function removerFormatacaoReal(valor) {
 	return valor;
 }
 
+
+function validaValor(valorAnterior, valor, valorPrevisto) {
+	if(valorAnterior == '0' &&  valor == '0' && valorPrevisto == '0'){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+
 function pesquisarReceita(codigoNivel) {
 	var dataInicial = $('#dataInicial').val();
 	var dataFinal = $('#dataFinal').val();
@@ -168,15 +196,16 @@ function pesquisarReceita(codigoNivel) {
 		})
 		.done(function(response){
 			for (var i = 0; i < response.length; i++) {
-				var row = '<tr>';
-		                row += "<td>"+response[i]["descricao"]+"</td>";
-		                row += "<td>"+response[i]["valorAnterior"]+"</td>";
-		                row += "<td>"+response[i]["valor"]+"</td>";
-		                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
-						row += "</tr>";
+				if(validaValor(response[i]["valorAnterior"] , response[i]["valor"] , response[i]["valorPrevisto"]) === false){
+					var row = '<tr>';
+			                row += "<td>"+response[i]["descricao"]+"</td>";
+			                row += "<td>"+response[i]["valorAnterior"]+"</td>";
+			                row += "<td>"+response[i]["valor"]+"</td>";
+			                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
+							row += "</tr>";
 
-				$('#tabelaQuintoNivel > tbody').append(row);
-
+					$('#tabelaQuintoNivel > tbody').append(row);
+				}
 			}
 			$('#quintoNivel').modal('show');
 		})
@@ -198,14 +227,15 @@ function pesquisarDespesa(codigoNivel) {
 		})
 		.done(function(response){
 			for (var i = 0; i < response.length; i++) {
-				var row = '<tr>';
-		                row += "<td>"+response[i]["descricao"]+"</td>";
-		                row += "<td>"+response[i]["valorAnterior"]+"</td>";
-		                row += "<td>"+response[i]["valor"]+"</td>";
-		                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
-						row += "</tr>";
-
-				$('#tabelaQuintoNivel > tbody').append(row);
+				if(validaValor(response[i]["valorAnterior"] , response[i]["valor"] , response[i]["valorPrevisto"]) === false){
+					var row = '<tr>';
+			                row += "<td>"+response[i]["descricao"]+"</td>";
+			                row += "<td>"+response[i]["valorAnterior"]+"</td>";
+			                row += "<td>"+response[i]["valor"]+"</td>";
+			                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
+							row += "</tr>";
+					$('#tabelaQuintoNivel > tbody').append(row);
+				}
 			}
 			$('#quintoNivel').modal('show');
 		})
@@ -213,4 +243,26 @@ function pesquisarDespesa(codigoNivel) {
 			$('#spinner').modal('hide');
 		    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
 	});
+}
+
+function abrirComentario(id) {
+	$.ajax({
+			 url : '/sgu/fluxo/pesquisa/comentario/'+id,
+		     type : 'get',
+		beforeSend : function(){
+				$('#textoComentario').text("");
+			}
+		})
+		.done(function(response){
+			var codigo = response["codigo"];
+			var competencia = response["competencia"];
+			var comentario = response["comentario"];
+			
+			$('#textoComentario').text(comentario);
+			$('#comentario').modal('show');
+		 })
+		.fail(function(jqXHR, textStatus, msg){
+			('#comentario').modal('hide');
+		    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
+		});
 }

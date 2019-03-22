@@ -19,8 +19,11 @@
 .btn-patone348:hover{color:#fff;background-color:#00995F;border-color:#00995F}
 
 /** card color unimed **/
-.card-pantone348c{border-color: #5B5C65 !important; color: #5B5C65 !important;}
+.card-pantone348c{border-color: #00995D !important; color: #00995D !important;}
 .card-pantone348c:hover{}
+
+.card-pantone{border-color: #5B5C65 !important; color: #5B5C65 !important;}
+.card-pantone:hover{}
 
 .card-pantone561c{border-color: #0A5F55 !important; color: #0A5F55 !important;}
 .card-pantone561c:hover{}

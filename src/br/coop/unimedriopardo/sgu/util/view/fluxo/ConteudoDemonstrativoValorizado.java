@@ -1,6 +1,6 @@
 package br.coop.unimedriopardo.sgu.util.view.fluxo;
 
-public class QuartoNivelDemonstrativoValorizado {
+public class ConteudoDemonstrativoValorizado {
 
 	private String descricao;
 	private String valorAnterior;

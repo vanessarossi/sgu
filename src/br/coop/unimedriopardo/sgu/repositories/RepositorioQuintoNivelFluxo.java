@@ -9,7 +9,9 @@ import br.coop.unimedriopardo.sgu.models.QuintoNivelFluxo;
 
 public interface RepositorioQuintoNivelFluxo extends JpaRepository<QuintoNivelFluxo, String>{
 	
-	public List<QuintoNivelFluxo> findByCodigoPrimeiroNivelAndCodigoSegundoNivelAndCodigoTerceiroNivel(
-						String codigoPrimeiroNivel, String codigoSegundoNivel, String codigoTerceiroNivel);
+	public List<QuintoNivelFluxo> findByCodigoPrimeiroNivelAndCodigoSegundoNivelAndCodigoTerceiroNivel(String codigoPrimeiroNivel, String codigoSegundoNivel, String codigoTerceiroNivel);
 	
+	public List<QuintoNivelFluxo> findByCodigoPrimeiroNivelAndCodigoSegundoNivelAndCodigoTerceiroNivelAndCodigoQuartoNivel(String codigoPrimeiroNivel, 
+			String codigoSegundoNivel, String codigoTerceiroNivel, String codigoQuartoNivel);
+
 }

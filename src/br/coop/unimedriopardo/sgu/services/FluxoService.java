@@ -7,7 +7,7 @@ import br.coop.unimedriopardo.sgu.models.Filial;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.DemonstrativoValorizadoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.DemonstrativoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.MovimentoValorizadoView;
-import br.coop.unimedriopardo.sgu.util.view.fluxo.QuartoNivelDemonstrativoValorizado;
+import br.coop.unimedriopardo.sgu.util.view.fluxo.ConteudoDemonstrativoValorizado;
 
 public interface FluxoService {
 	
@@ -15,7 +15,7 @@ public interface FluxoService {
 	public List<Filial> montarFilial();
 	public List<DemonstrativoValorizadoView> valorizarDemonstrativo(String dataInicial, String dataFinal);
 	public List<MovimentoValorizadoView> valorizarMovimento(String dataInicial, String dataFinal);
-	public List<QuartoNivelDemonstrativoValorizado> valorizarQuintoNivel(String codigoPrimeiroNivel, 
+	public List<ConteudoDemonstrativoValorizado> valorizarQuintoNivel(String codigoPrimeiroNivel, 
 			String codigoSegundoNivel, String codigoTerceiroNivel, 
 			String dataInicial, String dataFinal);
 

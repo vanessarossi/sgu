@@ -37,7 +37,7 @@ public class DespesaReceitaController {
 	
 	@RequestMapping(value = "/consultar", method = RequestMethod.POST)
 	public String consultar(@ModelAttribute("data") String data, Model model) {
-	
+		model.addAttribute("","");
 		return "despesa.receita.index.tiles";
 	}
 	

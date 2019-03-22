@@ -27,6 +27,19 @@ public class Conversor {
 			return dataFormatada;
 		}
 		
+		public String formatarCompetenciaString(String data, String formatoNovo) {
+			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+			Date date = null;
+			try {
+				date = formato.parse(data);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			formato.applyPattern(formatoNovo);
+			String dataFormatada = formato.format(date);
+			return dataFormatada;
+		}
+		
 		public String formataReal(String valorString) {
 			valorString = valorString.replace(",", ".");
 			BigDecimal valor = new BigDecimal (valorString);  
