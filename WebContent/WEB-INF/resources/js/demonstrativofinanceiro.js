@@ -258,7 +258,7 @@ function abrirComentario(id) {
 			var competencia = response["competencia"];
 			var comentario = response["comentario"];
 			
-			$('#textoComentario').text(comentario);
+			$('#textoComentario').val(comentario);
 			$('#comentario').modal('show');
 		 })
 		.fail(function(jqXHR, textStatus, msg){

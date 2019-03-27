@@ -59,9 +59,25 @@
 			</table>
 		</div>
 	</div>
-	<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
-		<div class="alert alert-info" role="alert">SALDO TOTAL
-			${saldoTotal}</div>
-	</div>
+	<br/>
+	 
+	<table class="table table-sm table-success text-center" id="resumo_valor">
+	  <thead>
+	    <tr>
+	      <th>SALDO TOTAL CONTA CORRENTE</th>
+	      <th>SALDO TOTAL CONTA APLICAÇÃO</th>
+	      <th>SALDO TOTAL CONTA APLICAÇÃO ANS</th>
+	      <th >SALDO TOTAL CONTAS</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td>${saldoTotalContaCorrente}</td>
+	      <td>${saldoTotalAplicacao}</td>
+	      <td>${saldoTotalAplicacaoAns}</td>
+	      <td>${saldoTotal}</td>
+	    </tr>
+	  </tbody>
+	</table>
 </section>
 <br>

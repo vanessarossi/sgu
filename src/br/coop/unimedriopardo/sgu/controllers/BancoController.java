@@ -27,6 +27,9 @@ public class BancoController {
 	public String home(Model model) {
 		model.addAttribute("bancos", bancoService.listarContasBancariaValorizada(new Conversor().formatarData(new Date(),"YYYYMMdd")));
 		model.addAttribute("saldoTotal",bancoService.retornaSaldoTotalContas(new Conversor().formatarData(new Date(),"YYYYMMdd")));
+		model.addAttribute("saldoTotalContaCorrente",bancoService.retornaSaldoTotalContaCorrente((new Conversor().formatarData(new Date(),"YYYYMMdd"))));
+		model.addAttribute("saldoTotalAplicacao",bancoService.retornaSaldoTotalContaAplicacao(new Conversor().formatarData(new Date(),"YYYYMMdd")));
+		model.addAttribute("saldoTotalAplicacaoAns",bancoService.retornaSaldoTotalContaAplicacaoAns((new Conversor().formatarData(new Date(),"YYYYMMdd"))));
 		model.addAttribute("dataEscolhida", new Conversor().formatarData(new Date(),"dd/MM/YYYY"));
 		return "banco.index.tiles";
 	}

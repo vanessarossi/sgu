@@ -56,4 +56,19 @@ public class BancoServiceImpl implements BancoService {
 		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldo(data));
 	}
 
+	@Override
+	public String retornaSaldoTotalContaCorrente(String data) {
+		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldoContaCorrente(data));
+	}
+
+	@Override
+	public String retornaSaldoTotalContaAplicacao(String data) {
+		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldoContaAplicacao(data));
+	}
+
+	@Override
+	public String retornaSaldoTotalContaAplicacaoAns(String data) {
+		return new Conversor().formataReal(repositorioBanco.calcularTotalSaldoContaAplicacaoAns(data));
+	}
+
 }

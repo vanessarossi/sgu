@@ -29,6 +29,7 @@
 				<th>Competência</th>
 				<th>Comentário</th>
 				<th></th>
+					<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -39,6 +40,8 @@
 					<td>${comentario.comentario}</td>
 					<td>
 						<a href="/sgu/fluxo/editar/comentario/${comentario.id}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+					</td>
+					<td>
 						<a href="/sgu/fluxo/excluir/comentario/${comentario.id}" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>
 					</td>
 				</tr>

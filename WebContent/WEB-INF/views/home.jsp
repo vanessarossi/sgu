@@ -6,7 +6,7 @@
 	prefix="sec"%>
 
 <nav class="navbar navbar-dark bg-dark">
-	<a class="navbar-brand" href="/sgu/home">SGU v3.0.0 Unimed São José
+	<a class="navbar-brand" href="/sgu/home">SGU v3.4.0 Unimed São José
 		do Rio Pardo </a>
 </nav>
 <sec:authorize access="isAuthenticated()">
@@ -70,34 +70,33 @@
 				</a>
 			</div>
 		</div>
-		<div class="row card-columns justify-content-center">
-			<div class=" col-11 csol-sm-5 col-md-4 col-lg-4 col-xl-4">
-				<a href="/sgu/fluxo/listagem/comentario">
-					<div class="card card-pantone348c text-center" id="comentario">
-						<i class="fas fa-info fa-5x"></i>
-						<div class="card-body">
-							<h5 class="card-title">Informações Adicionais do Demonstrativo</h5>
-							<p class="card-text">Inclusão de informações no demonstrativo.</p>
-						</div>
-					</div>
-				</a>
-			</div>
-			<sec:authorize access="hasRole('ROLE_ADMIN')">
-			<div class=" col-11 col-sm-11 col-md-4 col-lg-4 col-xl-4">
-					<a href="/sgu/usuario/listagem">
-						<div class="card card-pantone192c text-center" id="usuario">
-							<i class="fas fa-users fa-5x"></i>
-			
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<div class="row card-columns justify-content-center">
+				<div class=" col-11 csol-sm-5 col-md-4 col-lg-4 col-xl-4">
+					<a href="/sgu/fluxo/listagem/comentario">
+						<div class="card card-pantone348c text-center" id="comentario">
+							<i class="fas fa-info fa-5x"></i>
 							<div class="card-body">
-								<h5 class="card-title">Cadastro de Usuário</h5>
-								<p class="card-text">Acesse o seu cadastro de usuários.</p>
+								<h5 class="card-title">Informações Adicionais do Demonstrativo</h5>
+								<p class="card-text">Inclusão de informações no demonstrativo.</p>
 							</div>
 						</div>
 					</a>
 				</div>
+				
+				<div class=" col-11 col-sm-11 col-md-4 col-lg-4 col-xl-4">
+						<a href="/sgu/usuario/listagem">
+							<div class="card card-pantone192c text-center" id="usuario">
+								<i class="fas fa-users fa-5x"></i>
+				
+								<div class="card-body">
+									<h5 class="card-title">Cadastro de Usuário</h5>
+									<p class="card-text">Acesse o seu cadastro de usuários.</p>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
 		</sec:authorize>
-		</div>
-		
-		
 	</section>
 </sec:authorize>

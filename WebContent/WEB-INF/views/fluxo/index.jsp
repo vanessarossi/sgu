@@ -176,7 +176,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <p id="textoComentario"></p>
+       		<div class="col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11">
+       			<textarea class="form-control form-control-sm" rows="20" cols="50" id="textoComentario" readonly></textarea>
+      		</div>
       </div>
     </div>
   </div>

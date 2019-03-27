@@ -27,7 +27,7 @@
 	<div class="form-row">
 		<div class="form-group col-md-6">
 			<label>Comentário</label>
-			<form:textarea cssClass="form-control form-control-sm" rows="5" path="comentario" />
+			<form:textarea cssClass="form-control form-control-sm" rows="5" cols="100" path="comentario" />
 			<form:errors path="comentario" />
 		</div>
 	</div>
