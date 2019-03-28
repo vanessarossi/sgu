@@ -42,8 +42,10 @@ public class Conversor {
 		
 		public String formataReal(String valorString) {
 			valorString = valorString.replace(",", ".");
-			BigDecimal valor = new BigDecimal (valorString);  
+			BigDecimal valor = new BigDecimal(valorString);
 			NumberFormat nf = NumberFormat.getCurrencyInstance();  
+			nf.setMaximumFractionDigits(2);
+			nf.setMinimumFractionDigits(2);
 			String formatado = nf.format (valor);
 			return formatado;
 		}
@@ -52,6 +54,8 @@ public class Conversor {
 			valorString = valorString.replace(",", ".");
 			BigDecimal valor = new BigDecimal (valorString);  
 			NumberFormat nf = NumberFormat.getInstance();  
+			nf.setMaximumFractionDigits(2);
+			nf.setMinimumFractionDigits(2);
 			String formatado = nf.format (valor);
 			return formatado;
 		}

@@ -28,6 +28,10 @@
 					</div>
 				</div>
 			</div>
+		 	<div class="form-group">
+		 		<br/>
+				<a href="/sgu/home" class="btn btn-danger">Sair do demonstrativo</a>
+			</div>
 		 </div>
 	</form>
 	<div class="row justify-content-center text-center">

@@ -6,7 +6,7 @@
 	prefix="sec"%>
 
 <nav class="navbar navbar-dark bg-dark">
-	<a class="navbar-brand" href="/sgu/home">SGU v3.4.0 Unimed São José
+	<a class="navbar-brand" href="/sgu/home">SGU v4.0 Unimed São José
 		do Rio Pardo </a>
 </nav>
 <sec:authorize access="isAuthenticated()">

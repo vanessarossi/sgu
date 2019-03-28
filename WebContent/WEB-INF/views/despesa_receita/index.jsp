@@ -11,48 +11,90 @@
 	<p class="h5">Data do saldo:</p><label class="h5" id="dataSaldo">${dataEscolhida}</label>
 </section>
 <section id="conteudo justify-content-center text-center">
-	<form action="/sgu/despesareceita/consultar" method="post">
-		<div class="row">
-			<div class="form-group col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
-				<div class="input-group">
-					<input type="date" class="form-control" id="data" name="data" required="required">
-					<div class="input-group-append">
-						<button type="submit" class="btn btn-info">
-							<i class="fas fa-search"> Consultar</i>
-						</button>
-					</div>
+	<div class="row">
+		<div class="form-group col-6 col-sm-6 col-md-3 col-lg-3 col-xl-3">
+			<div class="input-group">
+				<input type="date" class="form-control" id="data" name="data" required="required">
+				<div class="input-group-append">
+					<button onclick="calcular()" class="btn btn-info">
+						<i class="fas fa-search"> Consultar</i>
+					</button>
 				</div>
 			</div>
-			<div class="form-group">
-				<a href="/sgu/home" class="btn btn-danger">Sair da consulta de despesas e receitas</a>
-			</div>
 		</div>
-	</form>
+		<div class="form-group">
+			<a href="/sgu/home" class="btn btn-danger">Sair da consulta de despesas e receitas</a>
+		</div>
+	</div>
+	<div class="row form-group col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center justify-content-center" id="espera">
+    	<div>
+    		<p class="lead text-center"> Por favor, aguarde o processamento dos dados! </p>
+	    	<br/>
+	       	<div class="fa-5x">
+				<i class="fas fa-spinner fa-spin"></i>
+			</div>
+    	</div>
+    </div>
 	<div class="row" id="demonstrativo">
 		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="despesaNivelUm">
-			<p><strong>${despesa.codigo}</strong> - ${despesa.descricao} : <strong>${saldoTotalDespesaNivel1}</strong></p>
+			<p class="text-center"> <strong>${despesa.descricao} :</strong> <strong id="${despesa.codigoNivel}"></strong> </p>
 			<table class="table table-hover table-sm">
 				<thead>
 					<tr>
-						<th>Código</th>
 					   	<th>Descrição</th>
+					    <th></th>
 					    <th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${segundoNivelDespesas}" var="segundoNivelDespesa">
 						<tr>
-					    	<td id="${segundoNivelDespesa.codigoNivel}"><button onclick="">EXPANDIR</button>${segundoNivelDespesa.codigo}</td>
-					        <td id="segundoNivelDespesa${segundoNivelDespesa.codigoNivel}">${segundoNivelDespesa.descricao}</td>
-					        <td>R$ ${segundoNivelDespesa.valorTotal}</td>
+					        <td>${segundoNivelDespesa.descricao}</td>
+					        <td id="${segundoNivelDespesa.codigoPrimeiroNivel}${segundoNivelDespesa.codigoNivel}"> </td>
+					        <td><a class='btn btn-info btn-sm info-fluxo' onclick="buscarDetalhes(${segundoNivelDespesa.codigoPrimeiroNivel},'${segundoNivelDespesa.codigoNivel}')"><i class='fas fa-info'></i></a></td>
 					   </tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="receitaNivelUm"></div>
+		<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" id="receitaNivelUm">
+			<p class="text-center"> <strong>${receita.descricao} : </strong><strong id="${receita.codigoNivel}"></strong></p>
+			<table class="table table-hover table-sm">
+				<thead>
+					<tr>
+					   	<th>Descrição</th>
+					    <th></th>
+					    <th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${segundoNivelReceitas}" var="segundoNivelReceita">
+						<tr>
+					        <td>${segundoNivelReceita.descricao}</td>
+					        <td id="${segundoNivelReceita.codigoPrimeiroNivel}${segundoNivelReceita.codigoNivel}"> </td>
+					        <td><a class='btn btn-info btn-sm info-fluxo' onclick="buscarDetalhes(${segundoNivelReceita.codigoPrimeiroNivel},'${segundoNivelReceita.codigoNivel}')"><i class='fas fa-info'></i></a></td>
+					   </tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </section>
-<br>
+<div class="modal fade" id="detalhe" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <table class="table" id="tabelaDetalhe">
+			<thead>
+				<tr>
+					<th>Descrição</th>
+				    <th>Valor</th>
+				</tr>
+			</thead>
+			<tbody>  
+			</tbody>
+		</table>
+    </div>
+  </div>
+</div>
 <spring:url value="/resources/js/despesaereceita.js" var="despesaereceitaJs"></spring:url>
 <script type="text/javascript" src="${despesaereceitaJs}"></script>

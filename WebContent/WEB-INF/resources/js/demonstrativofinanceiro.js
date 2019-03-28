@@ -4,7 +4,7 @@ $(document).ready(function(){
 
 function montarInfo(comentario) {
 	if (comentario != "" && comentario != " ") {
-		return "<a class='badge badge-info' onclick=abrirComentario("+comentario+")><i class='fas fa-info'></i></a>";
+		return "<a class='badge badge-info info-fluxo' onclick=abrirComentario("+comentario+")><i class='fas fa-info'></i></a>";
 	}else{
 		return '';
 	}
@@ -14,84 +14,89 @@ function montarInfo(comentario) {
 function enviarConsulta() {
 	var dataInicial = $('#dataInicial').val();
 	var dataFinal = $('#dataFinal').val();
-
-	/** carregar info**/
-	$.ajax({
-			 url : '/sgu/fluxo/carregar/'+dataInicial+'/'+dataFinal,
-		     type : 'get',
-		beforeSend : function(){
-				$('#spinner').modal('show');
-			}
-		})
-		.done(function(response){
-			for (var i = response.length - 1; i >= 0; i--) {
-				$("#totalReceitaAnterior"+response[i]["codigoId"]).text(response[i]["valorReceitaAnterior"]);
-				$("#totalReceita"+response[i]["codigoId"]).text(response[i]["valorReceita"]);
-				$("#totalReceitaPrevisto"+response[i]["codigoId"]).text(response[i]["valorReceitaPrevisao"]);
-				$("#totalDespesaAnterior"+response[i]["codigoId"]).text(response[i]["valorDespesaAnterior"]);
-				$("#totalDespesa"+response[i]["codigoId"]).text(response[i]["valorDespesa"]);
-				$("#totalDespesaPrevisto"+response[i]["codigoId"]).text(response[i]["valorDespesaPrevisao"]);
-
-				/** Valor Líquido**/
-				$("#totalLiquidoAnterior"+response[i]["codigoId"]).text(response[i]["valorLiquidoAnterior"]);
-				$("#totalLiquido"+response[i]["codigoId"]).text(response[i]["valorLiquido"]);
-				$("#totalLiquidoPrevisto"+response[i]["codigoId"]).text(response[i]["valorLiquidoPrevisao"]);
-
-				for (var j = response[i]["receitas"].length - 1; j >= 0; j--) {
-
-					$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorAnterior"]);
-					$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentarioAnterior"]));
-
-					$("#receita"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valor"]);
-					$("#receita"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentario"]));
-
-					$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorPrevisao"]);
+	if(dataInicial != '' && dataInicial != null && dataFinal != '' && dataFinal != null){
+		$.ajax({
+				 url : '/sgu/fluxo/carregar/'+dataInicial+'/'+dataFinal,
+			     type : 'get',
+			beforeSend : function(){
+					$('#spinner').modal('show');
 				}
+			})
+			.done(function(response){
+				for (var i = response.length - 1; i >= 0; i--) {
+					$("#totalReceitaAnterior"+response[i]["codigoId"]).text(response[i]["valorReceitaAnterior"]);
+					$("#totalReceita"+response[i]["codigoId"]).text(response[i]["valorReceita"]);
+					$("#totalReceitaPrevisto"+response[i]["codigoId"]).text(response[i]["valorReceitaPrevisao"]);
+					$("#totalDespesaAnterior"+response[i]["codigoId"]).text(response[i]["valorDespesaAnterior"]);
+					$("#totalDespesa"+response[i]["codigoId"]).text(response[i]["valorDespesa"]);
+					$("#totalDespesaPrevisto"+response[i]["codigoId"]).text(response[i]["valorDespesaPrevisao"]);
 
-				for (var k = response[i]["despesas"].length - 1; k >= 0; k--) {
-					$("#despesaAnterior"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorAnterior"]);
-					$("#despesaAnterior"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentarioAnterior"]));
+					/** Valor Líquido**/
+					$("#totalLiquidoAnterior"+response[i]["codigoId"]).text(response[i]["valorLiquidoAnterior"]);
+					$("#totalLiquido"+response[i]["codigoId"]).text(response[i]["valorLiquido"]);
+					$("#totalLiquidoPrevisto"+response[i]["codigoId"]).text(response[i]["valorLiquidoPrevisao"]);
 
-					$("#despesa"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valor"]);
-					$("#despesa"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentario"]));
+					for (var j = response[i]["receitas"].length - 1; j >= 0; j--) {
 
-					$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisao"]);
+						$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorAnterior"]);
+						$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentarioAnterior"]));
+
+						$("#receita"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valor"]);
+						$("#receita"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentario"]));
+
+						$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorPrevisao"]);
+					}
+
+					for (var k = response[i]["despesas"].length - 1; k >= 0; k--) {
+						$("#despesaAnterior"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorAnterior"]);
+						$("#despesaAnterior"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentarioAnterior"]));
+
+						$("#despesa"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valor"]);
+						$("#despesa"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentario"]));
+
+						$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisao"]);
+					}
 				}
-			}
-			
-			carregarMovimentacao(dataInicial,dataFinal);
-			
-			$('#spinner').modal('hide');
-		 })
-		.fail(function(jqXHR, textStatus, msg){
-			$('#spinner').modal('hide');
-		    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
-		});
+				
+				carregarMovimentacao(dataInicial,dataFinal);
+				
+				$('#spinner').modal('hide');
+			 })
+			.fail(function(jqXHR, textStatus, msg){
+				$('#spinner').modal('hide');
+			    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
+			});
+	}else{
+		alert("POR FAVOR, ESCOLHA UMA DATA");
+	}
 }
 
 function carregarMovimentacao(dataInicial, dataFinal) {
-	/** carregar info**/
-	$.ajax({
-			 url : '/sgu/fluxo/carregar/movimento/'+dataInicial+'/'+dataFinal,
-		     type : 'get',
-		beforeSend : function(){}
-		})
-		.done(function(response){
-			for (var i = 0; i < response.length; i++) {
-				$("#movSaldoLiquidoAnterior"+response[i]["codigoId"]).text(response[i]["saldoLiquidoAnterior"]);
-				$("#movSaldoBanco"+response[i]["codigoId"]).text(response[i]["saldoBanco"]);
-				$("#movSaldoCaixa"+response[i]["codigoId"]).text(response[i]["saldoCaixa"]);
-				$("#movSaldoTotal"+response[i]["codigoId"]).text(response[i]["saldoLiquido"]);
-				$("#movTransRealizada"+response[i]["codigoId"]).text(response[i]["saldoTranferenciaRealizada"]);
-				$("#movTransRecebida"+response[i]["codigoId"]).text(response[i]["saldoTranferenciaRecebida"]);
-			}
-			calcularReceitaMovimentacao();
-			calcularDespesaMovimentacao();
-		 })
-		.fail(function(jqXHR, textStatus, msg){
-			$('#spinner').modal('hide');
-		    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
-		});
+	if(dataInicial != '' && dataInicial != null && dataFinal != '' && dataFinal != null){
+		$.ajax({
+				 url : '/sgu/fluxo/carregar/movimento/'+dataInicial+'/'+dataFinal,
+			     type : 'get',
+			beforeSend : function(){}
+			})
+			.done(function(response){
+				for (var i = 0; i < response.length; i++) {
+					$("#movSaldoLiquidoAnterior"+response[i]["codigoId"]).text(response[i]["saldoLiquidoAnterior"]);
+					$("#movSaldoBanco"+response[i]["codigoId"]).text(response[i]["saldoBanco"]);
+					$("#movSaldoCaixa"+response[i]["codigoId"]).text(response[i]["saldoCaixa"]);
+					$("#movSaldoTotal"+response[i]["codigoId"]).text(response[i]["saldoLiquido"]);
+					$("#movTransRealizada"+response[i]["codigoId"]).text(response[i]["saldoTranferenciaRealizada"]);
+					$("#movTransRecebida"+response[i]["codigoId"]).text(response[i]["saldoTranferenciaRecebida"]);
+				}
+				calcularReceitaMovimentacao();
+				calcularDespesaMovimentacao();
+			 })
+			.fail(function(jqXHR, textStatus, msg){
+				$('#spinner').modal('hide');
+			    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
+			});
+	}else{
+		alert("POR FAVOR, ESCOLHA UMA DATA");
+	}
 }
 
 function calcularReceitaMovimentacao() {
@@ -176,7 +181,7 @@ function removerFormatacaoReal(valor) {
 
 
 function validaValor(valorAnterior, valor, valorPrevisto) {
-	if(valorAnterior == '0' &&  valor == '0' && valorPrevisto == '0'){
+	if(valorAnterior == '0,00' &&  valor == '0,00' && valorPrevisto == '0,00'){
 		return true;
 	}else{
 		return false;
@@ -187,62 +192,70 @@ function validaValor(valorAnterior, valor, valorPrevisto) {
 function pesquisarReceita(codigoNivel) {
 	var dataInicial = $('#dataInicial').val();
 	var dataFinal = $('#dataFinal').val();
-	$.ajax({
-			url : '/sgu/fluxo/carregar/receita/'+codigoNivel+'/'+dataInicial+'/'+dataFinal,
-		    type : 'get',
-		beforeSend : function(){
-				$('#tabelaQuintoNivel > tbody >tr').remove();
-			}
-		})
-		.done(function(response){
-			for (var i = 0; i < response.length; i++) {
-				if(validaValor(response[i]["valorAnterior"] , response[i]["valor"] , response[i]["valorPrevisto"]) === false){
-					var row = '<tr>';
-			                row += "<td>"+response[i]["descricao"]+"</td>";
-			                row += "<td>"+response[i]["valorAnterior"]+"</td>";
-			                row += "<td>"+response[i]["valor"]+"</td>";
-			                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
-							row += "</tr>";
-
-					$('#tabelaQuintoNivel > tbody').append(row);
+	if(dataInicial != '' && dataInicial != null && dataFinal != '' && dataFinal != null){
+		$.ajax({
+				url : '/sgu/fluxo/carregar/receita/'+codigoNivel+'/'+dataInicial+'/'+dataFinal,
+			    type : 'get',
+			beforeSend : function(){
+					$('#tabelaQuintoNivel > tbody >tr').remove();
 				}
-			}
-			$('#quintoNivel').modal('show');
-		})
-		.fail(function(jqXHR, textStatus, msg){
-			$('#spinner').modal('hide');
-		    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
-	});
+			})
+			.done(function(response){
+				for (var i = 0; i < response.length; i++) {
+					if(validaValor(response[i]["valorAnterior"] , response[i]["valor"] , response[i]["valorPrevisto"]) === false){
+						var row = '<tr>';
+				                row += "<td>"+response[i]["descricao"]+"</td>";
+				                row += "<td>"+response[i]["valorAnterior"]+"</td>";
+				                row += "<td>"+response[i]["valor"]+"</td>";
+				                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
+								row += "</tr>";
+
+						$('#tabelaQuintoNivel > tbody').append(row);
+					}
+				}
+				$('#quintoNivel').modal('show');
+			})
+			.fail(function(jqXHR, textStatus, msg){
+				$('#spinner').modal('hide');
+			    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
+		});
+	}else{
+		alert("POR FAVOR, ESCOLHA UMA DATA");
+	}
 }
 
 function pesquisarDespesa(codigoNivel) {
 	var dataInicial = $('#dataInicial').val();
 	var dataFinal = $('#dataFinal').val();
-	$.ajax({
-			 url : '/sgu/fluxo/carregar/despesa/'+codigoNivel+'/'+dataInicial+'/'+dataFinal,
-		     type : 'get',
-		beforeSend : function(){
-				$('#tabelaQuintoNivel > tbody >tr').remove();
-			}
-		})
-		.done(function(response){
-			for (var i = 0; i < response.length; i++) {
-				if(validaValor(response[i]["valorAnterior"] , response[i]["valor"] , response[i]["valorPrevisto"]) === false){
-					var row = '<tr>';
-			                row += "<td>"+response[i]["descricao"]+"</td>";
-			                row += "<td>"+response[i]["valorAnterior"]+"</td>";
-			                row += "<td>"+response[i]["valor"]+"</td>";
-			                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
-							row += "</tr>";
-					$('#tabelaQuintoNivel > tbody').append(row);
+	if(dataInicial != '' && dataInicial != null && dataFinal != '' && dataFinal != null){
+		$.ajax({
+				 url : '/sgu/fluxo/carregar/despesa/'+codigoNivel+'/'+dataInicial+'/'+dataFinal,
+			     type : 'get',
+			beforeSend : function(){
+					$('#tabelaQuintoNivel > tbody >tr').remove();
 				}
-			}
-			$('#quintoNivel').modal('show');
-		})
-		.fail(function(jqXHR, textStatus, msg){
-			$('#spinner').modal('hide');
-		    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
-	});
+			})
+			.done(function(response){
+				for (var i = 0; i < response.length; i++) {
+					if(validaValor(response[i]["valorAnterior"] , response[i]["valor"] , response[i]["valorPrevisto"]) === false){
+						var row = '<tr>';
+				                row += "<td>"+response[i]["descricao"]+"</td>";
+				                row += "<td>"+response[i]["valorAnterior"]+"</td>";
+				                row += "<td>"+response[i]["valor"]+"</td>";
+				                row += "<td>"+response[i]["valorPrevisto"]+"</td>";
+								row += "</tr>";
+						$('#tabelaQuintoNivel > tbody').append(row);
+					}
+				}
+				$('#quintoNivel').modal('show');
+			})
+			.fail(function(jqXHR, textStatus, msg){
+				$('#spinner').modal('hide');
+			    alert("Ocorreu um erro, entre em contato com o desenvolvedor do sistema");
+		});
+	}else{
+		alert("POR FAVOR, ESCOLHA UMA DATA");
+	}
 }
 
 function abrirComentario(id) {

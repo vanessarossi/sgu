@@ -12,10 +12,10 @@ public interface RepositorioSegundoNivelFluxo extends JpaRepository<SegundoNivel
 	
 	public List<SegundoNivelFluxo> findByCodigoPrimeiroNivel(String codigoPrimeiroNivel);
 	
-	@Query(nativeQuery = true, value = "SELECT FN_UNRP_SALDO_RECEITA_DIA_N02(:data, :codigoSegundoNivel) FROM dual")
+	@Query(nativeQuery = true, value = "SELECT FN_UNRP_SALDO_NIVEL_02(:data,1, :codigoSegundoNivel) FROM dual")
 	public String calcularReceita(@Param("data")String data, @Param("codigoSegundoNivel")String codigoSegundoNivel);
 	
-	@Query(nativeQuery = true, value = "SELECT FN_UNRP_SALDO_DESPESA_DIA_N02(:data, :codigoSegundoNivel) FROM dual")
+	@Query(nativeQuery = true, value = "SELECT FN_UNRP_SALDO_NIVEL_02(:data,2, :codigoSegundoNivel) FROM dual")
 	public String calcularDespesa(@Param("data")String data, @Param("codigoSegundoNivel")String codigoSegundoNivel);
 
 }

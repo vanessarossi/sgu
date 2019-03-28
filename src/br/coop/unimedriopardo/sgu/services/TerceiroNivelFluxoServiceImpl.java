@@ -9,7 +9,7 @@ import br.coop.unimedriopardo.sgu.repositories.RepositorioTerceiroNivelFluxo;
 @Transactional
 public class TerceiroNivelFluxoServiceImpl implements TerceiroNivelFluxoService{
 	
-private final RepositorioTerceiroNivelFluxo repositorioTerceiroNivelFluxo;
+	private final RepositorioTerceiroNivelFluxo repositorioTerceiroNivelFluxo;
 	
 	@Autowired
 	public TerceiroNivelFluxoServiceImpl(RepositorioTerceiroNivelFluxo repositorioTerceiroNivelFluxo) {

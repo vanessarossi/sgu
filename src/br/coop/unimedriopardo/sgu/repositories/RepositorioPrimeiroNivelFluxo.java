@@ -10,10 +10,10 @@ public interface RepositorioPrimeiroNivelFluxo extends JpaRepository<PrimeiroNiv
 	
 	public PrimeiroNivelFluxo findByCodigoNivel(String codigoNivel);
 	
-	@Query(nativeQuery = true, value = "SELECT NVL(FN_UNRP_SALDO_RECEITA_DIA_N01(:data),0) FROM dual")
+	@Query(nativeQuery = true, value = "SELECT NVL(FN_UNRP_SALDO_NIVEL_01(:data, 1),0) FROM dual")
 	 String calcularReceita(@Param("data") String data);
 	
-	@Query(nativeQuery = true, value = "SELECT NVL(FN_UNRP_SALDO_DESPESA_DIA_N01(:data),0) FROM dual")
+	@Query(nativeQuery = true, value = "SELECT NVL(FN_UNRP_SALDO_NIVEL_01(:data, 2),0) FROM dual")
 	 String calcularDespesa(@Param("data") String data);
 
 }
