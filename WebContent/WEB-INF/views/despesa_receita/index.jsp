@@ -8,7 +8,6 @@
 </nav>
 <section class="text-center" id="titulo">
 	<h1 class="h1">Despesas e Receitas</h1>
-	<p class="h5">Data do saldo:</p><label class="h5" id="dataSaldo">${dataEscolhida}</label>
 </section>
 <section id="conteudo justify-content-center text-center">
 	<div class="row">
