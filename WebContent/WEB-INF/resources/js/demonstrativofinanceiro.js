@@ -57,6 +57,8 @@ function enviarConsulta() {
 
 						$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisao"]);
 						$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentarioPrevisao"]));
+
+						
 					}
 				}
 				
