@@ -11,6 +11,8 @@ public class TerceiroNivelDemonstrativoValorizadoView {
 	private String comentarioPrevisao;
 	
 	
+	
+	
 	public String getCodigoId() {
 		return codigoId;
 	}
