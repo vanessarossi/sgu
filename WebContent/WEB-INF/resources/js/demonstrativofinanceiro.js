@@ -45,6 +45,7 @@ function enviarConsulta() {
 						$("#receita"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentario"]));
 
 						$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorPrevisao"]);
+						$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentarioPrevisao"]));
 					}
 
 					for (var k = response[i]["despesas"].length - 1; k >= 0; k--) {
@@ -55,6 +56,7 @@ function enviarConsulta() {
 						$("#despesa"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentario"]));
 
 						$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).text(response[i]["despesas"][k]["valorPrevisao"]);
+						$("#despesaPrevisto"+response[i]["despesas"][k]["codigoId"]).append(montarInfo(response[i]["despesas"][k]["comentarioPrevisao"]));
 					}
 				}
 				

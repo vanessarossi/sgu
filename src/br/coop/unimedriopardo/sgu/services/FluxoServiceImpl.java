@@ -151,11 +151,15 @@ public class FluxoServiceImpl implements FluxoService {
 						
 					String competenciaAnterior = ((String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1).length() == 1 ? "0"+String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1) : String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1))+"/"+dataInicialGCS.substring(0,4));								
 					String competencia = dataInicialGCS.substring(4,6)+"/"+dataInicialGCS.substring(0,4);
+					String competenciaPrevisao = ((String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1).length() == 1 ? "0"+String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1) : String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1))+"/"+dataInicialGCS.substring(0,4));	
+					
 					Comentario comentarioAnterior = repositorioComentario.findByCodigoAndCompetencia(codigo, competenciaAnterior);
 					Comentario comentario = repositorioComentario.findByCodigoAndCompetencia(codigo, competencia);
-						
+					Comentario comentarioPrevisao = repositorioComentario.findByCodigoAndCompetencia(codigo, competenciaPrevisao);
+					
 					receita.setComentarioAnterior(comentarioAnterior != null ? comentarioAnterior.getId().toString() : "");
 					receita.setComentario(comentario != null ? comentario.getId().toString() : "");
+					receita.setComentarioPrevisao(comentarioPrevisao != null ? comentarioPrevisao.getId().toString() : "");
 					receitas.add(receita);
 			}	
 			//despesas
@@ -170,12 +174,16 @@ public class FluxoServiceImpl implements FluxoService {
 				
 				String competenciaAnterior = ((String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1).length() == 1 ? "0"+String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1) : String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1))+"/"+dataInicialGCS.substring(0,4));								
 				String competencia = dataInicialGCS.substring(4,6)+"/"+dataInicialGCS.substring(0,4);
+				String competenciaPrevisao = ((String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1).length() == 1 ? "0"+String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1) : String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1))+"/"+dataInicialGCS.substring(0,4));	
 				
 				Comentario comentarioAnterior = repositorioComentario.findByCodigoAndCompetencia(codigo, competenciaAnterior);
 				Comentario comentario = repositorioComentario.findByCodigoAndCompetencia(codigo,competencia);
+				Comentario comentarioPrevisao = repositorioComentario.findByCodigoAndCompetencia(codigo, competenciaPrevisao);
+				
 				
 				despesa.setComentarioAnterior(comentarioAnterior != null ? comentarioAnterior.getId().toString() : "");
 				despesa.setComentario(comentario != null ? comentario.getId().toString() : "");
+				despesa.setComentarioPrevisao(comentarioPrevisao != null ? comentarioPrevisao.getId().toString() : "");
 				
 				despesas.add(despesa);	
 			}

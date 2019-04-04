@@ -8,6 +8,9 @@ public class TerceiroNivelDemonstrativoValorizadoView {
 	private String valorPrevisao;
 	private String comentarioAnterior;
 	private String comentario;
+	private String comentarioPrevisao;
+	
+	
 	public String getCodigoId() {
 		return codigoId;
 	}
@@ -44,4 +47,12 @@ public class TerceiroNivelDemonstrativoValorizadoView {
 	public void setComentario(String comentario) {
 		this.comentario = comentario;
 	}
+	public String getComentarioPrevisao() {
+		return comentarioPrevisao;
+	}
+	public void setComentarioPrevisao(String comentarioPrevisao) {
+		this.comentarioPrevisao = comentarioPrevisao;
+	}
+
+	
 }
