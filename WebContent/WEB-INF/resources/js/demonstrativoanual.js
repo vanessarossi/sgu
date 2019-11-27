@@ -72,8 +72,6 @@ function pesquisarReceita(codigoNivel) {
 			})
 			.done(function(response){
 				for (var i = 0; i < response.length; i++) {
-					console.log(response[i]["valor"]);
-					console.log(validaValor(response[i]["valor"]));
 					if(validaValor(response[i]["valor"]) === false){
 						var row = '<tr>';
 				                row += "<td>"+response[i]["descricao"]+"</td>";
