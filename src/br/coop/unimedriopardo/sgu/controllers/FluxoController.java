@@ -42,6 +42,13 @@ public class FluxoController {
 		return "fluxo.index.tiles";
 	}
 	
+	@RequestMapping("/anual")
+	public String fechamento(Model model) {
+		model.addAttribute("demonstrativos", fluxoService.montarDemonstrativo());
+		model.addAttribute("filiais",fluxoService.montarFilial());
+		return "fluxo.anual.index.tiles";
+	}
+	
 	@RequestMapping("/formulario/comentario")
 	public String formulario(Model model) {
 		model.addAttribute("comentario", new Comentario());

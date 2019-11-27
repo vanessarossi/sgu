@@ -6,7 +6,7 @@
 	prefix="sec"%>
 
 <nav class="navbar navbar-dark bg-dark">
-	<a class="navbar-brand" href="/sgu/home">SGU v4.0 Unimed São José
+	<a class="navbar-brand" href="/sgu/home">SGU v5.0 Unimed São José
 		do Rio Pardo </a>
 </nav>
 <sec:authorize access="isAuthenticated()">
@@ -44,6 +44,7 @@
 					</div>
 				</a>
 			</div>
+			
 		</div>
 		<div class="row card-columns justify-content-center">
 			<div class=" col-11 col-sm-11 col-md-4 col-lg-4 col-xl-4">
@@ -69,6 +70,19 @@
 					</div>
 				</a>
 			</div>
+		</div>
+		<div class="row card-columns justify-content-center">
+			<div class=" col-11 csol-sm-5 col-md-4 col-lg-4 col-xl-4">
+					<a href="/sgu/fluxo/anual">
+						<div class="card card-pantone381c text-center" id="fluxo">
+							<i class="fas fa-chart-line fa-5x"></i>
+							<div class="card-body">
+								<h5 class="card-title">Fechamendo Anual</h5>
+								<p class="card-text">Tenha acesso ao fechamento anual.</p>
+							</div>
+						</div>
+					</a>
+				</div>
 		</div>
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<div class="row card-columns justify-content-center">

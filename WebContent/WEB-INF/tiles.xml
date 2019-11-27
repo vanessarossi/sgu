@@ -49,6 +49,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/fluxo/index.jsp"></put-attribute>
 	</definition>
 	
+	<!-- FLUXO DE CAIXA ANUAL -->
+	<definition name="fluxo.anual.index.tiles" extends="layout.tiles">
+		<put-attribute name="title" value="Fluxo de Caixa"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/fluxo/fechamentoAnual.jsp"></put-attribute>
+	</definition>
+	
 	<!-- CADASTRO COMENTARIO -->
 	<definition name="fluxo.comentario.form.tiles" extends="layout.tiles">
 		<put-attribute name="title" value="Formulário Cadastro"></put-attribute>
