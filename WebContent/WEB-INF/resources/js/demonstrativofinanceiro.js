@@ -37,13 +37,13 @@ function enviarConsulta() {
 					$("#totalLiquidoPrevisto"+response[i]["codigoId"]).text(response[i]["valorLiquidoPrevisao"]);
 
 					for (var j = response[i]["receitas"].length - 1; j >= 0; j--) {
-
+						
 						$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorAnterior"]);
 						$("#receitaAnterior"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentarioAnterior"]));
-
+						
 						$("#receita"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valor"]);
 						$("#receita"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentario"]));
-
+						
 						$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).text(response[i]["receitas"][j]["valorPrevisao"]);
 						$("#receitaPrevisto"+response[i]["receitas"][j]["codigoId"]).append(montarInfo(response[i]["receitas"][j]["comentarioPrevisao"]));
 					}

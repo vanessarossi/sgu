@@ -106,8 +106,8 @@ public class FluxoServiceImpl implements FluxoService {
 		List<SegundoNivelFluxo> listaSegundoNivel = repositorioSegundoNivelFluxo.findByCodigoPrimeiroNivel("2");
 		List<DemonstrativoValorizadoView> listaDemonstrativoValorizada = new ArrayList<>();
 		Conversor conversor = new Conversor();
-		String dataInicialGCS = conversor.formatarDataString(dataInicial, "YYYYMMdd");
-		String dataFinalGCS = conversor.formatarDataString(dataFinal, "YYYYMMdd");
+		String dataInicialGCS = conversor.formatarDataString(dataInicial, "yyyyMMdd");
+		String dataFinalGCS = conversor.formatarDataString(dataFinal, "yyyyMMdd");
 		for (SegundoNivelFluxo segundoNivelFluxo : listaSegundoNivel) {
 			DemonstrativoValorizadoView demonstrativoValorizado = new DemonstrativoValorizadoView();
 			demonstrativoValorizado.setCodigoId(segundoNivelFluxo.getCodigoNivel());
@@ -210,8 +210,8 @@ public class FluxoServiceImpl implements FluxoService {
 		List<MovimentoValorizadoView> movimentosValorizado = new ArrayList<>();
 		
 		Conversor conversor = new Conversor();
-		String dataInicialGCS = conversor.formatarDataString(dataInicial, "YYYYMMdd");
-		String dataFinalGCS = conversor.formatarDataString(dataFinal, "YYYYMMdd");
+		String dataInicialGCS = conversor.formatarDataString(dataInicial, "yyyyMMdd");
+		String dataFinalGCS = conversor.formatarDataString(dataFinal, "yyyyMMdd");
 		
 		/** SALDO ANTERIOR BANCOS **/
 		Float saldoAnteriorBancoConstrucao = 0f;
@@ -337,8 +337,8 @@ public class FluxoServiceImpl implements FluxoService {
 			String dataFinal) {
 	List<ConteudoDemonstrativoValorizado> listaConteudoValorizado = new ArrayList<ConteudoDemonstrativoValorizado>();
 		Conversor conversor = new Conversor();
-		String dataInicialGCS = conversor.formatarDataString(dataInicial, "YYYYMMdd");
-		String dataFinalGCS = conversor.formatarDataString(dataFinal, "YYYYMMdd");
+		String dataInicialGCS = conversor.formatarDataString(dataInicial, "yyyyMMdd");
+		String dataFinalGCS = conversor.formatarDataString(dataFinal, "yyyyMMdd");
 		
 		if (codigoPrimeiroNivel.equals("1")) {
 						
