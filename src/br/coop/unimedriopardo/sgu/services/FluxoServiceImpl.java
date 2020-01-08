@@ -149,9 +149,9 @@ public class FluxoServiceImpl implements FluxoService {
 					
 					String codigo = terceiroNivelFluxo.getCodigoPrimeiroNivel().concat(terceiroNivelFluxo.getCodigoSegundoNivel().concat(terceiroNivelFluxo.getCodigoNivel()));
 						
-					String competenciaAnterior = ((String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1).length() == 1 ? "0"+String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1) : String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1))+"/"+dataInicialGCS.substring(0,4));								
-					String competencia = dataInicialGCS.substring(4,6)+"/"+dataInicialGCS.substring(0,4);
-					String competenciaPrevisao = ((String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1).length() == 1 ? "0"+String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1) : String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1))+"/"+dataInicialGCS.substring(0,4));	
+					String competenciaAnterior = conversor.calcularCompetenciaAnterior(conversor.formatarCompString(dataInicialGCS, "MM/yyyy"));								
+					String competencia = conversor.formatarCompString(dataInicialGCS, "MM/yyyy");
+					String competenciaPrevisao = conversor.calcularCompetenciaPrevisao(conversor.formatarCompString(dataInicialGCS, "MM/yyyy"));	
 					
 					Comentario comentarioAnterior = repositorioComentario.findByCodigoAndCompetencia(codigo, competenciaAnterior);
 					Comentario comentario = repositorioComentario.findByCodigoAndCompetencia(codigo, competencia);
@@ -172,9 +172,9 @@ public class FluxoServiceImpl implements FluxoService {
 				
 				String codigo = terceiroNivelFluxo.getCodigoPrimeiroNivel().concat(terceiroNivelFluxo.getCodigoSegundoNivel().concat(terceiroNivelFluxo.getCodigoNivel()));
 				
-				String competenciaAnterior = ((String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1).length() == 1 ? "0"+String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1) : String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))-1))+"/"+dataInicialGCS.substring(0,4));								
-				String competencia = dataInicialGCS.substring(4,6)+"/"+dataInicialGCS.substring(0,4);
-				String competenciaPrevisao = ((String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1).length() == 1 ? "0"+String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1) : String.valueOf(Integer.parseInt(dataInicialGCS.substring(4,6))+1))+"/"+dataInicialGCS.substring(0,4));	
+				String competenciaAnterior = conversor.calcularCompetenciaAnterior(conversor.formatarCompString(dataInicialGCS, "MM/yyyy"));								
+				String competencia = conversor.formatarCompString(dataInicialGCS, "MM/yyyy");
+				String competenciaPrevisao = conversor.calcularCompetenciaPrevisao(conversor.formatarCompString(dataInicialGCS, "MM/yyyy"));	
 				
 				Comentario comentarioAnterior = repositorioComentario.findByCodigoAndCompetencia(codigo, competenciaAnterior);
 				Comentario comentario = repositorioComentario.findByCodigoAndCompetencia(codigo,competencia);

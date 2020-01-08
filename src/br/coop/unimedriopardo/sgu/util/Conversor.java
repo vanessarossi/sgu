@@ -27,6 +27,21 @@ public class Conversor {
 			return dataFormatada;
 		}
 		
+		
+		public String formatarCompString(String data, String formatoNovo) {
+			SimpleDateFormat formato = new SimpleDateFormat("yyyyMMdd");
+			Date date = null;
+			try {
+				date = formato.parse(data);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			formato.applyPattern(formatoNovo);
+			String dataFormatada = formato.format(date);
+			return dataFormatada;
+		}
+		
+		
 		public String formatarCompetenciaString(String data, String formatoNovo) {
 			SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = null;
@@ -58,5 +73,42 @@ public class Conversor {
 			nf.setMinimumFractionDigits(2);
 			String formatado = nf.format (valor);
 			return formatado;
+		}
+		
+		public String calcularCompetenciaAnterior(String competenciaAtual) {
+				String mes = competenciaAtual.substring(0,2);
+				String ano = competenciaAtual.substring(3,7);
+				
+				if((Integer.parseInt(mes)-1) < 1) {
+					mes = "12";
+					ano = String.valueOf(Integer.parseInt(ano) - 1);
+				}else{
+					if(String.valueOf(Integer.parseInt(mes)-1).length() == 1) {
+						mes = "0"+String.valueOf(Integer.parseInt(mes)-1);
+					}else {
+						mes = String.valueOf(Integer.parseInt(mes)-1);
+					}
+				}
+			
+			return mes+"/"+ano;
+		}
+
+		public String calcularCompetenciaPrevisao(String competenciaAtual) {
+			
+			String mes = competenciaAtual.substring(0,2);
+			String ano = competenciaAtual.substring(3,7);
+			
+			if((Integer.parseInt(mes)+1) > 12) {
+				mes = "01";
+				ano = String.valueOf(Integer.parseInt(ano) + 1);
+			}else{
+				if(String.valueOf(Integer.parseInt(mes) + 1).length() == 1) {
+					mes = "0"+String.valueOf(Integer.parseInt(mes) + 1);
+				}else {
+					mes = String.valueOf(Integer.parseInt(mes) + 1);
+				}
+			}
+		
+		return mes+"/"+ano;
 		}
 }
