@@ -2,6 +2,7 @@ package br.coop.unimedriopardo.sgu.services;
 
 
 import java.util.List;
+
 import br.coop.unimedriopardo.sgu.util.view.BancoView;
 
 public interface BancoService {

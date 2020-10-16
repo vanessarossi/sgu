@@ -8,7 +8,6 @@ function montarInfo(comentario) {
 	}else{
 		return '';
 	}
-
 }
 
 function enviarConsulta() {
@@ -75,6 +74,7 @@ function enviarConsulta() {
 	}
 }
 
+/** analisar aqui  **/
 function carregarMovimentacao(dataInicial, dataFinal) {
 	if(dataInicial != '' && dataInicial != null && dataFinal != '' && dataFinal != null){
 		$.ajax({
@@ -84,15 +84,12 @@ function carregarMovimentacao(dataInicial, dataFinal) {
 			})
 			.done(function(response){
 				for (var i = 0; i < response.length; i++) {
-					$("#movSaldoLiquidoAnterior"+response[i]["codigoId"]).text(response[i]["saldoLiquidoAnterior"]);
-					$("#movSaldoBanco"+response[i]["codigoId"]).text(response[i]["saldoBanco"]);
-					$("#movSaldoCaixa"+response[i]["codigoId"]).text(response[i]["saldoCaixa"]);
-					$("#movSaldoTotal"+response[i]["codigoId"]).text(response[i]["saldoLiquido"]);
-					$("#movTransRealizada"+response[i]["codigoId"]).text(response[i]["saldoTranferenciaRealizada"]);
-					$("#movTransRecebida"+response[i]["codigoId"]).text(response[i]["saldoTranferenciaRecebida"]);
+
+					$("#movSaldoAnterior"+response[i]["codigoId"]).text(parseFloat(response[i]["saldoLiquidoAnterior"]).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+					$("#movReceita"+response[i]["codigoId"]).text(parseFloat(response[i]["totalReceita"]).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+					$("#movDespesa"+response[i]["codigoId"]).text(parseFloat(response[i]["totalDespesa"]).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+					$("#movSaldoAtual"+response[i]["codigoId"]).text(parseFloat(response[i]["saldoLiquido"]).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
 				}
-				calcularReceitaMovimentacao();
-				calcularDespesaMovimentacao();
 			 })
 			.fail(function(jqXHR, textStatus, msg){
 				$('#spinner').modal('hide');
@@ -103,75 +100,6 @@ function carregarMovimentacao(dataInicial, dataFinal) {
 	}
 }
 
-function calcularReceitaMovimentacao() {
-	var receitaSede = removerFormatacaoReal($("#totalReceita01").text());
-	var receitaPostos = removerFormatacaoReal($("#totalReceita02").text());
-	var receitaMedPrev = removerFormatacaoReal($("#totalReceita03").text());
-	var receitaSdu = removerFormatacaoReal($("#totalReceita04").text());
-	var receitaRemocao = removerFormatacaoReal($("#totalReceita05").text());
-	var receitaDso = removerFormatacaoReal($("#totalReceita06").text());
-	var receitaCduImg = removerFormatacaoReal($("#totalReceita07").text());
-	var receitaVideo = removerFormatacaoReal($("#totalReceita08").text());
-	var receitaCduLab = removerFormatacaoReal($("#totalReceita12").text());
-	var receitaCru = removerFormatacaoReal($("#totalReceita09").text());
-	var receitaNestle = removerFormatacaoReal($("#totalReceita10").text());
-	var receitaCeu = removerFormatacaoReal($("#totalReceita11").text());
-	var receitaOncologia = removerFormatacaoReal($("#totalReceita13").text());
-
-	var totalReceitaContaSede = parseFloat(receitaSede) + parseFloat(receitaPostos) + parseFloat(receitaMedPrev) + parseFloat(receitaSdu)
-							+ parseFloat(receitaRemocao) + parseFloat(receitaDso) + parseFloat(receitaCduImg) + parseFloat(receitaVideo)
-							+ parseFloat(receitaCduLab) + parseFloat(receitaCru) + parseFloat(receitaNestle) + parseFloat(receitaCeu)
-							+ parseFloat(receitaOncologia);
-
-	var receitaFarmacia = removerFormatacaoReal($("#totalReceita90").text());
-	var totalReceitaContaFarmacia = receitaFarmacia;
-
-	var receitaOptica = removerFormatacaoReal($("#totalReceita91").text());
-	var totalReceitaContaOptica = receitaOptica;
-
-	var receitaHospital = removerFormatacaoReal($("#totalReceita70").text());
-	var totalReceitaContaHospital = receitaHospital;
-
-	$('#movReceita001').text(parseFloat(totalReceitaContaSede).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movReceita002').text(parseFloat(totalReceitaContaFarmacia).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movReceita003').text(parseFloat(totalReceitaContaOptica).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movReceita070').text(parseFloat(totalReceitaContaHospital).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-}
-
-function calcularDespesaMovimentacao() {
-	var despesaSede = removerFormatacaoReal($("#totalDespesa01").text());
-	var despesaPostos = removerFormatacaoReal($("#totalDespesa02").text());
-	var despesaMedPrev = removerFormatacaoReal($("#totalDespesa03").text());
-	var despesaSdu = removerFormatacaoReal($("#totalDespesa04").text());
-	var despesaRemocao = removerFormatacaoReal($("#totalDespesa05").text());
-	var despesaDso = removerFormatacaoReal($("#totalDespesa06").text());
-	var despesaCduImg = removerFormatacaoReal($("#totalDespesa07").text());
-	var despesaVideo = removerFormatacaoReal($("#totalDespesa08").text());
-	var despesaCduLab = removerFormatacaoReal($("#totalDespesa12").text());
-	var despesaCru = removerFormatacaoReal($("#totalDespesa09").text());
-	var despesaNestle = removerFormatacaoReal($("#totalDespesa10").text());
-	var despesaCeu = removerFormatacaoReal($("#totalDespesa11").text());
-	var despesaOncologia = removerFormatacaoReal($("#totalDespesa13").text());
-
-	var totalDespesaContaSede = parseFloat(despesaSede) + parseFloat(despesaPostos) + parseFloat(despesaMedPrev) + parseFloat(despesaSdu)
-							+ parseFloat(despesaRemocao) + parseFloat(despesaDso) + parseFloat(despesaCduImg) + parseFloat(despesaVideo)
-							+ parseFloat(despesaCduLab) + parseFloat(despesaCru) + parseFloat(despesaNestle) + parseFloat(despesaCeu)
-							+ parseFloat(despesaOncologia);
-
-	var despesaFarmacia = removerFormatacaoReal($("#totalDespesa90").text());
-	var totalDespesaContaFarmacia = despesaFarmacia;
-
-	var despesaOptica = removerFormatacaoReal($("#totalDespesa91").text());
-	var totalDespesaContaOptica = despesaOptica;
-
-	var despesaHospital = removerFormatacaoReal($("#totalDespesa70").text());
-	var totalDespesaContaHospital = despesaHospital;
-
-	$('#movDespesa001').text(parseFloat(totalDespesaContaSede).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movDespesa002').text(parseFloat(totalDespesaContaFarmacia).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movDespesa003').text(parseFloat(totalDespesaContaOptica).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-	$('#movDespesa070').text(parseFloat(totalDespesaContaHospital).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-}
 
 function removerFormatacaoReal(valor) {
 	while (valor.indexOf('.') != -1)

@@ -25,7 +25,7 @@
                             <input type="password" id="senha" name="senha" class="form-control" />
                         </div>
                         <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Entrar">
-                        <p class="text-center"><em>v5.0 - Unimed São José do Rio Pardo</em></p>
+                        <p class="text-center"><em>v6.0 - Unimed São José do Rio Pardo</em></p>
                     </form>
         	    </div>
     		</div> 

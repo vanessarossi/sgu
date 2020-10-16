@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import br.coop.unimedriopardo.sgu.models.Comentario;
 import br.coop.unimedriopardo.sgu.services.ComentarioService;
 import br.coop.unimedriopardo.sgu.services.FluxoService;
+import br.coop.unimedriopardo.sgu.util.view.fluxo.ConteudoDemonstrativoValorizado;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.DemonstrativoValorizadoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.MovimentoValorizadoView;
-import br.coop.unimedriopardo.sgu.util.view.fluxo.ConteudoDemonstrativoValorizado;
 
 
 @Controller

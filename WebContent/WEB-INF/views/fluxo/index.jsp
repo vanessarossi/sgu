@@ -103,35 +103,20 @@
 				<table class="table table-striped table-hover table-sm">
 				  <thead>
 				    <tr>
-				      <th>Saldo Líquido Anterior</th>
-				      <th>Receita</th>
-				      <th>Despesa</th>
-				      <th></th>
-				      <th>Saldo Banco</th>
-				      <th>Saldo Caixa</th>
-				      <th>Total</th>
+				    	<!--  <th>Saldo Mês Anterior</th> -->
+				      	<th>Receita</th>
+				      	<th>Despesa</th>
+				      	<th>Saldo</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				  	<tr>
-				      <td id="movSaldoLiquidoAnterior${filial.codigoFilial}"></td>
-				      <td id="movReceita${filial.codigoFilial}"></td>
-				      <td id="movDespesa${filial.codigoFilial}"></td>
-				      <td></td>
-				      <td id="movSaldoBanco${filial.codigoFilial}"></td>
-				      <td id="movSaldoCaixa${filial.codigoFilial}"></td>
-				      <td id="movSaldoTotal${filial.codigoFilial}"></td>
+				  		<!-- <td id="movSaldoAnterior${filial.codigoFilial}"></td> -->
+				     	<td id="movReceita${filial.codigoFilial}"></td>
+				      	<td id="movDespesa${filial.codigoFilial}"></td>
+				      	<td id="movSaldoAtual${filial.codigoFilial}"></td>
 				    </tr>
 				  </tbody>
-				  <tfoot>
-						<tr>
-							<td colspan="2">Transferências Realizadas</td>
-							<td id="movTransRealizada${filial.codigoFilial}"></td>
-							<td></td>
-							<td colspan="2">Transferências Recebidas</td>
-							<td id="movTransRecebida${filial.codigoFilial}"></td>
-						</tr>
-				  </tfoot>
 				</table>
 			</c:forEach>
 		</div>
@@ -149,7 +134,6 @@
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="quintoNivel" tabindex="-1" role="dialog"  aria-hidden="true">
   <div class="modal-dialog modal-lg">

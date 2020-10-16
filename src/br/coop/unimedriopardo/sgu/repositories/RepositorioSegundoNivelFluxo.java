@@ -19,3 +19,4 @@ public interface RepositorioSegundoNivelFluxo extends JpaRepository<SegundoNivel
 	public String calcularDespesa(@Param("data")String data, @Param("codigoSegundoNivel")String codigoSegundoNivel);
 
 }
+

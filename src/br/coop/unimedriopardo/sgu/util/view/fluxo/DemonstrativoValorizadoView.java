@@ -18,6 +18,7 @@ public class DemonstrativoValorizadoView {
 	
 	List<TerceiroNivelDemonstrativoValorizadoView> receitas;
 	List<TerceiroNivelDemonstrativoValorizadoView> despesas;
+	
 	public String getCodigoId() {
 		return codigoId;
 	}
@@ -90,8 +91,4 @@ public class DemonstrativoValorizadoView {
 	public void setDespesas(List<TerceiroNivelDemonstrativoValorizadoView> despesas) {
 		this.despesas = despesas;
 	}
-	
-	
-	
-	
 }

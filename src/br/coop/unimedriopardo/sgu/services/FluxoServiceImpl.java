@@ -2,13 +2,13 @@ package br.coop.unimedriopardo.sgu.services;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import br.coop.unimedriopardo.sgu.models.Banco;
+
 import br.coop.unimedriopardo.sgu.models.Comentario;
 import br.coop.unimedriopardo.sgu.models.Filial;
-import br.coop.unimedriopardo.sgu.models.PostoAtendimento;
 import br.coop.unimedriopardo.sgu.models.QuartoNivelFluxo;
 import br.coop.unimedriopardo.sgu.models.QuintoNivelFluxo;
 import br.coop.unimedriopardo.sgu.models.SegundoNivelFluxo;
@@ -24,10 +24,10 @@ import br.coop.unimedriopardo.sgu.repositories.RepositorioReceita;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioSegundoNivelFluxo;
 import br.coop.unimedriopardo.sgu.repositories.RepositorioTerceiroNivelFluxo;
 import br.coop.unimedriopardo.sgu.util.Conversor;
+import br.coop.unimedriopardo.sgu.util.view.fluxo.ConteudoDemonstrativoValorizado;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.DemonstrativoValorizadoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.DemonstrativoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.MovimentoValorizadoView;
-import br.coop.unimedriopardo.sgu.util.view.fluxo.ConteudoDemonstrativoValorizado;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.TerceiroNivelDemonstrativoValorizadoView;
 import br.coop.unimedriopardo.sgu.util.view.fluxo.TerceiroNivelDemonstrativoView;
 
@@ -204,8 +204,7 @@ public class FluxoServiceImpl implements FluxoService {
 
 	@Override
 	public List<MovimentoValorizadoView> valorizarMovimento(String dataInicial, String dataFinal) {
-		List<Banco> bancos = repositorioBanco.findByAplicacao("N");
-		List<PostoAtendimento> postosAtendimento = repositorioPostoAtendimento.findAll();
+
 		List<Filial> filiais = repositorioFilial.findAll();
 		List<MovimentoValorizadoView> movimentosValorizado = new ArrayList<>();
 		
@@ -213,18 +212,21 @@ public class FluxoServiceImpl implements FluxoService {
 		String dataInicialGCS = conversor.formatarDataString(dataInicial, "yyyyMMdd");
 		String dataFinalGCS = conversor.formatarDataString(dataFinal, "yyyyMMdd");
 		
-		/** SALDO ANTERIOR BANCOS **/
+		/** SALDO ANTERIOR BANCOS 
 		Float saldoAnteriorBancoConstrucao = 0f;
 		Float saldoAnteriorBancoFarmacia = 0f;
 		Float saldoAnteriorBancoOptica = 0f;
 		Float saldoAnteriorBancoSede = 0f;
-				
-		/** SALDO BANCOS **/
+		**/
+		
+		/** SALDO BANCOS 
 		Float saldoBancoConstrucao = 0f;
 		Float saldoBancoFarmacia = 0f;
 		Float saldoBancoOptica = 0f;
 		Float saldoBancoSede = 0f;
+		**/
 		
+		/**
 		for (Banco banco : bancos) {
 			String saldoAnterior = repositorioBanco.calcularSaldoAnterior(banco.getCodigoConta(), dataInicialGCS);
 			String saldo = repositorioBanco.calcularSaldo(banco.getCodigoConta(), dataFinalGCS);
@@ -250,18 +252,23 @@ public class FluxoServiceImpl implements FluxoService {
 			}
 		}
 		
-		/** SALDO CAIXAS ANTERIOR**/
+		**/
+		
+		/** SALDO CAIXAS ANTERIOR
 		Float saldoAnteriorCaixaConstrucao = 0f;
 		Float saldoAnteriorCaixaFarmacia = 0f;
 		Float saldoAnteriorCaixaOptica = 0f;
 		Float saldoAnteriorCaixaSede = 0f;
+		**/
 		
-		/** SALDO CAIXAS **/
+		/** SALDO CAIXAS 
 		Float saldoCaixaConstrucao = 0f;
 		Float saldoCaixaFarmacia = 0f;
 		Float saldoCaixaOptica = 0f;
 		Float saldoCaixaSede = 0f;
+		**/
 		
+		/**
 		for (PostoAtendimento postoAtendimento : postosAtendimento) {
 			
 			String saldoAnterior = repositorioPostoAtendimento.calcularSaldoCaixa(postoAtendimento.getCodigoPosto(), dataInicialGCS);
@@ -285,8 +292,8 @@ public class FluxoServiceImpl implements FluxoService {
 				saldoCaixaSede = saldoAnteriorCaixaSede+ Float.parseFloat(saldo.replaceAll(",", "."));
 			}
 		}
-		
-		
+		**/
+		/**
 		for (Filial filial : filiais) {
 			MovimentoValorizadoView movimento = new MovimentoValorizadoView();
 			movimento.setCodigoId(filial.getCodigoFilial());
@@ -327,6 +334,54 @@ public class FluxoServiceImpl implements FluxoService {
 				break;
 			}
 		
+			movimentosValorizado.add(movimento);
+		}
+		*/
+		for (Filial filial : filiais) {
+			MovimentoValorizadoView movimento = new MovimentoValorizadoView();
+			movimento.setCodigoId(filial.getCodigoFilial());
+			switch (filial.getCodigoFilial()) {
+			case "001":
+				
+				String saldoAntSede = "00";
+				String receitaSede = repositorioRececita.calcularSaldoMov(dataInicialGCS, dataFinalGCS, "1","001");
+				String despesaSede = repositorioRececita.calcularSaldoMov(dataInicialGCS, dataFinalGCS, "2","001");
+				
+				
+				
+				String saltoAtualSede = String.valueOf(Double.parseDouble(receitaSede.replaceAll(",", ".")) 
+													- Double.parseDouble(despesaSede.replaceAll(",", "."))
+										);		
+				
+				
+				movimento.setCodigoId(filial.getCodigoFilial());
+				movimento.setSaldoLiquidoAnterior(saldoAntSede);
+				movimento.setTotalReceita(receitaSede);
+				movimento.setTotalDespesa(despesaSede);
+				movimento.setSaldoLiquido(saltoAtualSede);
+				
+				break;
+			case "070":
+				
+				String saldoAntHosp = "00";
+				String receitaHosp = repositorioRececita.calcularSaldoMov(dataInicialGCS, dataFinalGCS, "1","070");
+				String despesaHosp = repositorioRececita.calcularSaldoMov(dataInicialGCS, dataFinalGCS, "2","070");
+				
+				String saltoAtualHosp = String.valueOf(Double.parseDouble(receitaHosp.replaceAll(",", "."))
+													- Double.parseDouble(despesaHosp.replaceAll(",", "."))		
+											);
+				
+				
+				movimento.setCodigoId(filial.getCodigoFilial());
+				movimento.setSaldoLiquidoAnterior(saldoAntHosp);
+				movimento.setTotalReceita(receitaHosp);
+				movimento.setTotalDespesa(despesaHosp);
+				movimento.setSaldoLiquido(saltoAtualHosp);
+
+				break;
+			default:
+				break;
+			}
 			movimentosValorizado.add(movimento);
 		}
 		return movimentosValorizado;

@@ -2,14 +2,17 @@ package br.coop.unimedriopardo.sgu.util.view.fluxo;
 
 public class MovimentoValorizadoView {
 	
+	//private String saldoBanco;
+	//private String saldoCaixa;
+	//private String saldoTranferenciaRealizada;
+	//private String saldoTranferenciaRecebida;
+	
+	
 	private String codigoId;
 	private String saldoLiquidoAnterior;
-	private String saldoBanco;
-	private String saldoCaixa;
+	private String totalReceita;
+	private String totalDespesa;
 	private String saldoLiquido;
-	private String saldoTranferenciaRealizada;
-	private String saldoTranferenciaRecebida;
-	
 	public String getCodigoId() {
 		return codigoId;
 	}
@@ -22,17 +25,17 @@ public class MovimentoValorizadoView {
 	public void setSaldoLiquidoAnterior(String saldoLiquidoAnterior) {
 		this.saldoLiquidoAnterior = saldoLiquidoAnterior;
 	}
-	public String getSaldoBanco() {
-		return saldoBanco;
+	public String getTotalReceita() {
+		return totalReceita;
 	}
-	public void setSaldoBanco(String saldoBanco) {
-		this.saldoBanco = saldoBanco;
+	public void setTotalReceita(String totalReceita) {
+		this.totalReceita = totalReceita;
 	}
-	public String getSaldoCaixa() {
-		return saldoCaixa;
+	public String getTotalDespesa() {
+		return totalDespesa;
 	}
-	public void setSaldoCaixa(String saldoCaixa) {
-		this.saldoCaixa = saldoCaixa;
+	public void setTotalDespesa(String totalDespesa) {
+		this.totalDespesa = totalDespesa;
 	}
 	public String getSaldoLiquido() {
 		return saldoLiquido;
@@ -40,16 +43,5 @@ public class MovimentoValorizadoView {
 	public void setSaldoLiquido(String saldoLiquido) {
 		this.saldoLiquido = saldoLiquido;
 	}
-	public String getSaldoTranferenciaRealizada() {
-		return saldoTranferenciaRealizada;
-	}
-	public void setSaldoTranferenciaRealizada(String saldoTranferenciaRealizada) {
-		this.saldoTranferenciaRealizada = saldoTranferenciaRealizada;
-	}
-	public String getSaldoTranferenciaRecebida() {
-		return saldoTranferenciaRecebida;
-	}
-	public void setSaldoTranferenciaRecebida(String saldoTranferenciaRecebida) {
-		this.saldoTranferenciaRecebida = saldoTranferenciaRecebida;
-	}
+	
 }
